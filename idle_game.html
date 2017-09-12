@@ -8,25 +8,21 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
   </script>
-  <title>Idle Game</title>
+  <title>Jack Whacker</title>
 </head>
 <body>
 <div class="upgrades">
   <h1> Upgrades: </h1>
-  <div class="upgrade1">200%</div>
 </div>
 
 <div class="header">
-  <div class="CPS">Clicks per Second: 0</div>
-  <div class="CPC">Clicks per Click: 0</div>
-  <div class="display">0</div>
+  <div class="CPS"></div>
+  <div class="CPC"></div>
+  <div class="display"><h1>0</h1></div>
 </div>
 
 <div class="buildings">
   <h1> Buildings: </h1>
-  <div class="building mouse">Cost: 10</div>
-  <div class="buuilding auto"> Cost: 10 </div>
-  <div class="building grandma"> Cost: 100</div>
 </div>
 
 </body>
@@ -34,24 +30,39 @@
 <style>
 
 html, body {
+  background-image: url(static/BG-Noise.jpg);
+  background-repeat:repeat;
   height: 100%;
   width: 100%;
-  display: inline-block;
+  color: white;
+}
+
+* {
+  border-radius: 2px;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
 }
 
 .upgrades, .header, .buildings  {
   display: inline-block;
+  width: auto;
+  vertical-align: text-top;
+  margin: 50px;
 }
 
-.display, .mouse, .auto, .grandma, .upgrade1 {
+.display, .building, .upgrade {
   height: 50px;
-  width: 100px;
+  width: 100%;
   background: blue;
-  margin-left: 50px;
-  background: lightblue;
+  margin-left: 0;
+  background: forestGreen;
   text-align: center;
   font-weight: bolder;
   color: white;
+  margin-top: 3px;
 }
 
 .display {
@@ -60,16 +71,103 @@ html, body {
   text-align: center;
   color: yellow;
   font-size: 20px;
+  display: table;
+  width: 300px;
+  height: 300px;
+}
+
+.display * {
+  display: table-cell;
   vertical-align: middle;
 }
 
-.mouse, .auto {
+.upgrade, .description {
+  border: solid 1px black;
+  padding: 3px;
+}
+
+.description {
+  position: absolute;
+  width: auto;
+  top: +=5px;
+  right: +=5px;
+  background: #ecf;
+
+}
+
+.achievement {
+  text-align: center;
+  position: absolute;
+  width: 300px;
+  height: 150px;
+  background: black;
+  bottom: 50px;
+  font-size: 50px;
+  color: white;
+  border: 5px grey solid;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.mouse, .grandma {
+  background: black;
 }
 
 </style>
 <script>
 
 $(document).ready(function() {
+
+  class Buildings {
+    constructor(name,reference,description,effect) {
+      this._name = name;
+      this._reference = reference;
+      this._description = description;
+      this._effect = effect;
+      this._buildNumber = 0;
+    }
+
+    get name() {
+      return this._name;
+    }
+
+    get reference() {
+      return this._reference;
+    }
+
+    get description() {
+      return this._description
+    }
+
+    incrementBuildNumber() {
+      this._buildNumber++;
+    }
+
+    decrementBuildNumber() {
+      this._buildnumber++;
+    }
+
+  };
+
+const mouse = new Buildings('Mouse Upgrade','.mouse','each mouse gives +1 click per click',1);
+const grandma = new Buildings('Grandma','.grandma','0.1cps per Grandma!', 0.1);
+const temple = new Buildings('Temple','.temple','1cps per Temple',1);
+
+let buildingList = [
+  mouse,
+  grandma,
+  temple
+];
+
+for (var i = 0 ; i < buildingList.length; i++) {
+let $newBuildingBox = $("<div/>")   // creates a div element
+  .addClass("building").addClass(buildingList[i].reference)   // add a class
+  .html("<div>"+buildingList[i].name+"</div>"+"<div class='description' style='display:none;'>"+buildingList[i].description+"</div>").css("background","#66"+(i/9));
+
+  $(".buildings").append($newBuildingBox);
+}
+
+$(".mouse").css("background","black");
 
 // Cookies
 let clickCount = 0;
@@ -117,11 +215,6 @@ let mouseOver = function(building) {
     $(this).css("border","0px");
   });
 };
-mouseOver(".display");
-mouseOver(".auto");
-mouseOver(".mouse");
-mouseOver(".grandma")
-
 
 
 let mouseClick = function(building) {
@@ -135,24 +228,77 @@ let mouseClick = function(building) {
   });
 };
 
+class Upgrades {
+  constructor(name,description,effect) {
+    this._name = name;
+    this._description = description;
+    this._effect = effect;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  get description() {
+    return this._description
+  }
+}
 
 
+const chocolateChip = new Upgrades('Chocolate Chip','Gives 15% CPS boost!',1.15);
+const raisin = new Upgrades('Raisin','Gives 5% CPS boost!', 1.05);
+const whiteChoc = new Upgrades('White Chocolate','Gives 20% CPS boost!',1.15);
+
+let upgradeList = [
+  chocolateChip,
+  raisin,
+  whiteChoc
+];
+
+
+
+for (var i = 0 ; i < upgradeList.length; i++) {
+let $newUpgradeBox = $("<div/>")   // creates a div element
+  .addClass("upgrade")   // add a class
+  .html("<div>"+upgradeList[i].name+"</div>"+"<div class='description' style='display:none;'>"+upgradeList[i].description+"</div>");
+
+  $(".upgrades").append($newUpgradeBox);
+}
+
+$(".upgrade, .building").hover(function() {
+  $(this).find(".description").show();
+}, function() {
+  $(this).find(".description").hide();
+})
+
+$(".upgrade2").css("background","red");
+
+
+
+
+let unlocked = "no";
 //code goes here that will be run every .1 seconds.
 setInterval(function(){
   clickCount = Math.round((clickCount + autoCount/10)*100)/100;
-  $(".display").text(clickCount);
+  $(".display h1").text(clickCount);
   $(".CPS").text(`Clicks per Second: ${autoCount}`);
   $(".CPC").text(`Clicks per Click: ${clickVal}`);
   autoUpdate(".mouse", mouseCost);
   autoUpdate(".auto", autoCost);
   autoUpdate(".grandma", grandmaCost);
+  if (clickCount >= 1000 && unlocked == "no") {
+    unlocked = "yes";
+    $('.buildings').after("CONGRATS! U DID IT!!!!!!!!11");
+    let $newUpgradeBox = $("<div/>").addClass("achievement").html("I Did It!!");
+    $("body").append($newUpgradeBox);
+  }
 }, 100);
 
 // Cookier Clicker
 $('.display').mousedown(function() {
   mouseClick(".display");
   clickCount += clickVal;
-  $(".display").text(clickCount);
+  $(".display h1").text(clickCount);
   $(".mouse").text("Cost: " + mouseCost);
 
 });
@@ -198,7 +344,7 @@ $(document).ready(function() {
       });
     });
 
-$(".upgrade1").click(function() {
+$(".upgrade").click(function() {
   $(this).hide();
   autoCount *= 2;
 })
@@ -212,5 +358,14 @@ $(document).ready(function() {
   })
 })
 
+mouseOver(".display");
+mouseOver(".auto");
+mouseOver(".mouse");
+mouseOver(".grandma");
+mouseOver(".upgrade");
+mouseClick(".upgrade");
+mouseOver(".building")
 });
+
+
 </script>
