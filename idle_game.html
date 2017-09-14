@@ -116,28 +116,69 @@ h1 {
 
 
 .building div{
-  display: inline-block;
   text-align: center;
 }
 
 .building {
   text-align: left;
+  width: 100%;
 }
 
 .buildCount {
   position: relative;
-  left: 0;
   width: 25%;
-  height:100%;
+  height: 100%;
+  top: -50%;
   background:black;
   display: inline-block;
-  }
-
-.buildingName {
-  width: 75%;
 }
+.buildCount p{
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.buildingName {
+  display: flex;
+  height: 50%;
+  background:grey;
+  display: block;
+  width: 100%;
+}
+
+.buildCost {
+  display: inline-block;
+  background: red;
+  height: 50%;
+  width: 100%;
+  text-align: center;
+}
+
+.buildingContainer {
+  width: 75%;
+  height: 100%;
+  display: inline-block;
+}
+
 </style>
 <script>
+
+//===================//
+//Global Variables
+//===================//
+
+// Misc
+let multiplyVal = 1.15;
+
+// Cookies
+let clickCount = 0;
+
+// Generators
+let clickVal = 1;
+let autoCount = 0;
+
+//===================//
+//Building Generator
+//===================//
 
   class Buildings {
     constructor(name,reference,buildCost,description,effect) {
@@ -169,6 +210,9 @@ h1 {
       return this._buildCost;
     }
 
+    get effect() {
+      return this._effect;
+    }
 
     incrementBuildNumber() {
       this._buildNumber++;
@@ -190,7 +234,7 @@ h1 {
 const mouse = new Buildings('Mouse Upgrade','mouse',10,'each mouse gives +1 click per click',1);
 const grandma = new Buildings('Grandma','grandma',10,'0.1cps per Grandma!', 0.1);
 const temple = new Buildings('Temple','temple',100,'1cps per Temple',1);
-const temple2 = new Buildings('Temple','temple2',100,'1cps per Temple',1);
+const temple2 = new Buildings('Generator','temple2',1000,'1cps per Temple',10);
 
 let buildingList = [
   mouse,
@@ -203,38 +247,30 @@ for (let i = 0 ; i < buildingList.length; i++) {
 
 let $newBuildingBox = $("<div/>")   // creates a div element
   .addClass(`building ${buildingList[i].reference}`)   // add a class
-  .html("<div id="+buildingList[i].reference+" class='buildCount'>"+buildingList[i].buildNumber+"</div>"+"<div class='buildingName'>"+buildingList[i].name+"</div>"+"<div class='buildCost'>"+buildingList[i].buildCost+"</div>"+"<div class='buildCost' style='display:none;'>"+buildingList[i].description+"</div>");
+  .html("<div id="+buildingList[i].reference+" class='buildCount'><p>"+buildingList[i].buildNumber+"</p></div>"+"<div class='buildingContainer'>"+"<div class='buildingName'>"+buildingList[i].name+"</div>"+"<div class='buildCost'>"+buildingList[i].buildCost+"</div>"+"</div>"+"<div class='description' style='display:none;'>"+buildingList[i].description+"</div>");
 
 $(".buildings").append($newBuildingBox);
 
 $("."+buildingList[i].reference).click(function() {
+if (clickCount >= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))) {
+  clickCount -= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))
   buildingList[i].incrementBuildNumber();
-  $(this).find(".buildCount").text(buildingList[i].buildNumber);
-  buildingList[i].buildCost = buildingList[i].buildCost * 1.25;
-  $(this).find(".buildCost").text(buildingList[i].buildCost * buildingList[i].buildNumber * 1.15);
+  $(this).find(".buildCount").html("<p>"+buildingList[i].buildNumber+"</p>");
+  $(this).find(".buildCost").text(Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber )));
+  autoCount = 0;
+  for (let j = 0 ; j < buildingList.length; j++) {autoCount += buildingList[j].buildNumber*buildingList[j].effect};
+
+}
 })
 
 };
 
 
-
-
-// Cookies
-let clickCount = 0;
-
-// Generators
-let clickVal = 1;
-let autoCount = 0;
-
-// Misc
-let multiplyVal = 1.15;
-
-//Building Costs
-let mouseCost = 10;
-let autoCost = 10;
-let grandmaCost = 100;
-
 //===================//
+//Misc Functions
+//===================//
+
+
 
 let increaseCPS = (cps) => {
   autoCount = Math.floor((autoCount + cps)*10)/10;
@@ -352,46 +388,6 @@ $('.display').mousedown(function() {
 
 });
 
-// Mouseclicker
-$(document).ready(function() {
-  $(".mouse").mousedown(function() {
-      if (clickCount >= mouseCost) {
-        clickCountUpdate(mouseCost);
-        mouseCost = Math.floor(mouseCost * multiplyVal);
-        $(".display").text(clickCount);
-        $(".buildCost").text("Cost: " + mouseCost);
-        clickVal++;
-      };
-    });
-  });
-
-
-
-// Autoclicker
-  $(document).ready(function() {
-    $(".auto").mousedown(function() {
-        if (clickCount >= autoCost) {
-          clickCountUpdate(autoCost);
-          autoCost = Math.floor(autoCost * multiplyVal);
-          $(".display").text(clickCount);
-          $(".auto").text("Cost: " + autoCost);
-          increaseCPS(.1);
-        };
-      });
-    });
-
-// Grandmaclicker
-  $(document).ready(function() {
-    $(".grandma").mousedown(function() {
-        if (clickCount >= grandmaCost) {
-          clickCountUpdate(grandmaCost);
-          grandmaCost = Math.floor(grandmaCost * multiplyVal);
-          $(".display").text(clickCount);
-          $(".grandma").text("Cost: " + grandmaCost);
-          increaseCPS(1);
-        };
-      });
-    });
 
 $(".upgrade").click(function() {
   $(this).hide();
