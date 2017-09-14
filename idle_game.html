@@ -18,6 +18,7 @@
 <div class="header">
   <div class="CPS"></div>
   <div class="CPC"></div>
+  <div class="timer">Time: 0</div>
   <div class="display"><h1>0</h1></div>
 </div>
 
@@ -80,6 +81,7 @@ h1 {
 .display * {
   display: table-cell;
   vertical-align: middle;
+  color: white;
 }
 
 .upgrade, .description {
@@ -91,13 +93,14 @@ h1 {
   position: absolute;
   width: 150px;
   height: 50px;
-  top: +=5px;
-  right: +=5px;
   background: #ecf;
   padding: 5px;
   margin: 0px;
-
-
+  z-index: 15;
+  z-index: 15;
+  z-index: 15;
+  z-index: 15;
+  z-index: 15;
 }
 
 .achievement {
@@ -132,11 +135,13 @@ h1 {
   background:black;
   display: inline-block;
 }
-.buildCount p{
+
+.buildCount p {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
+
 .buildingName {
   display: flex;
   height: 50%;
@@ -222,11 +227,6 @@ let autoCount = 0;
       this._buildNumber--;
     }
 
-    clickFun() {
-      this.incrementBuildNumber();
-      alert(this._buildNumber+" "+this._name);
-    }
-
 
   };
 
@@ -234,13 +234,18 @@ let autoCount = 0;
 const mouse = new Buildings('Mouse Upgrade','mouse',10,'each mouse gives +1 click per click',1);
 const grandma = new Buildings('Grandma','grandma',10,'0.1cps per Grandma!', 0.1);
 const temple = new Buildings('Temple','temple',100,'1cps per Temple',1);
-const temple2 = new Buildings('Generator','temple2',1000,'1cps per Temple',10);
+const generator = new Buildings('Generator','generator',1000,'10cps per Generator',10);
+const dimensionRift = new Buildings('Dimension Rift','dimensionRift',10000,'100cps per Generator',100);
+const galaxyDrain = new Buildings('Galaxy Drain','galaxyDrain',100000,'1000cps per Generator',1000);
+
 
 let buildingList = [
   mouse,
   grandma,
   temple,
-  temple2
+  generator,
+  dimensionRift,
+  galaxyDrain
 ];
 
 for (let i = 0 ; i < buildingList.length; i++) {
@@ -252,15 +257,15 @@ let $newBuildingBox = $("<div/>")   // creates a div element
 $(".buildings").append($newBuildingBox);
 
 $("."+buildingList[i].reference).click(function() {
-if (clickCount >= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))) {
-  clickCount -= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))
-  buildingList[i].incrementBuildNumber();
-  $(this).find(".buildCount").html("<p>"+buildingList[i].buildNumber+"</p>");
-  $(this).find(".buildCost").text(Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber )));
-  autoCount = 0;
-  for (let j = 0 ; j < buildingList.length; j++) {autoCount += buildingList[j].buildNumber*buildingList[j].effect};
-
-}
+  if (clickCount >= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))) {
+    clickCount -= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))
+    buildingList[i].incrementBuildNumber();
+    $(this).find(".buildCount").html("<p>"+buildingList[i].buildNumber+"</p>");
+    $(this).find(".buildCost").text(Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber )));
+    autoCount = 0;
+    for (let j = 0 ; j < buildingList.length; j++) {
+      autoCount += buildingList[j].buildNumber*buildingList[j].effect};
+    };
 })
 
 };
@@ -361,6 +366,7 @@ $(".upgrade, .building").hover(function() {
 
 
 
+let timer = 0;
 let unlocked = "no";
 //code goes here that will be run every .1 seconds.
 setInterval(function(){
@@ -368,6 +374,8 @@ setInterval(function(){
   $(".display h1").text(clickCount);
   $(".CPS").text(`Clicks per Second: ${autoCount}`);
   $(".CPC").text(`Clicks per Click: ${clickVal}`);
+  timer += 0.1;
+  $(".timer").text(`Time: ${timer}`);
   autoUpdate(".mouse", mouseCost);
   autoUpdate(".auto", autoCost);
   autoUpdate(".grandma", grandmaCost);
@@ -377,6 +385,7 @@ setInterval(function(){
     let $newUpgradeBox = $("<div/>").addClass("achievement").html("I Did It!!");
     $(".upgrades").append($newUpgradeBox);
   }
+
 }, 100);
 
 // Cookier Clicker
