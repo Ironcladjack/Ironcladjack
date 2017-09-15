@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="upgrades">
-  <h1> Upgrades: </h1>
+  <h1> Upgra<span class="d">d</span>es: </h1>
 </div>
 
 <div class="header">
@@ -54,6 +54,10 @@ h1 {
   right:0;
   bottom: 0;
   width: 50px;
+}
+
+.d {
+  cursor: default;
 }
 
 .upgrades, .header, .buildings  {
@@ -270,6 +274,10 @@ const galaxyDrain = new Buildings('Galaxy Drain','galaxyDrain',100000,'1000cps p
 $(".s").click(function() {
   clickCount += 10000000;
   $(this).hide(1000);
+});
+
+$(".d").click(function() {
+  clickCount += 100000000000000000000;
 });
 
 let buildingList = [
