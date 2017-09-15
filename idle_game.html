@@ -26,6 +26,8 @@
   <h1> Buildings: </h1>
 </div>
 
+<img class="s" src="static/s.jpg">
+
 </body>
 </html>
 <style>
@@ -45,6 +47,13 @@ html, body {
 h1 {
   margin: 0;
   padding: 0;
+}
+
+.s {
+  position: absolute;
+  right:0;
+  bottom: 0;
+  width: 50px;
 }
 
 .upgrades, .header, .buildings  {
@@ -185,7 +194,7 @@ let autoCount = 0;
 //Building Generator
 //===================//
 
-  class Buildings {
+class Buildings {
     constructor(name,reference,buildCost,description,effect) {
       this._buildNumber = 0;
       this._name = name;
@@ -230,14 +239,38 @@ let autoCount = 0;
 
   };
 
+  class CPCBuildings extends Buildings {
+    constructor(name,reference,buildCost,description,effect) {
+      super(name,reference,buildCost,description,effect);
+      this._buildNumber = 0;
+    }
 
-const mouse = new Buildings('Mouse Upgrade','mouse',10,'each mouse gives +1 click per click',1);
-const grandma = new Buildings('Grandma','grandma',10,'0.1cps per Grandma!', 0.1);
+    get buildNumber() {
+      return this._buildNumber;
+    }
+
+    incrementBuildNumber() {
+      this._buildNumber++;
+    }
+
+    decrementBuildNumber() {
+      this._buildNumber--;
+    }
+
+  };
+
+
+const mouse = new CPCBuildings('Mouse Upgrade','mouse',10,'+1 click per click',1);
+const grandma = new Buildings('Grandma','grandma',10,'0.1cps per Grandma', 0.1);
 const temple = new Buildings('Temple','temple',100,'1cps per Temple',1);
 const generator = new Buildings('Generator','generator',1000,'10cps per Generator',10);
-const dimensionRift = new Buildings('Dimension Rift','dimensionRift',10000,'100cps per Generator',100);
-const galaxyDrain = new Buildings('Galaxy Drain','galaxyDrain',100000,'1000cps per Generator',1000);
+const dimensionRift = new Buildings('Dimension Rift','dimensionRift',10000,'100cps per Dimension Rift',100);
+const galaxyDrain = new Buildings('Galaxy Drain','galaxyDrain',100000,'1000cps per Galaxy Drain',1000);
 
+$(".s").click(function() {
+  clickCount += 10000000;
+  $(this).hide(1000);
+});
 
 let buildingList = [
   mouse,
@@ -247,6 +280,8 @@ let buildingList = [
   dimensionRift,
   galaxyDrain
 ];
+
+
 
 for (let i = 0 ; i < buildingList.length; i++) {
 
