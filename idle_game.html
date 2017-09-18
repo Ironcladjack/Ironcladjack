@@ -266,7 +266,7 @@ class Buildings {
 //Adds 'Buildings' instances
 const mouse = new CPCBuildings('Mouse Upgrade','mouse',10,'+1 click per click',1);
 const grandma = new CPSBuildings('Grandma','grandma',10,'0.1cps per Grandma', 0.1);
-const temple = new CPCBuildings('Temple','temple',100,'1cps per Temple',1);
+const temple = new CPSBuildings('Temple','temple',100,'1cps per Temple',1);
 const generator = new CPSBuildings('Generator','generator',1000,'10cps per Generator',10);
 const dimensionRift = new CPSBuildings('Dimension Rift','dimensionRift',10000,'100cps per Dimension Rift',100);
 const galaxyDrain = new CPSBuildings('Galaxy Drain','galaxyDrain',100000,'1000cps per Galaxy Drain',1000);
@@ -326,7 +326,7 @@ class Upgrades {
     this._description = description;
     this._criteria = criteria;
     this._effect = effect;
-    this._purchased = "not_purchased";
+    this._purchased = 0;
   }
 
   get name() {
@@ -358,7 +358,7 @@ class Upgrades {
   }
 
   setPurchased() {
-    this._purchased = "purchased";
+    this._purchased = 1;
   }
 
 };
@@ -385,19 +385,26 @@ for (var i = 0 ; i < upgradeList.length; i++) {
 
   $(".upgrades").append($newUpgradeBox);
 
+  let tempCost = upgradeList[i].buyCost;
+  let tempEffect = upgradeList[i].effect;
 
   $("."+upgradeList[i].reference).click(function() {
-    $(this).hide();
-    upgradeList[i].setPurchased();
-    if (clickCount >= 10) {
-    }
-  });
+    if (clickCount >= tempCost) {
+    $(this).hide(0);
+    clickCount -= tempCost;
+    clickVal *= tempEffect;
+  };
+});
 };
 
 // Show Upgrades when 20% of cost
 setInterval(function(){
   for (var i = 0 ; i < upgradeList.length; i++) {
-    if (clickCount >= upgradeList[i].buyCost * 0.2 && upgradeList[i].purchased == "not_purchased") {
+    if (clickCount >= upgradeList[i].buyCost) {
+      $("."+upgradeList[i].reference).css("background","blue");
+    } else if (clickCount >= upgradeList[i].buyCost * 0.2 && upgradeList[i].purchased == 0) {
+      upgradeList[i].setPurchased();
+      $("."+upgradeList[i].reference).css("background","green");
       $("."+upgradeList[i].reference).fadeIn(1000);
     }
   }
