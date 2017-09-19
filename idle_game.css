@@ -1,0 +1,142 @@
+
+html, body {
+  background-image: url(static/BG-Noise.jpg);
+  background-repeat:repeat;
+  height: 100%;
+  width: 100%;
+  color: white;
+}
+
+* {
+  border-radius: 2px;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.s {
+  position: absolute;
+  right:0;
+  bottom: 0;
+  width: 50px;
+}
+
+.d {
+  cursor: default;
+}
+
+.upgrades, .header, .buildings  {
+  display: inline-block;
+  width: auto;
+  vertical-align: text-top;
+  margin: 50px;
+}
+
+.display, .building, .upgrade {
+  height: 50px;
+  width: 100%;
+  background: blue;
+  margin-left: 0;
+  background: forestGreen;
+  text-align: center;
+  font-weight: bolder;
+  color: white;
+  margin-top: 3px;
+  box-sizing: border-box;
+}
+
+.display {
+  margin-top: 50px;
+  background: green;
+  text-align: center;
+  color: yellow;
+  font-size: 20px;
+  display: table;
+  width: 300px;
+  height: 300px;
+}
+
+.display * {
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+}
+
+.upgrade, .description {
+  border: solid 1px black;
+  padding: 3px;
+}
+
+.description {
+  position: relative;
+  width: 150px;
+  height: 50px;
+  right: 100%;
+  top: -100%;
+  background: #ecf;
+  margin: 0px;
+  z-index: 15;
+}
+
+.achievement {
+  text-align: center;
+  position: absolute;
+  width: 300px;
+  height: 150px;
+  background: black;
+  bottom: 50px;
+  font-size: 50px;
+  color: white;
+  border: 5px grey solid;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+
+.building div{
+  text-align: center;
+}
+
+.building {
+  text-align: left;
+  width: 100%;
+}
+
+.buildCount {
+  position: relative;
+  width: 25%;
+  height: 100%;
+  top: -50%;
+  background:black;
+  display: inline-block;
+}
+
+.buildCount p {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.buildingName {
+  display: flex;
+  height: 50%;
+  background:grey;
+  display: block;
+  width: 100%;
+}
+
+.buildCost {
+  display: inline-block;
+  background: red;
+  height: 50%;
+  width: 100%;
+  text-align: center;
+}
+
+.buildingContainer {
+  width: 75%;
+  height: 100%;
+  display: inline-block;
+}
