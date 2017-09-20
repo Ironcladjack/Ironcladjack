@@ -22,7 +22,9 @@ let autoCount = 0;
 
 // Trackers
 let upgradeCount = 0;
-let achievementMultiplier = 0;
+let achievementMultiplier = 100;
+let numberClicks = 0;
+let numberAchievements = 0;
 
 //===================//
 //Building Generator
@@ -280,6 +282,96 @@ $(".upgrade, .building").hover(function() {
   $(this).find(".description").hide();
 })
 
+class Achievements {
+  constructor(name,reference,description,criteria,type,reward) {
+    this._unlocked = 0;
+    this._name = name;
+    this._reference = reference;
+    this._description = description;
+    this._criteria = criteria;
+    this._type = type;
+    this._reward = reward;
+  }
+
+  get unlocked() {
+    return this._unlocked;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  get reference() {
+    return this._reference;
+  }
+
+  get description() {
+    return this._description;
+  }
+
+  get criteria() {
+    return this._criteria;
+  }
+
+  get type() {
+    return this._type;
+  }
+
+  get reward() {
+    return this._reward;
+  }
+
+  lock() {
+    this._unlocked++;
+  }
+};
+//                            (name,reference,description,criteria,type,reward)
+let oneOne = new Achievements('One One!','oneOne','You earned 1 Click!',1,"clickCount",1);
+let oneTen = new Achievements('Ten!','oneTen','You earned 10 Clicks!',10,"clickCount",1);
+let oneHundred = new Achievements('One Hundred!','oneHundred','You earned 100 Clicks!',100,"clickCount",2);
+let oneThousand = new Achievements('One Thousand!','oneThousand','You earned 1000 Clicks!',1000,"clickCount",2);
+
+let upgradeOne = new Achievements('One upgrade!','upgradeOne','You bought 1 Upgrade!',1,"upgradeCount",1);
+let upgradeThree = new Achievements('Three upgrade!','upgradeThree','You bought 3 Upgrades!',3,"upgradeCount",2);
+
+let achievementList = [
+  oneOne,
+  oneTen,
+  oneHundred,
+  oneThousand,
+  upgradeOne,
+  upgradeThree,
+
+
+];
+
+
+setInterval(function(){
+  for (let i = 0; i < achievementList.length; i++) {
+
+
+  if (clickCount >= achievementList[i].criteria && achievementList[i].unlocked == 0 && achievementList[i].type == "clickCount") {
+    let $newAchivementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
+    $("body").append($newAchivementBox);
+    $newAchivementBox.delay(1000).fadeOut(2000);
+    achievementList[i].lock();
+    numberAchievements++;
+    achievementMultiplier += achievementList[i].reward;
+  }
+
+  if (upgradeCount >= achievementList[i].criteria && achievementList[i].unlocked == 0 && achievementList[i].type == "upgradeCount") {
+    let $newAchivementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
+    $("body").append($newAchivementBox);
+    $newAchivementBox.delay(1000).fadeOut(2000);
+    achievementList[i].lock();
+    numberAchievements++;
+    achievementMultiplier += achievementList[i].reward;
+  }
+
+
+  }
+
+}, 3000);
 
 //===================//
 //Misc Functions
@@ -310,27 +402,23 @@ let mouseClick = function(building) {
 
 //code goes here that will be run every .1 seconds.
 let timer = 0;
-let unlocked = "no";
+let unlocked = 0;
 
 setInterval(function(){
   clickCount = Math.round((clickCount + autoCount/10)*100)/100;
   $(".display h1").text(clickCount);
   $(".CPS").text(`Clicks per Second: ${autoCount}`);
   $(".CPC").text(`Clicks per Click: ${clickVal}`);
+  $(".numberAchievements").text(`Number of Achievements: ${numberAchievements}`);
+  $(".achievementMultiplier").text(`Achievement Multiplier: ${achievementMultiplier}%`);
+  $(".numberClicks").text(`Number of Clicks: ${numberClicks}`);
 
   timer += 0.1;
   timer = Math.round(timer*10)/10;
   $(".timer").text(`Time: ${timer}`);
 
-  clickVal = Math.round((clickValUpgrade * clickValBuild)*100)/100;
-  autoCount = Math.round((autoCountBuild * autoCountUpgrade)*100)/100;
-
-  if (clickCount >= 1000 && unlocked == "no") {
-    let $newAchivementBox = $("<div/>").addClass("achievement").html("I Did It!!");
-    $("body").append($newAchivementBox);
-    $newAchivementBox.delay(1000).fadeOut(2000);
-    unlocked = "yes";
-  }
+  clickVal = Math.round((clickValUpgrade * clickValBuild  * achievementMultiplier/100)*100)/100;
+  autoCount = Math.round((autoCountBuild * autoCountUpgrade * achievementMultiplier/100)*100)/100;
 
 }, 100);
 
@@ -339,6 +427,7 @@ $('.display').mousedown(function() {
   mouseClick(".display");
   clickCount = Math.round((clickCount + clickVal)*100)/100;
   $(".display h1").text(clickCount);
+  numberClicks++;
 
 });
 
