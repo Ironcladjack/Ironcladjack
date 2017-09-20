@@ -80,6 +80,7 @@ class Buildings {
 
     doBuildingEffect() {
       clickValBuild += this._effect;
+      autoCountBuild += this._effect/10;
     }
 
   };
@@ -97,12 +98,12 @@ class Buildings {
 
 
 //Adds 'Buildings' instances
-const mouse = new CPCBuildings('Mouse Upgrade','mouse',10,'+1 click per click',1);
-const grandma = new CPSBuildings('Grandma','grandma',10,'0.1cps per Grandma', 0.1);
-const temple = new CPSBuildings('Temple','temple',100,'1cps per Temple',1);
-const generator = new CPSBuildings('Generator','generator',1000,'10cps per Generator',10);
-const dimensionRift = new CPSBuildings('Dimension Rift','dimensionRift',10000,'100cps per Dimension Rift',100);
-const galaxyDrain = new CPSBuildings('Galaxy Drain','galaxyDrain',100000,'1000cps per Galaxy Drain',1000);
+const mouse = new CPCBuildings('Mouse Upgrade','mouse',15,'+1 click per click',1);
+const grandma = new CPSBuildings('Grandma','grandma',100,'1cps per Grandma', 1);
+const temple = new CPSBuildings('Temple','temple',2000,'10cps per Temple',10);
+const generator = new CPSBuildings('Generator','generator',30000,'100cps per Generator',100);
+const dimensionRift = new CPSBuildings('Dimension Rift','dimensionRift',400000,'1000cps per Dimension Rift',1000);
+const galaxyDrain = new CPSBuildings('Galaxy Drain','galaxyDrain',5000000,'10000cps per Galaxy Drain',10000);
 
 //List of all 'Buildings'
 let buildingList = [
@@ -127,7 +128,7 @@ for (let i = 0 ; i < buildingList.length; i++) {
     "</div>"+
     "<div class='buildingContainer'>"+
       "<div class='buildingName'>"+buildingList[i].name+"</div>"+
-      "<div class='buildCost'>"+buildingList[i].buildCost+"</div>"+
+      "<div class='buildCost "+buildingList[i].buildCost+"'>"+buildingList[i].buildCost+"</div>"+
     "</div>"+
     "<div class='description' style='display:none;'>"+buildingList[i].description+"</div>");
       // add this element into the '.buildings' div
@@ -237,13 +238,13 @@ for (var i = 0 ; i < upgradeList.length; i++) {
 
   let tempCost = upgradeList[i].buyCost;
   let tempEffect = upgradeList[i].effect;
-  let upgradeEff = upgradeList[i].doUpgradeEffect();
 
-  $(".display").append(`${upgradeList[i].type}`)
 
-  $(`.${upgradeList[i].reference}`).click(function() {
+  $(`.${upgradeList[i].reference}`).mousedown(function() {
     if (clickCount >= tempCost) {
       $(this).hide(0);
+      clickValUpgrade *= tempEffect;
+      autoCountUpgrade *= tempEffect;
       upgradeCount++;
       clickCount -= tempCost;
       $(".upgradeCount").text(`Upgrades: ${upgradeCount}`);
@@ -262,6 +263,14 @@ setInterval(function(){
     } else {
         $("."+upgradeList[i].reference).css("background","green");
   }
+  }
+
+  for (let j = 0; j < buildingList.length; j++) {
+    if (clickCount >= Math.round(buildingList[j].buildCost * (multiplyVal ** buildingList[j].buildNumber ))) {
+      $("."+buildingList[j].buildCost).css("background","green");
+    } else {
+      $("."+buildingList[j].buildCost).css("background","red");
+    }
   }
 }, 1000)
 
@@ -313,8 +322,8 @@ setInterval(function(){
   timer = Math.round(timer*10)/10;
   $(".timer").text(`Time: ${timer}`);
 
-  clickVal = clickValUpgrade * clickValBuild;
-  autoCount = autoCountBuild * autoCountUpgrade;
+  clickVal = Math.round((clickValUpgrade * clickValBuild)*100)/100;
+  autoCount = Math.round((autoCountBuild * autoCountUpgrade)*100)/100;
 
   if (clickCount >= 1000 && unlocked == "no") {
     let $newAchivementBox = $("<div/>").addClass("achievement").html("I Did It!!");
@@ -328,7 +337,7 @@ setInterval(function(){
 // Cookier Clicker
 $('.display').mousedown(function() {
   mouseClick(".display");
-  clickCount += clickVal;
+  clickCount = Math.round((clickCount + clickVal)*100)/100;
   $(".display h1").text(clickCount);
 
 });
