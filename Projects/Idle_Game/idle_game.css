@@ -1,6 +1,6 @@
 
 html, body {
-  background-image: url(static/BG-Noise.jpg);
+  background-image: url(../../static/BG-Noise.jpg);
   background-repeat:repeat;
   height: 100%;
   width: 100%;
