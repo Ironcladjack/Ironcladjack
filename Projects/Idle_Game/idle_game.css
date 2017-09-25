@@ -27,11 +27,25 @@ h1 {
   cursor: default;
 }
 
-.upgrades, .header, .buildings  {
+.upgrades, .header, .buildings, .achievements  {
   display: inline-block;
   width: auto;
   vertical-align: text-top;
   margin: 50px;
+}
+
+.achievements{
+  width: 400px;
+  background: rgba(255, 0, 0, 0.5);
+  display: inline-block;
+}
+
+.achievements * {
+  display: inline-block;
+}
+
+.achievementsTitle {
+  display: block;
 }
 
 .display, .building, .upgrade {

@@ -23,6 +23,10 @@ function getCookie(cname) {
     return "";
 }
 
+function deleteCookie(cname) {
+  document.cookie = cname+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
 function checkCookie() {
     var username = getCookie("username");
     if (username != "") {
@@ -35,6 +39,14 @@ function checkCookie() {
     }
 }
 
+function cookieExists(cookie, base) {
+    if (getCookie(cookie) > base) {
+      let cookie = getCookie(cookie);
+    } else {
+      let cookie = base;
+    }
+
+}
 
 //===================//
 //Global Variables
@@ -44,22 +56,33 @@ function checkCookie() {
 let multiplyVal = 1.15;
 
 // Cookies
-let clickCount = getCookie("clickCount");
+if (getCookie("clickCount") > 0) {
+  clickCount = getCookie("clickCount");
+} else {
+  clickCount = 0;
+}
+
 
 // Pre Generator values
-let clickValBuild = 1;
+
+let clickValBuild = 1
 let clickValUpgrade = 1;
 
 
-let autoCountBuild = 0;
 let autoCountUpgrade = 1;
-
+let autoCountBuild = 0;
 // Final Generator values
 let clickVal = 1;
 let autoCount = 0;
 
 // Trackers
-let upgradeCount = 0;
+if (getCookie("upgradeCount") > 0) {
+  let upgradeCount = getCookie("upgradeCount");
+  $(".upgradeCount").text(`Number of Upgrades: ${upgradeCount}`);
+} else {
+  let upgradeCount = 0;
+}
+
 let achievementMultiplier = 100;
 let numberClicks = 0;
 let numberAchievements = 0;
@@ -110,6 +133,17 @@ class Buildings {
       this._buildNumber--;
     }
 
+    setBuildingCookie() {
+      setCookie(this._reference,this._buildNumber, 5);
+    }
+
+    getBuildingCookie() {
+      if (getCookie(this._reference) != 0) {
+        this._buildNumber = getCookie(this._reference);
+      } else {
+        this._buildNumber = 0;
+      }
+    }
 
   };
 
@@ -178,6 +212,7 @@ for (let i = 0 ; i < buildingList.length; i++) {
       // add this element into the '.buildings' div
     $(".buildings").append($newBuildingBox);
 
+
     // add onClick effects to this new element
   $("."+buildingList[i].reference).click(function() {
     if (clickCount >= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))) {
@@ -189,14 +224,18 @@ for (let i = 0 ; i < buildingList.length; i++) {
       };
   })
 
-  mouse.incrementBuildNumber();
 };
 
-
-for (let i = 0; i < buildingList.length; i++) {
-  buildingList[i].buildNumber = getCookie(buildingList[i].reference);
+$(document).ready(function() {
+  for (let i = 0 ; i < buildingList.length; i++) {
+  buildingList[i].getBuildingCookie();
+  $("."+buildingList[i].reference).find(".buildCount").html("<p>"+buildingList[i].buildNumber+"</p>");
+  $("."+buildingList[i].reference).find(".buildCost").text(Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber )));
+  for (let j = 0; j < buildingList[i].buildNumber; j++) {
+    buildingList[i].doBuildingEffect();
+  }
 }
-
+});
 
 //===================//
 //Upgrade Generator
@@ -247,11 +286,24 @@ class Upgrades {
   }
 
   setPurchased() {
-    this._purchased = 1;
+    this._purchased++;
   }
 
   doUpgradeEffect() {
     clickValUpgrade *= this._effect;
+  }
+
+  setUpgradeCookie() {
+    setCookie(this._reference,this._purchased, 5);
+  }
+
+  getUpgradeCookie() {
+    if (getCookie(this._reference) == 1) {
+      this._purchased = getCookie(this._reference);
+      upgradeCount++;
+    } else {
+      this._purchased = 0;
+    }
   }
 };
 
@@ -268,9 +320,9 @@ const chocolateChip = new CPCUpgrades('Chocolate Chip','chocolateChip',10,'Gives
 const whiteChoc = new CPCUpgrades('White Chocolate','whiteChoc',25,'Gives 20% CPS boost!',true,'autoCountUpgrade',1.15);
 const raisin = new CPCUpgrades('Raisin','raisin',50,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
 const brownie = new CPCUpgrades('Brownie','brownie',200,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
-const blueberryMuffin = new CPCUpgrades('Blueberry Muffin','blueberryMuffin',1000,'Gives 20% CPS boost!',true,'autoCountUpgrade',5);
-const raspberryMuffin = new CPCUpgrades('Raspberry Muffin','raspberryMuffin',5000,'Gives 20% CPS boost!',true,'autoCountUpgrade',5);
-const bananaMuffin = new CPCUpgrades('Banana Muffin','bananaMuffin',20000,'Gives 20% CPS boost!',true,'autoCountUpgrade',5);
+const blueberryMuffin = new CPCUpgrades('Blueberry Muffin','blueberryMuffin',1000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
+const raspberryMuffin = new CPCUpgrades('Raspberry Muffin','raspberryMuffin',5000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
+const bananaMuffin = new CPCUpgrades('Banana Muffin','bananaMuffin',20000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
 
 let upgradeList = [
   chocolateChip,
@@ -303,15 +355,20 @@ for (var i = 0 ; i < upgradeList.length; i++) {
       autoCountUpgrade *= tempEffect;
       upgradeCount++;
       clickCount -= tempCost;
-      $(".upgradeCount").text(`Upgrades: ${upgradeCount}`);
+      $(".upgradeCount").text(`Number of Upgrades: ${upgradeCount}`);
+      setCookie(upgradeList[i].reference,upgradeList[i].locked, 5);
   };
 });
+
 };
+
+
 
 // Show Upgrades when 20% of cost, make blue when 100%;
 setInterval(function(){
   for (var i = 0 ; i < upgradeList.length; i++) {
-    if (clickCount >= upgradeList[i].buyCost) {
+    if (clickCount >= upgradeList[i].buyCost && upgradeList[i].purchased == 0) {
+
       $("."+upgradeList[i].reference).css("background","blue");
     } else if (clickCount >= upgradeList[i].buyCost * 0.2 && upgradeList[i].purchased == 0) {
       upgradeList[i].setPurchased();
@@ -379,15 +436,32 @@ class Achievements {
   lock() {
     this._unlocked++;
   }
+
+
+  setAchievementCookie() {
+    setCookie(this._reference,this._unlocked, 5);
+  }
+
+  getAchievementCookie() {
+    if (getCookie(this._reference) == 1) {
+      this._unlocked = getCookie(this._reference);
+      achievementMultiplier += this._reward;
+      numberAchievements++;
+    } else {
+      this._unlocked = 0;
+    }
+  }
+
+
 };
 //                            (name,reference,description,criteria,type,reward)
-let oneOne = new Achievements('One One!','oneOne','You earned 1 Click!',1,"clickCount",1);
-let oneTen = new Achievements('Ten!','oneTen','You earned 10 Clicks!',10,"clickCount",1);
-let oneHundred = new Achievements('One Hundred!','oneHundred','You earned 100 Clicks!',100,"clickCount",2);
-let oneThousand = new Achievements('One Thousand!','oneThousand','You earned 1000 Clicks!',1000,"clickCount",2);
+const oneOne = new Achievements('One One!','oneOne','You earned 1 Click!',1,"clickCount",1);
+const oneTen = new Achievements('Ten!','oneTen','You earned 10 Clicks!',10,"clickCount",1);
+const oneHundred = new Achievements('One Hundred!','oneHundred','You earned 100 Clicks!',100,"clickCount",2);
+const oneThousand = new Achievements('One Thousand!','oneThousand','You earned 1000 Clicks!',1000,"clickCount",2);
 
-let upgradeOne = new Achievements('One upgrade!','upgradeOne','You bought 1 Upgrade!',1,"upgradeCount",1);
-let upgradeThree = new Achievements('Three upgrades!','upgradeThree','You bought 3 Upgrades!',3,"upgradeCount",2);
+const upgradeOne = new Achievements('One upgrade!','upgradeOne','You bought 1 Upgrade!',1,"upgradeCount",1);
+const upgradeThree = new Achievements('Three upgrades!','upgradeThree','You bought 3 Upgrades!',3,"upgradeCount",2);
 
 
 let achievementList = new Array(
@@ -401,7 +475,7 @@ let achievementList = new Array(
 );
 
 
-let buildAchivementUnlocks = new Array(
+let buildAchievementUnlocks = new Array(
   1,
   10,
   25,
@@ -412,12 +486,12 @@ let buildAchivementUnlocks = new Array(
   200
 );
 
-for (let k = 0; k < buildAchivementUnlocks.length; k++) {
+for (let k = 0; k < buildAchievementUnlocks.length; k++) {
 
 (function(context) {
     for ( var i = 0; i < buildingList.length; i++) {
-       var key = `${buildingList[i].reference}${buildAchivementUnlocks[k]}`;
-       key = new Achievements(`${buildAchivementUnlocks[k]} ${buildingList[i].name}!`,`${buildingList[i].reference}`,`You bought ${buildAchivementUnlocks[k]} ${buildingList[i].name}!`,buildAchivementUnlocks[k],"buildNumber",(k+1));
+       var key = `${buildingList[i].reference}${buildAchievementUnlocks[k]}`;
+       key = new Achievements(`${buildAchievementUnlocks[k]} ${buildingList[i].name}!`,`${buildingList[i].reference}${buildAchievementUnlocks[k]}`,`You bought ${buildAchievementUnlocks[k]} ${buildingList[i].name}!`,buildAchievementUnlocks[k],"buildNumber",(k+1));
        achievementList.push(key);
        $(".display").append(this[key]);
      }
@@ -425,50 +499,64 @@ for (let k = 0; k < buildAchivementUnlocks.length; k++) {
 
 };
 
-/*(function(context) {
-    for ( var i = 0; i < buildingList.length; i++) {
-       var key = `${buildingList[i].reference}1`;
-       key = new Achievements(`10 ${buildingList[i].name}s!`,`${buildingList[i].reference}`,`You bought 10 ${buildingList[i].name}s!`,10,"buildNumber",2);
-       achievementList.push(key);
-       $(".display").append(this[key]);
-     }
-}(window));
-*/
+
 setInterval(function(){
   for (let i = 0; i < achievementList.length; i++) {
 
+    let filler = $("<div/>").addClass(achievementList[i].reference).html("<div style='width: 60px; height: 60px; background: rgba(255,255,255,1); margin: 5px; color: black; display: flex; border: solid 2px grey;'>"+achievementList[i].name+"</div>");
 
   if (clickCount >= achievementList[i].criteria && achievementList[i].unlocked == 0 && achievementList[i].type == "clickCount") {
-    let $newAchivementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
-    $("body").append($newAchivementBox);
-    $newAchivementBox.delay(1000).fadeOut(2000);
+    let $newAchievementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
+    $("body").append($newAchievementBox);
+    $newAchievementBox.delay(1000).fadeOut(2000);
     achievementList[i].lock();
     numberAchievements++;
     achievementMultiplier += achievementList[i].reward;
+    achievementList[i].setAchievementCookie();
+    $(".achievements").append(filler);
+
   }
 
   if (upgradeCount >= achievementList[i].criteria && achievementList[i].unlocked == 0 && achievementList[i].type == "upgradeCount") {
-    let $newAchivementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
-    $("body").append($newAchivementBox);
-    $newAchivementBox.delay(1000).fadeOut(2000);
+    let $newAchievementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
+    $("body").append($newAchievementBox);
+    $(".achievements").append(filler);
+    $newAchievementBox.delay(1000).fadeOut(2000);
     achievementList[i].lock();
     numberAchievements++;
     achievementMultiplier += achievementList[i].reward;
+    achievementList[i].setAchievementCookie();
+
   }
 
 for ( var j = 0; j < buildingList.length; j++) {
-  if (buildingList[j].reference == achievementList[i].reference && buildingList[j].buildNumber >= achievementList[i].criteria && achievementList[i].unlocked == 0 && achievementList[i].type == "buildNumber") {
-    let $newAchivementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
-    $("body").append($newAchivementBox);
-    $newAchivementBox.delay(1000).fadeOut(2000);
+if (`${buildingList[j].reference}${achievementList[i].criteria}` === achievementList[i].reference && buildingList[j].buildNumber >= achievementList[i].criteria && achievementList[i].unlocked == 0 && achievementList[i].type == "buildNumber") {
+    let $newAchievementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
+    $("body").append($newAchievementBox);
+    $newAchievementBox.delay(1000).fadeOut(2000);
     achievementList[i].lock();
     numberAchievements++;
     achievementMultiplier += achievementList[i].reward;
+    achievementList[i].setAchievementCookie();
+    $(".achievements").append(filler);
+
     }
   }
 }
 
 }, 3000);
+
+
+
+for (let i = 0; i < achievementList.length; i++) {
+  achievementList[i].getAchievementCookie();
+  let filler = $("<div/>").addClass(achievementList[i].reference).html("<div style='width: 60px; height: 60px; background: rgba(255,255,255,1); margin: 5px; color: black; display: flex; border: solid 2px grey;'>"+achievementList[i].name+"</div>");
+
+  if (achievementList[i].unlocked == 1) {
+    $(".achievements").append(filler);
+
+  }
+}
 
 //===================//
 //Misc Functions
@@ -516,7 +604,7 @@ setInterval(function(){
   timer = Math.round(timer*10)/10;
   $(".timer").text(`Time: ${timer}`);
 
-  clickVal = Math.round((clickValUpgrade * clickValBuild  * achievementMultiplier/100)*100)/100;
+  clickVal = Math.round((clickValBuild * clickValUpgrade * achievementMultiplier/100)*100)/100;
   autoCount = Math.round((autoCountBuild * autoCountUpgrade * achievementMultiplier/100)*100)/100;
 
 }, 100);
@@ -564,10 +652,26 @@ $(".d").click(function() {
 //==============//
 
 setInterval(function(){
+  let $saveMessage =  $("<div/>").addClass("saved").html("<div style='font-size: 20px; font-weight: 900;'>Saved!</div>");
+  $(".cookieClear").after($saveMessage);
+  $saveMessage.delay(3000).fadeOut(2000);
   setCookie("clickCount", clickCount, 5);
-  $(".buildings").after("Saved!").delay(3000);
-
+  setCookie("autoCountBuild", clickCount, 5);
+  setCookie("clickValBuild", clickValBuild, 5);
+  setCookie("upgradeCount",upgradeCount);
 for (let i = 0; i < buildingList.length; i++) {
-  setCookie(`${buildingList[i].reference}`,`${buildingList[i].buildNumber}`, 5);
+  buildingList[i].setBuildingCookie();
 }
-}, 6000);
+}, 10000);
+
+
+$(".cookieClear").click(function() {
+  for (let i = 0; i < buildingList.length; i++) {
+    deleteCookie(buildingList[i].reference);
+  };
+  for (let i = 0; i < achievementList.length; i++) {
+    deleteCookie(achievementList[i].reference);
+  };
+  deleteCookie("clickCount");
+  deleteCookie("upgradeCount");
+});
