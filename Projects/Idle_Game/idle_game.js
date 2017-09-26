@@ -414,7 +414,6 @@ for (var i = 0 ; i < upgradeList.length; i++) {
       clickCount -= tempCost;
       $(".upgradeCount").text(`Number of Upgrades: ${upgradeCount}`);
       setCookie(upgradeList[i].reference,upgradeList[i].locked, 5);
-      upgradeList[i].setPurchased();
   };
 });
 
@@ -473,7 +472,7 @@ $(".buyAll").click(function() {
   for (let i = 0; i < upgradeList.length; i++) {
     let tempCost = upgradeList[i].buyCost;
     let tempEffect = upgradeList[i].effect;
-    if (clickCount >= tempCost) {
+    if (clickCount >= tempCost && upgradeList[i].purchased == 1) {
       $(`.${upgradeList[i].reference}`).hide(0);
       clickValUpgrade *= tempEffect;
       autoCountUpgrade *= tempEffect;

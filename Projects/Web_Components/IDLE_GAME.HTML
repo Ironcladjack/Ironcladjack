@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+  </script>
+  <title>Wipe in</title>
+</head>
+<body>
+  <div class="display">0</div>
+  <div class="mouse">Cost: 10</div>
+  <div class="auto"> Cost: 10 </div>
+  <div class="test123"></div>
+
+
+</body>
+</html>
+
+<style>
+.click, .display, .mouse, .auto, .test {
+height: 50px;
+width: 100px;
+background: blue;
+margin-left: 50px;
+}
+
+.click {
+  text-align: center;
+  color: white;
+}
+
+.display {
+  margin-top: 50px;
+  background: green;
+  text-align: center;
+  color: yellow;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.mouse, .auto {
+  background: lightblue;
+  text-align: center;
+  font-weight: bolder;
+  color: white;
+}
+
+</style>
+<script>
+
+let clickCount = 0;
+let clickVal = 1;
+let mouseCost = 10;
+let mouseCostRound = Math.floor(mouseCost);
+let autoCost = 10;
+let autoCostRound = Math.floor(autoCost);
+let autoCount = 0;
+
+$(document).ready(function() {
+  $(".mouse").css("background","red");
+});
+
+$(document).ready(function() {
+  setInterval(function(){
+    //code goes here that will be run every 5 seconds.
+  clickCount += autoCount;
+  $(".display").text(clickCount);
+  if (clickCount < mouseCostRound) {
+    $(".mouse, .auto").css("background","red");
+  } else if (clickCount >= mouseCostRound) {
+    $(".mouse, .auto").css("background","green");
+  };
+}, 1000);
+});
+
+$(document).ready(function() {
+  $('.display').mousedown(function() {
+    $(this).css("transform","translateY(5%)");
+    $(this).css("transform","scale(1.03,1.03)");
+    clickCount += clickVal;
+    if (clickCount >= mouseCostRound) {
+      $(".mouse").css("background","green");
+    };
+    $(".display").text(clickCount);
+  });
+  $('.display').mouseup(function() {
+    $(this).css("transform","translateY(5%)");
+    $(this).css("transform","scale(1,1)");
+  });
+});
+
+$(document).ready(function() {
+  $(".mouse").mousedown(function() {
+      if (clickCount >= mouseCostRound) {
+      $(this).css("transform","translateY(5%)");
+      $(this).css("transform","scale(1.03,1.03)");
+      clickCount -= mouseCostRound;
+      mouseCost = mouseCost * 1.05;
+      mouseCostRound = Math.floor(mouseCost);
+      $(".display").text(clickCount);
+      $(".mouse").text("Cost: " + mouseCostRound);
+      clickVal++;
+      if (clickCount < mouseCostRound) {
+        $(".mouse").css("background","red");
+      };
+    } else {};
+  });
+  $(".mouse").mouseup(function() {
+      $(this).css("transform","translateY(5%)");
+      $(this).css("transform","scale(1,1)");
+    });
+  });
+
+  $(document).ready(function() {
+    $(".auto").mousedown(function() {
+        if (clickCount >= autoCostRound) {
+        $(this).css("transform","translateY(5%)");
+        $(this).css("transform","scale(1.03,1.03)");
+        clickCount -= autoCostRound;
+        mouseCost = autoCost * 1.05;
+        mouseCostRound = Math.floor(autoCost);
+        $(".display").text(clickCount);
+        $(".mouse").text("Cost: " + autoCostRound);
+        autoCount += 0.1;
+        if (clickCount < autoCostRound) {
+          $(".mouse").css("background","red");
+        };
+      } else {};
+    });
+    $(".auto").mouseup(function() {
+        $(this).css("transform","translateY(5%)");
+        $(this).css("transform","scale(1,1)");
+      });
+    });
+
+$(document).ready(function() {
+  $('.test').mousedown(function() {
+    $(this).css("background","red");
+  });
+  $('.test').mouseup(function() {
+    $(this).css("background","blue");
+  })
+})
+
+</script>

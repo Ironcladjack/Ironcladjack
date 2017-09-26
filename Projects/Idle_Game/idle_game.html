@@ -10,12 +10,13 @@
   <title>Jack Whacker</title>
 </head>
 <body>
-<div class="upgrades">
+<div class="container-fluid">
+<div class="row">
+<div class=" col-sm-3 upgrades">
   <h1> Upgrades: </h1>
   <div class="buyAll">Buy All</div>
 </div>
-
-<div class="header">
+<div class="col-sm-6 header">
   <div class="CPS"></div>
   <div class="CPC"></div>
   <div class="upgradeCount">Number of Upgrades: 0</div>
@@ -26,7 +27,7 @@
   <div class="display"><h1>0</h1></div>
 </div>
 
-<div class="buildings">
+<div class="col-sm-3 buildings">
   <h1> Buildings: </h1>
   <div class="purchaseAmount">
     <div class="x1 purchaseAmountActive">x1</div>
@@ -34,11 +35,15 @@
     <div class="x100">x100</div>
   </div>
 </div>
+</div>
+<div class="row">
 
 <div class="achievements"><div class="achievementsTitle" style="display: block;">Achievements:</div></div>
 
-<button style="color: black; font-size: 20px;" class="cookieClear" onClick="window.location.reload()">Clear Cookies</button>
+<button style="color: black; font-size: 20px;" class="cookieClear" >Clear Cookies</button>
 <div class=".cookieWarning"></div>
+</div>
+</div>
 </body>
 </html>
 <script type="text/javascript" src="idle_game.js"></script>

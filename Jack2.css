@@ -1,0 +1,98 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background-image: url(static/BG-Noise.jpg);
+  background-repeat:repeat;
+}
+
+* {
+  color: white;
+}
+
+*:active {
+  border: dashed 1px white;
+}
+h1 {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+.container {
+  padding: 0;
+  min-height: 100%;
+  height: 100%;
+}
+
+.header {
+  background: #282b33;
+  padding: 0;
+  margin: 0;
+  height: 100px;
+}
+
+.headerH1Box {
+  height: 100%;
+  display: table;
+}
+.header h1 {
+  display: table-cell;
+  padding: 10px;
+  margin: 15px;
+  vertical-align: middle;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+
+.headerMenuBox {
+  text-align: right;
+  display: table;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.headerMenu {
+  display: table-cell;
+  padding: 0 50px;
+  margin: 0;
+  vertical-align: bottom;
+}
+
+.headerMenu li {
+  display: inline-block;
+  padding:  6px 12px;
+  margin: 0;
+  vertical-align: bottom;
+  font-size: 20px;
+  animation: 1000;
+}
+
+.content {
+  background: grey;
+  height: auto;
+  min-height: 80%;
+  padding: 30px;
+}
+
+
+kbd {
+  color: white;
+}
+
+.footer {
+  padding: 0;
+  margin: 0;
+  height: 30px;
+  bottom:0;
+
+}

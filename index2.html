@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="Jack2.css">
+  <link rel="stylesheet" href="footer.css">
+  <title>Jack Whacker</title>
+</head>
+
+<body>
+  <div class="container">
+
+
+    <div class="header">
+      <div class="col-sm-5 headerH1Box">
+      <h1>  <a href="#">IT Support Exeter</a></h1>
+      </div>
+      <div class="col-sm-7 headerMenuBox">
+      <ul class="headerMenu">
+        <li>About</li>
+        <li>Raspberry Pi</li>
+        <li>
+          <div class="dropdown">
+           <div class="dropdown-toggle" data-toggle="dropdown">
+             Programming  <span class="caret"></span>
+           </div>
+           <ul class="dropdown-menu">
+             <li><a href="Projects\Idle_Game\idle_game.html">Python</a></li>
+             <li><a href="Projects\Idle_Game\idle_game.html">Javascript</a></li>
+             <li><a href="#">JQuery</a></li>
+             <li><a href="#">HTML/CSS</a></li>
+           </ul>
+         </div></li>
+        <li>
+          <div class="dropdown">
+           <div class="dropdown-toggle" data-toggle="dropdown">
+             Projects  <span class="caret"></span>
+           </div>
+           <ul class="dropdown-menu">
+             <li class="dropdown-header">Games</li>
+             <li><a href="Projects\Idle_Game\idle_game.html">Idle Game</a></li>
+             <li><a href="Projects\Idle_Game\idle_game.html">Snake?</a></li>
+             <li style="display: block;" class="divider"></li>
+             <li class="dropdown-header">Other</li>
+             <li><a href="#">Maybe Soon</a></li>
+             <li><a href="#">Nothing Yet</a></li>
+           </ul>
+         </div>
+         </li>
+        </ul>
+    </div>
+  </div>
+    <div class="content">
+      <div class="Github_Basics">
+      <h1>Github Basics:</h1>
+
+      <h2>Setup</h2>
+      <ol>
+      <li>CD into directory</li>
+      <li>run &apos;git init&apos; to create repository</li>
+      <li>Check status of git repo with <kbd>&apos;git status&apos;</kbd></li>
+      <li>Add files to staging areas with &apos;git add &lt;code&gt;&lt;filename&gt;&apos;</li>
+      <li>Check difference between files in WD &amp; SA with &apos;git diff &lt;filename&gt;&apos;</li>
+      <li>Add files to Repo with &apos;git commit -m &apos;&apos;Complete first line of dialogue&apos;&apos;&apos;</li>
+      <li>View all previous commits &apos;git log&apos;</li>
+      </ol>
+
+      <img src="images/git.jpg">
+
+      <h2>Controlling Github Commits:</h2>
+      <ol>
+      <li>Show most recent commit with &apos;git show HEAD&apos;</li>
+      <li>restore file to previous commit version with &apos;git checkout HEAD &lt;filename&gt; &apos;</li>
+      <li>remove files from staging area, if mistakenly added &apos;git reset HEAD &lt;filename&gt;&apos;</li>
+      <li>reset WD to a previous commit with &apos;git reset SHA&apos; where &apos;SHA&apos; is the first 7 characters in the commit SHA you want.</li>
+      </ol>
+
+      <h2>Controlling Branches:</h2>
+      <ol>
+      <li>Show which branch we are working in with &apos;git branch&apos;</li>
+      <li>To create a new branch, use &apos;git branch &lt;new_branch&gt;&apos;</li>
+      <li>To switch to a branch, use &apos;git checkout &lt;new_branch&gt;&apos;</li>
+      <li>To merge a branch with another, navigate to host branch and use &apos;git merge &lt;branch_name&gt;&apos;</li>
+      <li>To remove a branch, use &apos;git branch -d branch_name&apos;</li>
+      </ol>
+
+      <h2>Sharing Remotely:</h2>
+      <ol>
+      <li>To clone an online repo, use &apos;git clone &lt;remote_location&gt; &lt;clone_name&gt;&apos;</li>
+      <li>You can see a list of a Git project's remotes with the command: &apos;git remote -v&apos;</li>
+      </ol>
+      </div>
+    </div>
+    <div class="row footer">
+      <p>&copy; 2017 IT Support Exeter //   Design by IT Support Exeter // <a class="text-uppercase" href="#">ironcladjack.github.io</a></p>
+    </div>
+  </div>
+
+</body>
+</html>
+<script type="text/javascript" src="index.js"></script>

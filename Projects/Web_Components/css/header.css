@@ -1,0 +1,102 @@
+html{
+    min-height:100%;/* make sure it is at least as tall as the viewport */
+    position:relative;
+    padding: 0;
+    margin:0;
+    overflow-x: hidden;
+}
+body{
+    /* force the BODY element to match the height of the HTML element */
+    padding: 0;
+    margin:0;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.header {
+  border-bottom: 1px solid grey;
+  z-index: 5;
+  height: 100px;
+  background-color: rgb(47, 46, 49);
+}
+
+.header .row {
+  height: 100%;
+  width: 100%;
+}
+
+.row > .title {
+  display: table;
+  vertical-align: middle;
+  padding: 20px;
+  background: none;
+  height: 100%;
+}
+
+.title h1 {
+  padding: 0;
+  margin: 0;
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+}
+
+.header .row > .menu {
+  background: none;
+  display: inline-block;
+  height: 100%;
+  margin: 0;
+  display: table;
+}
+
+.menu ul {
+  display: table-cell;
+  vertical-align: bottom;
+  list-style: none;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  display: inline-block;
+  font-size: 20px;
+  background: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  vertical-align: bottom;
+  margin: 0;
+  min-width: 150px;
+  text-align: center;
+}
+
+.menu a {
+  text-decoration: none;
+  color: black;
+  font-weight: 900;
+}
+
+.hamburger {
+  display: none;
+}
+
+
+.main {
+  background: black;
+  margin:0;
+  padding: 0;
+  border: 1px solid grey;
+  border-top-width: 0px;
+  border-bottom-width: 0px;
+  z-index: -1;
+}
+
+.hamslice {
+  height: 5px;
+  width: 25px;
+  margin: 3px;
+  background: black;
+}
