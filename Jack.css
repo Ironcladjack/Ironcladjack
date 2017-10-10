@@ -14,8 +14,8 @@ body, html {
   margin:  0px auto;
   padding: 0px auto;
    }
-      
-  
+
+
 #time {
   position:relative;
   border: solid 3px #111;
@@ -28,15 +28,15 @@ body, html {
   background-color: rgba(12,86,160,0.3);
   top: 5px;
   left: -5px; }
-   
+
  a {
   color: RGB(200,200,255);
   }
-  
+
  a:hover {
-  color: #AAF; 
+  color: #AAF;
  }
- 
+
 #wrapper {
 	/*width: 1200px;*/
     width: 80%;
@@ -46,11 +46,11 @@ body, html {
     background-color: rgba(30,30,30,0.3);
     overflow:hidden
     }
-  
+
 html>body #wrapper {
     position:relative;
     top:-15px;
-   
+
 }
 html>body{
 position:relative;
@@ -61,14 +61,14 @@ top: -15px
 html>body .welcome {
 
 }
-    
+
   ul {
 padding: 0px;
-margin: 0px; 
+margin: 0px;
 float:none;
 clear:both;}
 
-     
+
 .welcome {
   color: rgb(255,255,255);
   background-color: rgba(12,86,160,0.4);
@@ -83,7 +83,7 @@ clear:both;}
   font-family:cursive;
   padding-top:25px;
   }
- 
+
  #menu {
   background-color: RGBa(12,86,160,0.4);
   color: RGB(255,255,255);
@@ -94,10 +94,10 @@ clear:both;}
   overflow: hidden;
   text-align:center;
    }
- 
+
  #menu ul {
  padding: 0px 10px; }
- 
+
  #menu li {
  border-color: rgba(200,200,255,1);
  border-style: solid;
@@ -110,25 +110,25 @@ clear:both;}
  display: inline-block;
  width: 100px;
  }
- 
+
   #menu li:hover {
     background-color: #348611;
     }
- 
+
  #menu img {
   height: 30px;
   padding: 10px 0px 5px 0px;
  }
- 
+
 #menu li:active {
     background-color: #459722;
     position:relative;
     top: 3px;
  }
- 
- 
- 
- .main { 
+
+
+
+ .main {
  padding: 0px 20px 30px 20px;
  border: solid 3px #469;
  margin: 10px 0px 0px 0px;
@@ -136,13 +136,13 @@ clear:both;}
  background-color: rgba(48,192,255,0.4);
  height: auto;
   }
- 
+
  .main p{
  height:100%;
  padding-bottom: 10px;
   }
-  
-  table { 
+
+  table {
   table-layout: fixed;
   position:relative;
   width: 100%;
@@ -153,7 +153,7 @@ clear:both;}
   margin-right: auto;
      }
 
- 
+
 th h1 {
   background-color: #2268ab;
   border: solid 5px rgba(100,100,100,1);
@@ -164,12 +164,12 @@ th h1 {
   margin-top: 15px;
   color: #FFF;
      }
-  
+
   td {
   border-radius: 200px;
   width:auto;
   }
-  
+
   .submits {
   margin:auto;
   margin-bottom: 15px;
@@ -182,7 +182,7 @@ th h1 {
   position:relative;
   top: -9px;
   }
- 
+
 #buttons {
   overflow-y: auto;
   padding: 0px 0px 0px 0px;
@@ -194,7 +194,7 @@ th h1 {
    }
 #buttons ul {
 padding: auto; }
- 
+
 #buttons li {
  border-color: rgba(200,200,255,1);
  border-style: solid;
@@ -206,19 +206,19 @@ padding: auto; }
  margin: 15px 30px;
  display: inline-block;
  width: 100px;
- 
+
   }
 
 #buttons img {
   height: 30px;
   padding: 10px 0px 5px 0px;
  }
- 
+
 #buttons li:hover {
 	background: #B6D434;
     background-color: #B6D434;
     }
-    
+
 #buttons li:active {
     background-color: #FFF;
     position:relative;
@@ -227,7 +227,7 @@ padding: auto; }
     }
 
 
-#footer { 
+#footer {
 text-align:center;
 text-transform: uppercase;
 font-family: serif;
@@ -239,7 +239,7 @@ clear: both;
 background: url(images/LED.png) no-repeat left top;
  }
  <A href="green">
-<LI> Green       <BR><IMG alt="PiHole" src="../static/LED_Green.png">  
+<LI> Green       <BR><IMG alt="PiHole" src="../static/LED_Green.png">
 </LI></A>
 #footer p {
 	text-align: center;
