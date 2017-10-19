@@ -1,0 +1,21 @@
+html, body {
+  height: 100%;
+}
+
+body {
+  padding: 20px;
+}
+
+.container-fluid {
+  min-height: 100%;
+  background: beige;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.resourceContainer, .clickContainer, .upgradeContainer {
+  position: relative;
+  border: solid 1px grey;
+  height: 100%;
+}

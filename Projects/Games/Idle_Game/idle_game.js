@@ -152,28 +152,28 @@ class Buildings {
 
   };
 
-  class CPCBuildings extends Buildings {
-    constructor(name,reference,buildCost,description,effect) {
+class CPCBuildings extends Buildings {
+  constructor(name,reference,buildCost,description,effect) {
       super(name,reference,buildCost,description,effect);
-    }
+  }
 
-    doBuildingEffect() {
+  doBuildingEffect() {
       clickValBuild += this._effect;
       autoCountBuild += this._effect/10;
-    }
+  }
 
-  };
+};
 
-  class CPSBuildings extends Buildings {
-    constructor(name,reference,buildCost,description,effect) {
-      super(name,reference,buildCost,description,effect);
-}
+class CPSBuildings extends Buildings {
+  constructor(name,reference,buildCost,description,effect) {
+    super(name,reference,buildCost,description,effect);
+  }
 
-    doBuildingEffect() {
-      autoCountBuild += this._effect;
-    }
+  doBuildingEffect() {
+    autoCountBuild += this._effect;
+  }
 
-  };
+};
 
 
 //Adds 'Buildings' instances
@@ -199,6 +199,8 @@ let buildingList = [
   puppyPunisher,
   duckDestroyer
 ];
+
+// Controls the x1, x10, x100 buttons
 
 let purchaseAmount = 1;
 
@@ -244,11 +246,11 @@ for (let i = 0 ; i < buildingList.length; i++) {
   $("."+buildingList[i].reference).click(function() {
     for (let j = 0; j < purchaseAmount; j++) {
       if (clickCount >= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))) {
-        clickCount -= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ));
-        buildingList[i].incrementBuildNumber();
-        $(this).find(".buildCount").html("<p>"+buildingList[i].buildNumber+"</p>");
-        $(this).find(".buildCost").text(Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber )));
-        buildingList[i].doBuildingEffect();
+          clickCount -= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ));
+          buildingList[i].incrementBuildNumber();
+          $(this).find(".buildCount").html("<p>"+buildingList[i].buildNumber+"</p>");
+          $(this).find(".buildCost").text(Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber )));
+          buildingList[i].doBuildingEffect();
         };
       }
     });
@@ -409,9 +411,6 @@ let buildNumberUpgrades = new Array (
 );
 
 
-
-
-
 // Show Upgrades when 20% of cost, make blue when 100%;
 setInterval(function(){
   for (var i = 0 ; i < upgradeList.length; i++) {
@@ -525,6 +524,7 @@ class Achievements {
 
 
 };
+
 //                            (name,reference,description,criteria,type,reward)
 const oneOne = new Achievements('One One!','oneOne','You earned 1 Click!',1,"clickCount",1);
 const oneTen = new Achievements('Ten!','oneTen','You earned 10 Clicks!',10,"clickCount",1);
@@ -631,29 +631,6 @@ for (let i = 0; i < achievementList.length; i++) {
 //Misc Functions
 //===================//
 
-
-let mouseOver = function(building) {
-  $(building).mouseenter(function() {
-    $(this).css("border","solid 3px lightblue");
-  });
-  $(building).mouseleave(function() {
-    $(this).css("border","0px");
-  });
-};
-
-
-let mouseClick = function(building) {
-  $(building).mousedown(function() {
-    $(this).css("transform","translateY(5%)");
-    $(this).css("transform","scale(1.03,1.03)");
-  });
-  $(building).mouseup(function() {
-    $(this).css("transform","translateY(5%)");
-    $(this).css("transform","scale(1,1)");
-  });
-};
-
-
 //code goes here that will be run every .1 seconds.
 
 setInterval(function(){
@@ -674,7 +651,7 @@ setInterval(function(){
 
 }, 100);
 
-// Cookier Clicker
+// Control over what happens when clicking the cookie
 $('.display').mousedown(function() {
   mouseClick(".display");
   if (Math.random() > .5) {
@@ -702,6 +679,27 @@ $('.display').mousedown(function() {
 
 });
 
+
+let mouseOver = function(building) {
+  $(building).mouseenter(function() {
+    $(this).css("border","solid 3px lightblue");
+  });
+  $(building).mouseleave(function() {
+    $(this).css("border","0px");
+  });
+};
+
+
+let mouseClick = function(building) {
+  $(building).mousedown(function() {
+    $(this).css("transform","translateY(5%)");
+    $(this).css("transform","scale(1.03,1.03)");
+  });
+  $(building).mouseup(function() {
+    $(this).css("transform","translateY(5%)");
+    $(this).css("transform","scale(1,1)");
+  });
+};
 
 mouseOver(".display");
 mouseOver(".auto");
