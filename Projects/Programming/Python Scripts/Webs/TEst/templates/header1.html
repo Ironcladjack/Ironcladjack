@@ -1,0 +1,81 @@
+<div class="header">
+  <div class="welcome">
+    <h1>Raspberry Pi Webserver</h1>
+  </div>
+  <div class="menu">
+    <ul>
+      <div class="menuLeft">
+      <a href="#"><li> Home <br /><img src= "../static/images/home.png" alt="Home"/></li></a>
+      <a href="#"><li> Raspberry Pi <br/><img src= "../static/images/RasPi.png" alt="Raspberry Pi" /></li></a>
+    </div>
+      <!--<a href="#"><li> PiHole Admin  <br /><img src= "../static/images/PiHole.png" alt="PiHole" /></li></a>-->
+    <div class="menuRight">
+      <a href="ledset/null"><li> LED Control <br /><img src= "../static/images/LED.png" alt="LED Control" /></li></a>
+      <a href="index.html"><li> Programming <br /><img src= "../static/images/question_mark.png" alt="About" /></li></a>
+    </div>
+    </ul>
+  </div><!--menu-->
+</div><!--header-->
+
+
+<style>
+.header{
+    }
+
+.welcome {
+  color: rgb(255,255,255);
+  font-weight:900;
+  background: RGB(12,86,160);
+  background: rgba(12,86,160,0.4);
+  border: solid 3px #466995;
+  border-top: 0;
+  height: 10%;
+  min-height: 75px;
+  }
+
+ .menu {
+  background: RGB(12,86,160);
+  background: RGBa(12,86,160,0.4);
+  color: RGB(255,255,255);
+  border: solid 3px #466995;
+  border-top: 0;
+  border-radius: 0 0 10px 10px;
+  text-align:center;
+   }
+
+.menuLeft, .menuRight {
+     display: inline-block;
+   }
+
+.menu ul {
+ padding: 0 10px;
+ margin: 0;
+}
+
+.menu li {
+ display: inline-block;
+ box-sizing: border-box;
+ border: solid 2px rgb(200,200,255);
+ border-width: 2px;
+ border-radius: 5px;
+ background-color: RGB(60,120,255);
+ color: rgb(200,255,255);
+ margin: 12px 75px;
+ width: 150px;
+ }
+
+.menu li:hover {
+    background-color: #348611;
+    }
+
+.menu img {
+  height: 30px;
+  padding: 10px 0 5px 0;
+ }
+
+.menu li:active {
+    background: #459722;
+    position:relative;
+    top: 3px;
+ }
+</style>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script>
+
+    $(document).ready(function() {
+      $(".ico").click(function() {
+        $(".ico").animate({top: '-=5px'},'fast');
+      });
+    });
+
+    $(document).ready(function() {
+      $(".EU-Cookie-Law").delay(2000).fadeIn('slow');
+
+      $(".Cookie-Consent, .Cookie-X").click(function() {
+        $(".EU-Cookie-Law").fadeOut('fast');
+      });
+    });
+
+    </script>
+    <title>footer</title>
+  </head>
+  <body>
+    <div class="wrapper">
+    <div class="box a">A</div>
+    <div class="box b">B</div>
+    <div class="box c">C</div>
+    <div class="box d">D</div>
+    <div class="box e">
+    <div class="space"></div>
+
+    </div>
+    <div class="box f">F</div>
+    <div class="box g">D</div>
+    <div class="box h">E</div>
+    <div class="box i">F</div>
+  </div>
+</body>
+</html>
+
+
+
+<style>
+body {
+  margin: 0px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body > .wrapper {
+  position: relative;
+  display: grid;
+  grid-template-columns: 100px auto 100px;
+  grid-template-rows: 100px auto 100px;
+  background-color: #fff;
+  color: #444;
+  height: 100%;
+  grid-template-areas:
+  "border border border"
+  "border snake border"
+  "border border border";
+}
+
+.box {
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 150%;
+}
+
+.e {
+  background-color: white;
+  display: grid;
+  grid-template-columns: 10, 10%;
+  grid-template-rows: 10, 10%;
+  padding: 0;
+}
+
+.space {
+  background-color: green;
+  height: 10%;
+  width: 10%;
+}
+</style>
