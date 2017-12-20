@@ -1,5 +1,9 @@
-// Cookie setter and getter
+//===================//
+//Cookie Control Functions
+//===================//
 
+
+// Creates Cookies
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -7,6 +11,7 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
   }
 
+// Retreives Cookies from Browsers
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -23,10 +28,12 @@ function getCookie(cname) {
     return "";
 }
 
+// Clears specific Cookies
 function deleteCookie(cname) {
   document.cookie = cname+"=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 }
 
+// Checks if Cookie Exists
 function cookieExists(cookie, base) {
     if (getCookie(cookie) > base) {
       let cookie = getCookie(cookie);
@@ -36,12 +43,14 @@ function cookieExists(cookie, base) {
 
 }
 
+// If 'cookieWarning' Cookie exists, set cookieWarning appropriately.
 if (getCookie("cookieWarning") != 0) {
   let cookieWarning = 1;
 } else {
   let cookieWarning = 0;
 }
 
+// Creates HTML & JQuery for cookie warning
 let $cookieWarning = $("<div/>")
 .addClass("cookieWarning")
 .html("<div><p>This page uses cookies to improve your experience. To acknowledge, click this button -> "+"  "+"  </p><button> Ok!</button></div>")
@@ -68,12 +77,10 @@ if (getCookie("clickCount") > 0) {
   clickCount = 0;
 }
 
-
 // Pre Generator values
 
 let clickValBuild = 1
 let clickValUpgrade = 1;
-
 
 let autoCountUpgrade = 1;
 let autoCountBuild = 0;
@@ -82,7 +89,6 @@ let clickVal = 1;
 let autoCount = 0;
 
 // Trackers
-
 let upgradeCount = 0;
 
 let timer = 0;
@@ -177,7 +183,7 @@ class CPSBuildings extends Buildings {
 
 
 //Adds 'Buildings' instances
-let mouse = new CPCBuildings('Mouse Upgrade','mouse',15,'+1 click per click',1);
+let mouse = new CPCBuildings('Mouse upgrade','mouse',15,'+1 click per click',1);
 let grandma = new CPSBuildings('Grandma','grandma',100,'1cps per Grandma', 1);
 let temple = new CPSBuildings('Temple','temple',2000,'10cps per Temple',10);
 let generator = new CPSBuildings('Generator','generator',40000,'100cps per Generator',100);
@@ -206,19 +212,25 @@ let purchaseAmount = 1;
 
 $(".x1").click(function() {
   purchaseAmount = 1;
-  $(".x100, .x10, x1").removeClass("purchaseAmountActive");
+  $(".x100, .x25, .x10, x1").removeClass("purchaseAmountActive");
   $(this).addClass("purchaseAmountActive");
 });
 
 $(".x10").click(function() {
   purchaseAmount = 10;
-  $(".x100, .x10, .x1").removeClass("purchaseAmountActive");
+  $(".x100, .x25, .x10, .x1").removeClass("purchaseAmountActive");
+  $(this).addClass("purchaseAmountActive");
+});
+
+$(".x25").click(function() {
+  purchaseAmount = 25;
+  $(".x100, .x25, .x10, .x1").removeClass("purchaseAmountActive");
   $(this).addClass("purchaseAmountActive");
 });
 
 $(".x100").click(function() {
   purchaseAmount = 100;
-  $(".x100, .x10, .x1").removeClass("purchaseAmountActive");
+  $(".x100, .x25, .x10, .x1").removeClass("purchaseAmountActive");
   $(this).addClass("purchaseAmountActive");
 });
 
@@ -227,29 +239,31 @@ for (let i = 0 ; i < buildingList.length; i++) {
 
   let $newBuildingBox = $("<div/>")   // creates a div element
       // add a class
-    .addClass(`building ${buildingList[i].reference}`)
+    .addClass(`buildingBox ${buildingList[i].reference}`)
       //add html
     .html(
-    "<div id="+buildingList[i].reference+" class='buildCount'>"+
-      "<p>"+buildingList[i].buildNumber+"</p>"+
-    "</div>"+
-    "<div class='buildingContainer'>"+
-      "<div class='buildingName'>"+buildingList[i].name+"</div>"+
-      "<div class='buildCost "+buildingList[i].buildCost+"'>"+buildingList[i].buildCost+"</div>"+
-    "</div>"+
+      "<div id="+buildingList[i].reference+" class='buildCount'>"+
+        "<p class='buildingBoxText'>"+buildingList[i].buildNumber+"</p>"+
+      "</div>"+
+      "<div class='buildingContainer'>"+
+        "<div class='buildingName'><p class='buildingBoxText'>"+buildingList[i].name+"</p></div>"+
+        "<div class='buildCost "+buildingList[i].buildCost+"'><p class='buildingBoxText'>"+buildingList[i].buildCost+"</p></div>"+
+      "</div>"+
     "<div class='description' style='display:none;'>"+buildingList[i].description+"</div>");
       // add this element into the '.buildings' div
     $(".buildings").append($newBuildingBox);
 
 
+
     // add onClick effects to this new element
   $("."+buildingList[i].reference).click(function() {
     for (let j = 0; j < purchaseAmount; j++) {
+      buildingList[i].setBuildingCookie();
       if (clickCount >= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))) {
           clickCount -= Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ));
           buildingList[i].incrementBuildNumber();
-          $(this).find(".buildCount").html("<p>"+buildingList[i].buildNumber+"</p>");
-          $(this).find(".buildCost").text(Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber )));
+          $(this).find(".buildCount").html("<p class='buildingBoxText'>"+buildingList[i].buildNumber+"</p>");
+          $(this).find(".buildCost").html("<p class='buildingBoxText'>"+Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))+"</p>");
           buildingList[i].doBuildingEffect();
         };
       }
@@ -260,8 +274,8 @@ for (let i = 0 ; i < buildingList.length; i++) {
 $(document).ready(function() {
   for (let i = 0 ; i < buildingList.length; i++) {
   buildingList[i].getBuildingCookie();
-  $("."+buildingList[i].reference).find(".buildCount").html("<p>"+buildingList[i].buildNumber+"</p>");
-  $("."+buildingList[i].reference).find(".buildCost").text(Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber )));
+  $("."+buildingList[i].reference).find(".buildCount").html("<p class='buildingBoxText'>"+buildingList[i].buildNumber+"</p>");
+  $("."+buildingList[i].reference).find(".buildCost").html("<p class='buildingBoxText'>"+Math.round(buildingList[i].buildCost * (multiplyVal ** buildingList[i].buildNumber ))+"</p>");
   for (let j = 0; j < buildingList[i].buildNumber; j++) {
     buildingList[i].doBuildingEffect();
   }
@@ -271,12 +285,11 @@ $(document).ready(function() {
 
 
 //===================//
-//Upgrade Generator
+//upgrade Generator
 //===================//
 
 class Upgrades {
   constructor(name,reference,buyCost,description,criteria,type,effect) {
-    this._purchased = 0;
     this._name = name;
     this._reference = reference;
     this._buyCost = buyCost;
@@ -284,8 +297,12 @@ class Upgrades {
     this._criteria = criteria;
     this._type = type;
     this._effect = effect;
+    this._purchased = 0;
   }
 
+  setPurchased() {
+    this._purchased = 1;
+  }
   get name() {
     return this._name;
   }
@@ -312,15 +329,12 @@ class Upgrades {
 
   get effect() {
     return this._effect;
-  };
+  }
 
   get purchased() {
     return this._purchased;
   }
 
-  setPurchased() {
-    this._purchased++;
-  }
 
   doUpgradeEffect() {
     clickValUpgrade *= this._effect;
@@ -340,24 +354,16 @@ class Upgrades {
   }
 };
 
-class CPCUpgrades extends Upgrades {
-  constructor(name,reference,buyCost,description,criteria,type,effect) {
-    super(name,reference,buyCost,description,criteria,type,effect);
-  }
-
-
-};
-
 // (name,reference,buyCost,description,criteria,effect)
-let chocolateChip = new CPCUpgrades('Chocolate Chip','chocolateChip',10,'Gives 15% CPS boost!',true,'clickValUpgrade',1.15);
-let whiteChoc = new CPCUpgrades('White Chocolate','whiteChoc',25,'Gives 20% CPS boost!',true,'autoCountUpgrade',1.15);
-let raisin = new CPCUpgrades('Raisin','raisin',50,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
-let darkChoc = new CPCUpgrades('Dark Chocolate','darkChoc',50,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
-let brownie = new CPCUpgrades('Brownie','brownie',200,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
-let blueberryMuffin = new CPCUpgrades('Blueberry Muffin','blueberryMuffin',1000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
-let raspberryMuffin = new CPCUpgrades('Raspberry Muffin','raspberryMuffin',5000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
-let bananaMuffin = new CPCUpgrades('Banana Muffin','bananaMuffin',20000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
-let pumpkinMuffin = new CPCUpgrades('Pumpkin Muffin','pumpkinMuffin',1000000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
+let chocolateChip = new Upgrades('Chocolate Chip','chocolateChip',10,'Gives 15% CPS boost!',true,'clickValUpgrade',1.15);
+let whiteChoc = new Upgrades('White Chocolate','whiteChoc',25,'Gives 20% CPS boost!',true,'autoCountUpgrade',1.15);
+let raisin = new Upgrades('Raisin','raisin',50,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
+let darkChoc = new Upgrades('Dark Chocolate','darkChoc',50,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
+let brownie = new Upgrades('Brownie','brownie',200,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
+let blueberryMuffin = new Upgrades('Blueberry Muffin','blueberryMuffin',1000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
+let raspberryMuffin = new Upgrades('Raspberry Muffin','raspberryMuffin',5000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
+let bananaMuffin = new Upgrades('Banana Muffin','bananaMuffin',20000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
+let pumpkinMuffin = new Upgrades('Pumpkin Muffin','pumpkinMuffin',1000000,'Gives 500% CPS boost!',true,'autoCountUpgrade',5);
 
 
 let upgradeList = [
@@ -373,35 +379,55 @@ let upgradeList = [
 ];
 
 
-for (var i = 0 ; i < upgradeList.length; i++) {
+for (let i = 0 ; i < upgradeList.length; i++) {
+
+  // This Section creates Elements for each item in UpgradeList
   let $newUpgradeBox = $("<div style='display:none'/>")   // creates a div element
-  .addClass(`upgrade ${upgradeList[i].reference}`)   // add a class
-  .html("<div>"+upgradeList[i].name+"</div>"+
-  "<div>"+upgradeList[i].buyCost+"</div>"+
+  .addClass(`upgradeBox ${upgradeList[i].reference}`)   // add a class
+  .html(
+    "<div class='upgradePadding'>"+
+    "<div class='upgradeName'>"+upgradeList[i].name+"</div>"+
+    "<div class='upgradeCost'>"+upgradeList[i].buyCost+"</div>"+
+  "</div>"+
   "<div class='description' style='display:none;'>"+upgradeList[i].description+"</div>");
 
   $(".upgrades").append($newUpgradeBox);
+  //
+
+
 
   let tempCost = upgradeList[i].buyCost;
   let tempEffect = upgradeList[i].effect;
+  let tempName = upgradeList[i].reference;
 
+  if (getCookie(upgradeList[i]._reference) != 0) {
+    upgradeList[i]._purchased = getCookie(upgradeList[i]._reference);
+    upgradeCount++;
+    $(".upgradeCount").text(`Number of Upgrades: ${upgradeCount}`);
+    clickValUpgrade *= tempEffect;
+    autoCountUpgrade *= tempEffect;
+  } else {
+    upgradeList[i]._purchased = 0;
+  }
 
+//
+// Controls Validation when clicking upgrades
+//
   $(`.${upgradeList[i].reference}`).mousedown(function() {
     if (clickCount >= tempCost) {
-      $(this).hide(0);
+      upgradeList[i].purchased = 1;
+      upgradeList[i]._purchased = 1;
       clickValUpgrade *= tempEffect;
       autoCountUpgrade *= tempEffect;
       upgradeCount++;
       clickCount -= tempCost;
+      setCookie(tempName,1,5);
+      $(this).hide(0);
       $(".upgradeCount").text(`Number of Upgrades: ${upgradeCount}`);
-      setCookie(upgradeList[i].reference,upgradeList[i].locked, 5);
-  };
+  }
 });
 
 };
-
-
-
 
 
 let buildNumberUpgrades = new Array (
@@ -416,14 +442,14 @@ setInterval(function(){
   for (var i = 0 ; i < upgradeList.length; i++) {
     if (clickCount >= upgradeList[i].buyCost * 0.2 && upgradeList[i].purchased == 0) {
       $("."+upgradeList[i].reference).fadeIn(1000);
+    }
 
-    } else if (clickCount < upgradeList[i].buyCost) {
-        $("."+upgradeList[i].reference).css("background","green");
-  }
   if (clickCount >= upgradeList[i].buyCost) {
-    $("."+upgradeList[i].reference).css("background","blue");
+    $("."+upgradeList[i].reference).find(".upgradePadding").css("background","blue");
   }
-}
+  else if (clickCount < upgradeList[i].buyCost) {
+      $("."+upgradeList[i].reference).find(".upgradePadding").css("background","green");
+}}
 
   for (let j = 0; j < buildingList.length; j++) {
     if (clickCount >= Math.round(buildingList[j].buildCost * (multiplyVal ** buildingList[j].buildNumber ))) {
@@ -431,34 +457,36 @@ setInterval(function(){
     } else {
       $("."+buildingList[j].buildCost).css("background","red");
     }
-
-    for (let k = 0; k < buildNumberUpgrades.length; k++) {
+    // This Adds Upgrades for each building with x built
+    /*for (let k = 0; k < buildNumberUpgrades.length; k++) {
       if (buildingList[j].buildNumber > buildNumberUpgrades[k] ) {
-        $(".upgrades").append("");
+        $(".upgrades").append(buildingList[j].reference+" "+buildNumberUpgrades[k]);
       }
-    }
+    }*/
   }
 }, 1000)
 
-$(".upgrade, .building").hover(function() {
+/*$(".upgradeBox, .building").hover(function() {
   $(this).find(".description").show();
 }, function() {
   $(this).find(".description").hide();
-})
+})*/
 
 $(".buyAll").click(function() {
   for (let i = 0; i < upgradeList.length; i++) {
     let tempCost = upgradeList[i].buyCost;
     let tempEffect = upgradeList[i].effect;
-    if (clickCount >= tempCost && upgradeList[i].purchased == 1) {
+    let tempName = upgradeList[i].reference;
+    if (clickCount >= tempCost && upgradeList[i].purchased != 1) {
       $(`.${upgradeList[i].reference}`).hide(0);
+      upgradeList[i].purchased = 1;
+      upgradeList[i]._purchased = 1;
       clickValUpgrade *= tempEffect;
       autoCountUpgrade *= tempEffect;
       upgradeCount++;
       clickCount -= tempCost;
-      upgradeList[i].setPurchased();
       $(".upgradeCount").text(`Number of Upgrades: ${upgradeCount}`);
-      setCookie(upgradeList[i].reference,upgradeList[i].locked, 5);
+      setCookie(tempName,2, 5);
     }
   }
 })
@@ -531,7 +559,7 @@ const oneTen = new Achievements('Ten!','oneTen','You earned 10 Clicks!',10,"clic
 const oneHundred = new Achievements('One Hundred!','oneHundred','You earned 100 Clicks!',100,"clickCount",2);
 const oneThousand = new Achievements('One Thousand!','oneThousand','You earned 1000 Clicks!',1000,"clickCount",2);
 
-const upgradeOne = new Achievements('One upgrade!','upgradeOne','You bought 1 Upgrade!',1,"upgradeCount",1);
+const upgradeOne = new Achievements('One upgrade!','upgradeOne','You bought 1 upgrade!',1,"upgradeCount",1);
 const upgradeThree = new Achievements('Three upgrades!','upgradeThree','You bought 3 Upgrades!',3,"upgradeCount",2);
 const upgradeSix = new Achievements('Six upgrades!','upgradeSix','You bought 6 Upgrades!',6,"upgradeCount",3);
 
@@ -648,13 +676,13 @@ setInterval(function(){
 
   clickVal = Math.round((clickValBuild * clickValUpgrade * achievementMultiplier/100)*100)/100;
   autoCount = Math.round((autoCountBuild * autoCountUpgrade * achievementMultiplier/100)*100)/100;
-
+  $(".pbar1").css("width",clickCount%100+"%");
 }, 100);
 
 // Control over what happens when clicking the cookie
 $('.display').mousedown(function() {
   mouseClick(".display");
-  if (Math.random() > .5) {
+  /*if (Math.random() > .5) {
     displayPlusNegX = 1;
   } else {
     displayPlusNegX = 2;
@@ -671,7 +699,7 @@ $('.display').mousedown(function() {
 
   let $displayEffect = $("<div/>").addClass("displayEffect").html("<div style='width: 50px; height: 50px; z-index: 25; position: absolute; left: "+displayDistanceX+"px; top: "+displayDistanceY+"px;'><img style='height: 50px;' src='hitmarker1.png'</div>");
   $(".display").append($displayEffect);
-  $displayEffect.fadeOut(2000);
+  $displayEffect.fadeOut(2000);*/
   clickCount = Math.round((clickCount + clickVal)*100)/100;
   clickCountDisplay = Math.floor(clickCount*10)/10;
   $(".display h1").text(clickCountDisplay);
@@ -685,7 +713,7 @@ let mouseOver = function(building) {
     $(this).css("border","solid 3px lightblue");
   });
   $(building).mouseleave(function() {
-    $(this).css("border","0px");
+    $(this).css("border","solid 1px black");
   });
 };
 
@@ -705,26 +733,15 @@ mouseOver(".display");
 mouseOver(".auto");
 mouseOver(".mouse");
 mouseOver(".grandma");
-mouseOver(".upgrade");
-mouseClick(".upgrade");
-mouseOver(".building");
-
+//mouseOver(".upgradeBox");
+mouseClick(".upgradeBox");
+mouseOver(".buildingBox");
+mouseClick(".buildingBox");
 
 
 //==============//
 //Misc Functions//
 //==============//
-
-//adds s
-$(".s").click(function() {
-  clickCount += 1;
-  $(this).hide(1000);
-});
-
-//adds d
-$(".d").click(function() {
-  clickCount += 1000;
-});
 
 
 
@@ -732,19 +749,25 @@ $(".d").click(function() {
 //Cookie Control//
 //==============//
 
-setInterval(function(){
-  let $saveMessage =  $("<div/>").addClass("saved").html("<div style='font-size: 20px; font-weight: 900;'>Saved!</div>");
-  $(".cookieClear").after($saveMessage);
-  $saveMessage.delay(1000).fadeOut(2000);
+let saveGame = function(saveText) {
+  let $saveMessage =  $("<div/>").addClass("saved").text(saveText);
   setCookie("clickCount", clickCount, 5);
   setCookie("autoCountBuild", clickCount, 5);
   setCookie("clickValBuild", clickValBuild, 5);
   setCookie("upgradeCount", upgradeCount, 5);
   setCookie("timer", timer, 5);
-for (let i = 0; i < buildingList.length; i++) {
-  buildingList[i].setBuildingCookie();
+  $(".saved").html($saveMessage);
+  $(".saved").show();
+  $(".saved").delay(1000).fadeOut(2000);
 }
+
+setInterval(function(){
+  saveGame("Autosaved!");
 }, 10000);
+
+$(".saveButton").click(function() {
+  saveGame("Saved!");
+})
 
 
 setInterval(function() {
@@ -758,8 +781,12 @@ $(".cookieClear").click(function() {
   for (let i = 0; i < achievementList.length; i++) {
     deleteCookie(achievementList[i].reference);
   };
+  for (let i = 0; i < upgradeList.length; i++) {
+    deleteCookie(upgradeList[i].reference);
+  };
   deleteCookie("clickCount");
   deleteCookie("upgradeCount");
   deleteCookie("timer");
   deleteCookie("cookieWarning");
+  location.reload();
 });
