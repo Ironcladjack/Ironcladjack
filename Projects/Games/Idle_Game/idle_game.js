@@ -355,6 +355,7 @@ class Upgrades {
 };
 
 // (name,reference,buyCost,description,criteria,effect)
+let newOne = new Upgrades('newOne','newOne',0,'Gives 15% CPS boost!',true,'clickValUpgrade',10);
 let chocolateChip = new Upgrades('Chocolate Chip','chocolateChip',10,'Gives 15% CPS boost!',true,'clickValUpgrade',1.15);
 let whiteChoc = new Upgrades('White Chocolate','whiteChoc',25,'Gives 20% CPS boost!',true,'autoCountUpgrade',1.15);
 let raisin = new Upgrades('Raisin','raisin',50,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
@@ -367,6 +368,7 @@ let pumpkinMuffin = new Upgrades('Pumpkin Muffin','pumpkinMuffin',1000000,'Gives
 
 
 let upgradeList = [
+  newOne,
   chocolateChip,
   whiteChoc,
   raisin,
@@ -377,6 +379,27 @@ let upgradeList = [
   bananaMuffin,
   pumpkinMuffin,
 ];
+
+
+let buildNumberUpgrades = new Array (
+  10,
+  25,
+  50,
+);
+
+for (let k = 0; k < buildNumberUpgrades.length; k++) {
+
+(function(context) {
+    for ( let i = 0; i < buildingList.length; i++) {
+       let key = `${buildNumberUpgrades[k]}${buildingList[i].reference}`;
+       let upgradeCost = Math.floor(buildNumberUpgrades[k]*buildingList[i].buildCost * multiplyVal* 0.5);
+       key = new Upgrades(`${buildNumberUpgrades[k]} ${buildingList[i].name}!`,`${buildNumberUpgrades[k]}${buildingList[i].reference}`,upgradeCost,`You bought ${buildNumberUpgrades[k]} ${buildingList[i].name}!`,false,'clickValUpgrade',5);
+       upgradeList.push(key);
+       $(".upgrades").append(this[key]);
+     }
+}(window));
+
+};
 
 
 for (let i = 0 ; i < upgradeList.length; i++) {
@@ -430,17 +453,12 @@ for (let i = 0 ; i < upgradeList.length; i++) {
 };
 
 
-let buildNumberUpgrades = new Array (
-  10,
-  25,
-  50,
-);
 
 
 // Show Upgrades when 20% of cost, make blue when 100%;
 setInterval(function(){
   for (var i = 0 ; i < upgradeList.length; i++) {
-    if (clickCount >= upgradeList[i].buyCost * 0.2 && upgradeList[i].purchased == 0) {
+    if (clickCount >= upgradeList[i].buyCost * 0.2 && upgradeList[i].purchased == 0 && upgradeList[i].criteria) {
       $("."+upgradeList[i].reference).fadeIn(1000);
     }
 
@@ -457,13 +475,17 @@ setInterval(function(){
     } else {
       $("."+buildingList[j].buildCost).css("background","red");
     }
-    // This Adds Upgrades for each building with x built
-    /*for (let k = 0; k < buildNumberUpgrades.length; k++) {
+
+
+  /*  // This Adds Upgrades for each building with x built
+    for (let k = 0; k < buildNumberUpgrades.length; k++) {
       if (buildingList[j].buildNumber > buildNumberUpgrades[k] ) {
         $(".upgrades").append(buildingList[j].reference+" "+buildNumberUpgrades[k]);
       }
     }*/
   }
+
+
 }, 1000)
 
 /*$(".upgradeBox, .building").hover(function() {
@@ -490,7 +512,6 @@ $(".buyAll").click(function() {
     }
   }
 })
-
 
 class Achievements {
   constructor(name,reference,description,criteria,type,reward) {
@@ -603,7 +624,7 @@ for (let k = 0; k < buildAchievementUnlocks.length; k++) {
 setInterval(function(){
   for (let i = 0; i < achievementList.length; i++) {
 
-    let filler = $("<div/>").addClass(achievementList[i].reference).html("<div style='width: 60px; height: 60px; background: rgba(255,255,255,1); margin: 5px; color: black; display: flex; border: solid 2px grey;'>"+achievementList[i].name+"</div>");
+    let filler = $("<div/>").addClass(achievementList[i].reference).html("<div style='width: 60px; height: 60px; background: rgba(255,255,255,1); margin: 5px; color: black; border: solid 2px grey; text-align: center;'>"+achievementList[i].name+"</div>");
 
   if (clickCount >= achievementList[i].criteria && achievementList[i].unlocked == 0 && achievementList[i].type == "clickCount") {
     let $newAchievementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
@@ -613,14 +634,14 @@ setInterval(function(){
     numberAchievements++;
     achievementMultiplier += achievementList[i].reward;
     achievementList[i].setAchievementCookie();
-    $(".achievements").append(filler);
+    $(".acheivementsContainer").append(filler);
 
   }
 
   if (upgradeCount >= achievementList[i].criteria && achievementList[i].unlocked == 0 && achievementList[i].type == "upgradeCount") {
     let $newAchievementBox = $("<div/>").addClass("achievement").html("<div style='background: grey; width: 100%;'>"+achievementList[i].name+"</div><div style='width: 100%;'>"+achievementList[i].description+"</div>");
     $("body").append($newAchievementBox);
-    $(".achievements").append(filler);
+    $(".acheivementsContainer").append(filler);
     $newAchievementBox.delay(1000).fadeOut(2000);
     achievementList[i].lock();
     numberAchievements++;
@@ -638,7 +659,7 @@ if (`${buildingList[j].reference}${achievementList[i].criteria}` === achievement
     numberAchievements++;
     achievementMultiplier += achievementList[i].reward;
     achievementList[i].setAchievementCookie();
-    $(".achievements").append(filler);
+    $(".acheivementsContainer").append(filler);
     }
   }
 }
@@ -651,7 +672,7 @@ for (let i = 0; i < achievementList.length; i++) {
   achievementList[i].getAchievementCookie();
   let filler = $("<div/>").addClass(achievementList[i].reference).html("<div style='width: 60px; height: 60px; background: rgba(255,255,255,1); margin: 5px; color: black; display: flex; border: solid 2px grey;'>"+achievementList[i].name+"</div>");
   if (achievementList[i].unlocked == 1) {
-    $(".achievements").append(filler);
+    $(".acheivementsContainer").append(filler);
   }
 }
 
@@ -733,7 +754,7 @@ mouseOver(".display");
 mouseOver(".auto");
 mouseOver(".mouse");
 mouseOver(".grandma");
-//mouseOver(".upgradeBox");
+mouseOver(".upgradePadding");
 mouseClick(".upgradeBox");
 mouseOver(".buildingBox");
 mouseClick(".buildingBox");

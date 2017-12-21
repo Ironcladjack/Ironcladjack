@@ -129,6 +129,8 @@ h1, h2, h3, h4 {
 
 .upgradePadding {
   margin: 2%;
+  padding: 3px;
+  box-sizing: border-box;
   border: solid 1px black;
 }
 .upgradeName {
@@ -152,22 +154,12 @@ h1, h2, h3, h4 {
   transform: translateX(-50%);
 }
 
-.achievements {
-  width: 400px;
-  background: rgba(255, 0, 0, 0.5);
-  display: inline-block;
-  height: 60%;
-  overflow-y:  scroll;
-  font-size: 0.8em;
-
-}
-
-.achievements * {
-  display: inline-block;
-}
-
-.achievementsTitle {
-  display: block;
+.acheivementsContainer {
+  min-height: 400px;
+  display: flex;
+  flex-flow: wrap;
+  width: 100%;
+  text-align: center;
 }
 
 /*=========================*/
