@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: #bbb;
+}
+
+body {
+}
+
+.container-fluid {
+  height: 100%;
+}
+
+.header-bar {
+  background: #666;
+  color: white;
+  border-bottom: solid 1px black;
+  height: 6%;
+}
+
+.main-content {
+  min-height: 94%;
+}
+
+.content-centre {
+  background: #fff;
+  border: solid 1px black;
+  border-width: 0 1px;
+}

@@ -1,7 +1,3 @@
 # Ironcladjack
 
-Backup website
-
-Jack Whacker v1.0
-
-Ironcladjack.github.io/idle_game.html
+Using this as a Hub for any different projects I create, as well as a deposit of any example/test/learning material I create along the way

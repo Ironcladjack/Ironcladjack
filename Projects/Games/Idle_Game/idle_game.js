@@ -184,26 +184,30 @@ class CPSBuildings extends Buildings {
 
 //Adds 'Buildings' instances
 let mouse = new CPCBuildings('Mouse upgrade','mouse',15,'+1 click per click',1);
-let grandma = new CPSBuildings('Grandma','grandma',100,'1cps per Grandma', 1);
-let temple = new CPSBuildings('Temple','temple',2000,'10cps per Temple',10);
+let paperPlane = new CPSBuildings('Paper Plane','paperPlane',100,'1cps per Paper Plane', 1);
+let bottleRocket = new CPSBuildings('Bottle Rocket','bottleRocket',2000,'10cps per Bottle Rocket',10);
 let generator = new CPSBuildings('Generator','generator',40000,'100cps per Generator',100);
-let dimensionRift = new CPSBuildings('Dimension Rift','dimensionRift',800000,'1000cps per Dimension Rift',1000);
-let galaxyDrain = new CPSBuildings('Galaxy Drain','galaxyDrain',16000000,'10000cps per Galaxy Drain',10000);
-let kittenKrusher = new CPSBuildings('Kitten Krusher','kittenKrusher',320000000,'100000cps per Kitten Krusher',100000);
-let puppyPunisher = new CPSBuildings('Puppy Punisher','puppyPunisher',6400000000,'100000cps per Puppy Punisher',1000000);
-let duckDestroyer = new CPSBuildings('Duck Destroyer','duckDestroyer',12800000000,'1000000cps per Duck Destroyer',1000000);
+let fighterJet = new CPSBuildings('Fighter Jet', 'fighterJet', 800000, '1000cps per Fighter Jet', 1000);
+let spaceRocket = new CPSBuildings('Space Rocket', 'spaceRocket', 16000000,'10000cps per Space Rocket', 10000);
+let planetMine = new CPSBuildings('Planet Mine', 'planetMine', 320000000, '100000cps per Planet Mine', 100000);
+let solarDrain = new CPSBuildings('Solar Drain', 'solarDrain', 6400000000, '1000000cps per Solar Drain', 1000000)
+let galaxyFarm = new CPSBuildings('Galaxy Drain','galaxyDrain',12800000000,'10000000cps per Galaxy Drain',10000000);
+let universeImploder = new CPSBuildings('Universe Imploder','universeImploder',256000000000,'100000000cps per Universe Imploder',100000000);
+let dimensionRift = new CPSBuildings('Dimension Rift','dimensionRift',5120000000000,'1000000000cps per Dimension Rift',1000000000);
 
 //List of all 'Buildings'
 let buildingList = [
   mouse,
-  grandma,
-  temple,
+  paperPlane,
+  bottleRocket,
   generator,
-  dimensionRift,
-  galaxyDrain,
-  kittenKrusher,
-  puppyPunisher,
-  duckDestroyer
+  fighterJet,
+  spaceRocket,
+  planetMine,
+  solarDrain,
+  galaxyFarm,
+  universeImploder,
+  dimensionRift
 ];
 
 // Controls the x1, x10, x100 buttons
@@ -355,7 +359,7 @@ class Upgrades {
 };
 
 // (name,reference,buyCost,description,criteria,effect)
-let newOne = new Upgrades('newOne','newOne',0,'Gives 15% CPS boost!',true,'clickValUpgrade',10);
+
 let chocolateChip = new Upgrades('Chocolate Chip','chocolateChip',10,'Gives 15% CPS boost!',true,'clickValUpgrade',1.15);
 let whiteChoc = new Upgrades('White Chocolate','whiteChoc',25,'Gives 20% CPS boost!',true,'autoCountUpgrade',1.15);
 let raisin = new Upgrades('Raisin','raisin',50,'Gives 15% CPS boost!',true,'autoCountUpgrade',1.15);
@@ -368,7 +372,6 @@ let pumpkinMuffin = new Upgrades('Pumpkin Muffin','pumpkinMuffin',1000000,'Gives
 
 
 let upgradeList = [
-  newOne,
   chocolateChip,
   whiteChoc,
   raisin,
