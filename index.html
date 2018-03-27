@@ -1,68 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Jack's Website</title>
-<link href="Jack.css" rel="stylesheet">
-<link rel="icon" type="image/png" href="static/PiHole.png"/>
-	<script type="text/javascript">
-</script>
-  </head>
-<div id="wrapper">
- <div class="welcome">
-<!-- <div id="time"></div> -->
- <h1> Welcome to Jack's Website!</h1>
+    <title>ironcladjack.github.io</title>
+    <link rel="icon" type="image/png" href="static/lightbulbON.ico"/>
+
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+	  <script src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+  <div class="row header-bar">
+    <h1>Ironcladjack.github.io</h1>
   </div>
+  <div class="row main-content">
+    <div class="col"></div>
+    <div class="col-sm-10 content-centre">
+        <h4>Current Projects:</h4>
+        <div class="row project">
+          <div class="col-1 "><img class="projectIcon" src="static/lightbulbON.ico"/></div>
+          <div class="col-2">
+              <a href="https://ironcladjack.github.io/Node-Server/public/index.html">Node-Server</a>
+              <p class="right top" >(<a href="https://github.com/Ironcladjack/Node-Server">Source</a>)</p>
+          </div>
+          <div class="col"><p>
+            A Node.js server for personal use, to control as much of my home as posible. Will be controlling several IoT Devices, both commercial and made by myself.
+            <br/>
+            <br/>Currently controls: Philips Hue Lights, TP-Link Smart Plugs, WS2812b RGB LED strip, Desktop Computer, Motion Detection Camera, Temperature/Humidity monitor.
+            <br/>Planned: Windows Blind control, Potted Plant monitor.
+          </p>
+          </div>
+        </div>
+          <div class="row project">
+            <div class="col-1 "><img class="projectIcon" src="static/electron2.png"/></div>
+            <div class="col-2">
+              <a href="#">Electron Hue App</a>
+              <p class="right top" >(<a href="https://github.com/Ironcladjack/Node-Server">Source</a>)</p>
+            </div>
+            <div class="col"><p>This is the intended end-goal of my Node-Server project, to convert the web-app into a Desktop program, which will allow features like Ambilight, or Game Sense to be passed to Lights etc.
+              <br/>
+              <br/>Currently can read an average screen colour and feed it to an RGB output, but I would like to finish working on the web-app before attempting to port it.</p></div>
 
- <div id="menu">
- <ul>
- <a href=".."><li> Home
- <br><img src='static/home.png' alt="Home"/></li></a>
- <a href="#"><li> Raspberry Pi
- <br><img src='static/RasPi.png' alt="Raspberry Pi" /></li></a>
- <a href="#"><li> PiHole Admin
- <br><img src='static/PiHole.png' alt="PiHole" /></li></a>
- <a href="ledset/null"><li> LED Control
- <br><img src='static/LED.png' alt="LED Control" /></li></a>
-  <a href="index.html"><li> About
- <br><img src='static/question_mark.png' alt="About" /></li></a>
- </ul>
- </div>
+          </div>
 
- <div class="main">
- <h2> Testing Header </h2>
- <p> Testing Text
-	 <a href="Projects/idle_game/idle_game.html">IDLE GAME</a>
- <br>
- <br>
- <br>
- <br>
-	 <a href="ironcladjack.github.io/Node-Server/public/index.html">Node-Server</a>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>so much testing text
-   </p>
+          <h4>Past Projects:</h4>
+          <div class="row project">
+            <div class="col-1  "><img class="projectIcon" src="static/game.png"/></div>
+            <div class="col-2">
+              <a href="https://ironcladjack.github.io/IDLE_GAME">Idle Game</a>
+              <p class="right top" >(<a href="https://github.com/Ironcladjack/IDLE_GAME">Source</a>)</p>
+            </div>
+            <div class="col"><p>A simple Idle Game based on Cookie Clicker. This was a learning excercise, to try and advance my Javascript knowledge. I may attempt to remake this using a library like Angular.js.</p></div>
 
- </div>
-  <div id="footer">
-<p> &copy; Copyright 2017. All Rights Reserved | Design by Jack Gooding | <a href=#> www.jacksweb.co.uk </a></p>
- </div><!-- #footer -->
- </div><!-- .main -->
- </div><!-- #wrapper -->
+          </div>
+          <div class="row project">
+            <div class="col-1 "><img class="projectIcon" src="static/LED_green.png"/></div>
+            <div class="col-2">
+              <a href="#">LED Control Page</a>
+              <p class="right top" >(<a href="https://github.com/Ironcladjack/Ironcladjack.github.io/tree/master/Projects/Web_Design/Website_Examples/Raspberry%20Pi%20Flask%20Server">Source</a>)</p>
+            </div>
+            <div class="col"><p>This is the first project I attempted, with the goal of controlling a ws2812b RGB LED strip. I used a Python Flask server to achieve this.
+              <br/>
+              <br/>Can change LED strip colours, or start set scripts.</p></div>
 
-  </body>
+          </div>
+        </div>
+    <div class="col"></div>
+  </div>
+</div>
+</body>
 </html>

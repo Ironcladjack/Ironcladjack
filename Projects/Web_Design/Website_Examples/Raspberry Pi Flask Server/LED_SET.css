@@ -8,7 +8,7 @@ border: solid 1px #FFF; }
 */
 
 body, html {
-  background-image: url(../../static/BG-Noise.jpg);
+  background-image: url(static/BG-Noise.jpg);
   background-repeat:repeat;
   height:  110%;
   margin:  0px auto;

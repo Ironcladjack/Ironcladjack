@@ -1,0 +1,59 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: #bbb;
+}
+
+body {
+}
+
+ul {
+  list-style: none;
+}
+
+.right {
+  position: absolute;
+  right: 0;
+}
+
+.top {
+  position: absolute;
+  top: 0
+}
+
+.container-fluid {
+  height: 100%;
+}
+
+.header-bar {
+  background: #666;
+  color: white;
+  //border-bottom: solid 1px black;
+  height: 6%;
+}
+
+.main-content {
+  min-height: 94%;
+}
+
+.content-centre {
+  background: #fff;
+  //border: solid 1px black;
+  //border-width: 0 1px;
+}
+
+.projectIcon {
+  width: 100%;
+}
+
+.project:nth-child(even){
+  background-color: #dcdcdc;
+}
+
+.project:nth-child(odd){
+  background-color: #cdcdcd;
+}
