@@ -5,7 +5,6 @@
 
 html, body {
   height: 100%;
-  background: #bbb;
 }
 
 body {
@@ -13,6 +12,11 @@ body {
 
 ul {
   list-style: none;
+}
+
+.external {
+  display: none;
+  visibility: none;
 }
 
 .right {
@@ -30,24 +34,44 @@ ul {
 }
 
 .header-bar {
-  background: #666;
+  background: #333;
   color: white;
-  //border-bottom: solid 1px black;
   height: 6%;
+  padding-left: 10%;
 }
+
+
 
 .main-content {
   min-height: 94%;
+  background: #dcdcdc;
 }
 
 .content-centre {
-  background: #fff;
-  //border: solid 1px black;
-  //border-width: 0 1px;
+  background: white;
+  padding-top: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.projects-container {
+  border-radius: 10px;
+  position: relative;
+  width: 95%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.project {
+  border-radius: 10px;
+
 }
 
 .projectIcon {
+  position: relative;
   width: 100%;
+  min-width: 50px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .project:nth-child(even){
