@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Node.js Server</title>
+    <link rel="stylesheet" href="./components/tutorials.css">
+    <link rel="stylesheet" href="./tutorials.css">
+  </head>
+  <body class="external">
+
+    <div class="tutorial">
+      <div class="tutorial-header">
+        <h2>My First Node.js Server</h2>
+        <div class="tutorial-date-container">
+          <p class="tutorial-date" >Date Posted: <span>??/??/????</span></p>
+          <p class="tutorial-date">Last Modified: <span>??/??/????</span></p>
+        </div>
+      </div>
+      <div class="tutorial-content">
+        <p>
+          In this tutorial we'll be going through how to set up a basic server using Node.Js.
+          In further tutorials we'll be looking at the things that you can use this to interact with IoT devices among other things.
+          <br/><br/>
+          As my experience is with using a Raspberry Pi, this is what i'll be using, but the majority of this should work on any operating system or hardware, but the installation and execution process may vary slightly.
+        </p>
+        <div data-include="contents"></div>
+        <div class="contents-container">
+          <div class="contents-border">
+            <ol class="contents-list">
+              <li><a href="#Installation">Installation</li>
+              <li><a href="#Code">Code</a></li>
+              <li><a href="Testing">Testing</a></li>
+              <li><a href="Extras">Extras</a></li>
+            </ol>
+        </div>
+      </div>
+      <h3 class="subheading" id="Installation"><a href="#Installation">#Installation</a></h3>
+      <p>
+        As stated, we'll be installing Node onto a Raspberry Pi, which runs a version of Linux Debian.
+      </p>
+      <p>
+        Run these commands in the Shell to install.
+      </p>
+      <div class="code">
+        curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+        <br/> sudo apt-get install -y nodejs
+        <br/>
+        <br/><span class="code-comment">//Optional: run the following code to install some dependencies for later use</span>
+        <br/>sudo apt-get install -y build-essential
+      </div>
+
+      <h3 class="subheading" id="Code"><a href="#Code">#Code</a></h3>
+        <p>
+          Coding with Node is simple, it's basically just Javascript, which i'm sure most people looking at this article are already fairly familiar with. To begin, we're going to run a simple <span class=".text-success">"Hello World!"</span> script, and then create a basic server.
+        </p>
+        <p>
+          First, make a folder named "node-test" on your Raspberry Pi, then navigate into it and create a file named "hello_world.js", then add the following code into it.
+        </p>
+        <div class="code">
+          <p>
+            console.log( "Hello World!" );
+          </p>
+        </div>
+
+      <h3 class="subheading" id="Testing"><a href="#Testing">#Testing</a></h3>
+      <p>
+        Now we can test the installation simply by directing node to run the new script with the following command.
+      </p>
+      <div class="code">
+        <p>node hello_world.js</p>
+      </div>
+      <p>
+        In the shell, you should now be able to see "Hello World!". That's great, but it's not useful or even that interesting. Let's try something better!
+      </p>
+
+
+
+    </div>
+  </div>
+</body>
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>

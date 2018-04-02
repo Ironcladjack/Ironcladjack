@@ -1,0 +1,60 @@
+.tutorial-date-container {
+  width: 200px;
+}
+
+.tutorial-date {
+  color: orange;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.tutorial-date > span {
+  color: black;
+}
+
+.contents-container {
+  padding: 1px;
+  border: solid black 1px;
+  width: 150px;
+  height: auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.contents-border {
+  margin: 1px;
+  border: solid 1px orange;
+  padding: 5px;
+  padding-left: 25px;
+}
+
+.contents-list {
+  padding: 0;
+  margin: 0;
+}
+
+.contents-list > li {
+  padding: 0;
+  margin: 0;
+}
+
+.subheading {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.code {
+  background: #2d2d2d;
+  color: white;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.code > p {
+  margin-bottom: 0;
+}
+.code-comment {
+  color: #8f8f8f;
+}
