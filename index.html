@@ -7,26 +7,32 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 	  <script src="index.js"></script>
+    <!--===========================================================================================-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--===========================================================================================-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!--===========================================================================================-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <!--===========================================================================================-->
 </head>
 
 <body>
-<div class="container-fluid">
+<div class="container-fluid" ng-app="Angular">
   <div class="row header-bar">
     <h1>Projects</h1>
   </div>
     <div class="row main-content">
       <div data-include="side-nav" class="col-sm-2"></div>
-      <div class="col-sm-9 content-centre">
-        <div data-include="projects"></div>
-        <div data-include="tutorials"></div>
-        <div data-include="comments"></div>
+      <div class="col-sm-9 content-centre" ng-controller="AngularApp  as $ctrl">
+        <ng-view></ng-view>
       </div>
     <div class="col-sm-1"></div>
   </div>
 </div>
 </body>
 </html>
+
+<!--===========================================================================================-->
 
 <script src="./index.js"></script>

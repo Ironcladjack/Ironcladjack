@@ -31,7 +31,7 @@ ul {
 .header-bar {
   background: #333;
   color: white;
-  height: 6%;
+  min-height: 6%;
   padding-left: 10%;
 }
 

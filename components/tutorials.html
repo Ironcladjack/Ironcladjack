@@ -1,156 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Node.js Server</title>
-    <link rel="stylesheet" href="./components/tutorials.css">
-    <link rel="stylesheet" href="./tutorials.css">
-  </head>
-  <body class="external">
+<head>
+  <title>Node.js Server</title>
+  <link rel="stylesheet" href="./components/tutorials/tutorials.css">
+  <link rel="stylesheet" href="./tutorials.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+</head>
+<body class="external">
+<h1>Tutorials</h1>
+<div class="tutorials_container">
 
-    <div class="tutorial">
-      <div class="tutorial-header-container">
-        <h1 class="tutorial-heading">Node.js HTTP Server</h1>
-        <div class="tutorial-date-container">
-          <p class="tutorial-date">Date Posted: <span>04/04/2018</span> Last Modified: <span>04/04/2018</span></p>
-        </div>
-      </div>
-      <div class="tutorial-content">
-        <p>
-          In this tutorial we'll be going through how to set up a basic server using Node.Js.
-          In further tutorials we'll be looking at the things that you can use this to interact with IoT devices among other things.
-          <br/><br/>
-          As my experience is with using a Raspberry Pi, this is what i'll be using, but the majority of this should work on any operating system or hardware, but the installation and execution process may vary slightly.
-        </p>
-        <div data-include="contents"></div>
-        <div class="contents-container">
-          <div class="contents-border">
-            <ol class="contents-list">
-              <li><a href="#Installation">Installation</a></li>
-              <li><a href="#Code">Code</a></li>
-              <li><a href="#Testing">Testing</a></li>
-              <li><a href="#Improvements">Improvements</a></li>
-              <li><a href="#Extras">Extras</a></li>
-            </ol>
-        </div>
-      </div>
-      <h3 class="subheading" id="Installation"><a href="#Installation">#Installation</a></h3>
-      <p>
-        As stated, we'll be installing Node onto a Raspberry Pi, which runs a version of Linux Debian.
-      </p>
-      <p>
-        Run these commands in the Shell to install.
-      </p>
-      <div class="code">
-        <pre>
-          curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
-          sudo apt-get install -y nodejs
-
-          <span class="code-comment">//Optional: run the following code to install some dependencies for later use</span>
-          sudo apt-get install -y build-essential
-        </pre>
-      </div>
-
-      <h3 class="subheading" id="Code"><a href="#Code">#Code</a></h3>
-
-          Coding with Node is simple, it's basically just Javascript, which i'm sure most people looking at this article are already fairly familiar with. To begin, we're going to run a simple <span class=".text-success">"Hello World!"</span> script, and then create a basic server.
-
-        <p>
-          First, make a folder named <i>'node-test'</i> on your Raspberry Pi, then navigate into it and create a file named <i>hello_world.js</i>, then add the following code into it.
-        </p>
-        <div class="code">
-          <pre>
-            console.log( "Hello World!" );
-          </pre>
-        </div>
-
-      <h3 class="subheading" id="Testing"><a href="#Testing">#Testing</a></h3>
-      <p>
-        Now we can test the installation simply by directing node to run the new script with the following command.
-      </p>
-      <div class="code">
-        <pre>
-          node hello_world.js
-        </pre>
-      </div>
-      <p>
-        <br/>
-        In the shell, you should now be able to see "Hello World!". That's great, but it's not useful or even that interesting. Let's try something better! Press CTRL + C to exit the program.
-
-        <h3 class="subheading" id="Improvements"><a href="#Improvements">#Improvements</a></h3>
-
-
-        One of the most popular things Node is used for is to host a webserver, so that's what we'll do next. There are more advanced ways to do this using other native packages, but this is the easiest way to get a simple server running, and suited me for a long time while learning Node.
-
-        First, create a new file called <i>'server.js'</i>, and then fill it with the following:
-      </p>
-
-      <div class="code">
-        <pre>
-          <span class="code-comment">//Load/require the native 'http' server package</span>
-          var http = require('http');
-
-          <span class="code-comment">//Create an object to configure the server:</span>
-          http.createServer( function (request, response) {
-
-            res.writeHead(200, {'Content-Type': 'text/html'}); <span class="code-comment">//Send out an 'OK' status message to the browser, and the type of content to expect </span>
-            response.write('Hello World!');      <span class="code-comment">//write a response to the client</span>
-            response.end();                      <span class="code-comment">//end the response</span>
-
-          }).listen(3000); <span class="code-comment">//the server is listening on ipaddress:port; localhost:3000, 127.0.0.1:3000</span>
-        </pre>
-      </div>
-      <p>
-        <br/>Now run the file by typing 'Node server.js', load up a browser and go to 127.0.0.1:3000, and you should see your message! Alternatively, go to the local ip address of your device, with the port 3000, and you should be able to view this from any other device on your network!
-        <br/>
-        <br/>Yet again, this still isn't very useful, as we don't want to be creating an entire website within <kbd>response.write('')</kbd>, lets load a .html file instead.
-        <br/>
-        <br/>Create an <i>'index.html'</i> file, and fill it with the following code:
-      </p>
-      <div class="code">
-        <pre>
-          &lt;h1&gt;Hello World!&lt;/h1&gt;
-          &lt;p&gt;I just loaded a html file!&lt;/p&gt;
-        </pre>
-      </div>
-      <p>
-      <br/>
-      <br/>To load this file, we'll need to use another of nodes native packages, 'fs' which stands for FileSystem. This package can be used to read/write on the server filesystem.
-      <br/>
-      <br/>Edit <i>'server.js'</i> to add the code in green.
-      </p>
-      <div class="code">
-        <pre>
-
-          var http = require('http');
-          <span class="code-green">var fs = require('fs');</span> <span class="code-comment">//Load/require the native 'fs' server package</span>
-
-
-          <span class="code-comment">//Create an object to configure the server:</span>
-          http.createServer( function (request, response) {
-            <span class="code-green">fs.readFileSync('index.html', function(err, data) {</span> <span class="code-comment">//before anything else, load <i>'index.html'</i>, then use a callback to complete the server</span>
-
-
-              res.writeHead(200, {'Content-Type': 'text/html'});
-              response.write(<span class="code-green">data</span>);
-              response.end();
-
-            <span class="code-green">});</span>
-
-          }).listen(3000);
-        </pre>
-      </div>
-      <p>
-        <br/>
-        <br/> When you close the server (CTRL + C) and run it again (node server.js), your browser should now display the html you created!
-        <br/>
-        <br/>You can do a lot with this package, although you cannot load in resources to the html file easily, any scripting or styling needs to be done inside that <i>'index.html'</i> file.
-        <br/>Once you are more proficient with Node, it is usually a good idea to convert to using a more advanced server package, such as 'Express'.
-        <br/>
-        <br/>I will be doing further tutorials on Node, using Express to create servers, and controlling IoT devices, and other things i have learned during my projects.
-      </p>
-    </div>
+      <ul>
+        <li><a href="index.html#!/tutorials/node_http_server">Node HTTP Server</a></li>
+        <li></li>
+        <li></li>
+        <li></li>
+      </ul>
   </div>
 </body>
 </html>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
+
+
+<script>
+//$(".tutorials_container").append("Hello");
+</script>
+
+
+<script src="./components/tutorials.js"></script>
