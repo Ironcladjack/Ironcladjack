@@ -1,6 +1,6 @@
 
 //Data store for available Tutorials
-let tutorials = [
+let tutorials_list = [
   {
     name: "Node HTTP Server",
     url:  "index.html#!/tutorials/node_http_server",
@@ -24,14 +24,14 @@ let tutorials = [
 
 ];
 
-/*
+
+
+
   setTimeout(function() {
-  $(".tutorials_container").append("<ul></ul>");
   for (let i=0; i < tutorials.length; i++) {
     let data = tutorials[i];
     let date = `${data.created.day}/${data.created.month}/${data.created.year}`;
-    $(".tutorials_container ul").append(`<li><a href="${data.url}">${data.name}, ${date}</a></li>`);
+    $(".tutorials_container ul").append(`<li><a href="${data.url}">${data.name},   ${date}</a></li>`);
 
   };
 },200);
-*/

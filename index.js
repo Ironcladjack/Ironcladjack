@@ -13,8 +13,33 @@ $(document).ready(function() {
 var AngularApp = angular.module('Angular', ["ngRoute"]);
 var extScope;
 
+
+
 AngularApp.controller('AngularApp', function($scope, $interval, $compile) {
+    //Data store for available Tutorials
+/*    $scope.tutorials = [
+    {
+      name: "Node HTTP Server",
+      url:  "index.html#!/tutorials/node_http_server",
+      created: {
+        year: "2018",
+        month: "04",
+        day: "04"
+      },
+      tags: ["Node.js", "Webserver", "begginner"],
+    },{
+      name: "Placeholder",
+      url: "",
+      created: {
+        year: "2018",
+        month: "04",
+        day: "06"
+      },
+      tags: ["Placeholder"],
+    },
+  ];*/
       extScope = $scope; //allows access to the $scope object outside of the Angular Contructor
+
 });
 
 AngularApp.config(function($routeProvider) { //Angular routing provides these HTML docs to "<ng-view></ng-view>" element
@@ -33,6 +58,10 @@ AngularApp.config(function($routeProvider) { //Angular routing provides these HT
   })
   .when("/tutorials/node_http_server", {
     templateUrl : "./components/tutorials/node_http_server.html",
+    controller : "AngularApp"
+  })
+  .when("/tutorials/hue_control_nodejs", {
+    templateUrl : "./components/tutorials/hue_control_nodejs.html",
     controller : "AngularApp"
   })
   .when("/about", {
