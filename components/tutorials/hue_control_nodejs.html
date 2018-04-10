@@ -17,13 +17,17 @@
       <div class="tutorial-content">
         <p>
           In this tutorial, we'll walk through setting up and registering your server with a Phillips Hue Hub, then sending commands to change the status of any attached lights.
-          A walkthrough of controlling this via your browser can be found at: <a href="https://developers.meethue.com/documentation/getting-started">Phillips: Meet Hue</a>
+          <br/>
+          <br/>We'll use the <a href="https://www.npmjs.com/package/node-hue-api">node-hue-api</a> package to do this.
+          <br/>
+          <br/>An official walkthrough of controlling Hue via your browser can be found at: <a href="https://developers.meethue.com/documentation/getting-started">Phillips: Meet Hue</a>
         </p>
         <div data-include="contents"></div>
         <div class="contents-container">
           <div class="contents-border">
             <ol class="contents-list">
-              <li><a href="#Installation">Installation</a></li>
+              <li><a href="#Installing-Package">Installing Package</a></li>
+              <li><a href="#Registering">Registering a user</a></li>
               <li><a href="#Code">Code</a></li>
               <li><a href="#Testing">Testing</a></li>
               <li><a href="#Improvements">Improvements</a></li>
@@ -31,9 +35,29 @@
             </ol>
         </div>
       </div>
-      <h3 class="subheading" id="Installation"><a href="#Installation">#Installation</a></h3>
+      <h3 class="subheading" id="Installing-Package"><a href="#Installing-Package">#Installing Package</a></h3>
       <p>
-        lorem ipsum
+        The first thing we need to do is create a folder, initialise it, then install the <a href="https://www.npmjs.com/package/node-hue-api">node-hue-api</a> package to Node.js.
+      </p>
+      <div class="code">
+        <pre>
+          <span class="code-comment">// Create a folder and navigate to it </span>
+          mkdir hue_control
+          cd hue_control
+
+          <span class="code-comment">// initialise this folder and install packages </span>
+          npm init
+          npm install -g node-hue-api
+        </pre>
+      </div>
+
+      <h3 class="subheading" id="Registering"><a href="#Registering">#Registering a user</a></h3>
+      <p>
+        Now for the hub to accept any commands we would like to send, we need to register a valid user with the Hue Bridge.
+        <br/>The easiest way to do this is to follow the tutorial at <a href="https://developers.meethue.com/documentation/getting-started">Phillips: Getting Started</a>
+
+        <br/>
+        However, it would be more useful to write a script that searched for Hue Bridges on the local network, registered a new user with them and stored the resulting 'username' in a separate file.
       </p>
       <div class="code">
         <pre>
