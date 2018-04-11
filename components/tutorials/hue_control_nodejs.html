@@ -9,29 +9,32 @@
 
     <div class="tutorial">
       <div class="tutorial-header-container">
-        <h1 class="tutorial-heading">Control Phillips Hue using Node.js</h1>
+        <h1 class="tutorial-heading">Control Philips Hue using Node.js</h1>
         <div class="tutorial-date-container">
           <p class="tutorial-date">Date Posted: <span>00/00/2010</span> Last Modified: <span>00/00/2010</span></p>
         </div>
       </div>
       <div class="tutorial-content">
         <p>
-          In this tutorial, we'll walk through setting up and registering your server with a Phillips Hue Hub, then sending commands to change the status of any attached lights.
+          In this tutorial, we'll walk through setting up and registering your server with a Philips Hue Hub, then sending commands to change the status of any attached lights.
+          <br/>As usual, this is intended for use on a Raspberry Pi, which will run this program 24/7, so any CLI instructions will be intended for linux/bash.
           <br/>
-          <br/>We'll use the <a href="https://www.npmjs.com/package/node-hue-api">node-hue-api</a> package to do this.
+          <br/>We'll mainly be using the <a href="https://www.npmjs.com/package/node-hue-api">node-hue-api</a> package to do this.
           <br/>
-          <br/>An official walkthrough of controlling Hue via your browser can be found at: <a href="https://developers.meethue.com/documentation/getting-started">Phillips: Meet Hue</a>
+          <br/>An official walkthrough of controlling Hue via your browser can be found at: <a href="https://developers.meethue.com/documentation/getting-started">Philips: Meet Hue</a>
         </p>
         <div data-include="contents"></div>
         <div class="contents-container">
           <div class="contents-border">
             <ol class="contents-list">
-              <li><a href="#Installing-Package">Installing Package</a></li>
-              <li><a href="#Registering">Registering a user</a></li>
-              <li><a href="#Code">Code</a></li>
-              <li><a href="#Testing">Testing</a></li>
-              <li><a href="#Improvements">Improvements</a></li>
-              <li><a href="#Extras">Extras</a></li>
+              <li><a href="index.html#!/tutorials/hue_control_nodejs#Installing-Package">Installing Package</a></li>
+              <li><a href="index.html#!/tutorials/hue_control_nodejs#Finding-bridge">Finding a Bridge</a></li>
+              <li><a href="index.html#!/tutorials/hue_control_nodejs#Registering">Registering a user</a></li>
+              <li><a href="index.html#!/tutorials/hue_control_nodejs#Checking-username">Checking for user</a></li>
+              <li><a href="index.html#!/tutorials/hue_control_nodejs#Finding-bulbs">Finding the Bulbs</a></li>
+              <li><a href="index.html#!/tutorials/hue_control_nodejs#Commanding-bulbs">Commanding the Bulbs</a></li>
+              <li><a href="index.html#!/tutorials/hue_control_nodejs#Improvements">Improvements</a></li>
+              <li><a href="index.html#!/tutorials/hue_control_nodejs#Extras">Extras</a></li>
             </ol>
         </div>
       </div>
@@ -51,24 +54,174 @@
         </pre>
       </div>
 
-      <h3 class="subheading" id="Registering"><a href="#Registering">#Registering a user</a></h3>
+      <h3 class="subheading" id="Finding-bridge"><a href="#Finding-bridge">#Finding a Bridge</a></h3>
       <p>
-        Now for the hub to accept any commands we would like to send, we need to register a valid user with the Hue Bridge.
-        <br/>The easiest way to do this is to follow the tutorial at <a href="https://developers.meethue.com/documentation/getting-started">Phillips: Getting Started</a>
+        Any commands we want to send to a Hue Bulb will need to pass through the Philips Hue Bridge, so first we need to find the Bridge on the local network.
 
-        <br/>
-        However, it would be more useful to write a script that searched for Hue Bridges on the local network, registered a new user with them and stored the resulting 'username' in a separate file.
+        It's possible to find this via the DCHP page on a router, however this isn't automated and may sometimes change.
+        It would better if we create an automated script that completes all the neccessary setup, so we only have to worry about sending commands to the lights.
+
+        Create a new file named 'hue-server.js' and add the following code to it:
+
       </p>
       <div class="code">
         <pre>
-          <span class="code-comment">//Optional:</span>
-          sudo apt-get install -y build-essential
+          <span class="code-comment">// Include the node-hue-api package, and link two of its premade objects</span>
+          let hue = require("node-hue-api"),
+          HueApi = hue.HueApi,
+          lightState = hue.lightState;
+
+          <span class="code-comment">// Creating a global variable to hold the Bridge data.</span>
+          let hueData, hueBridgeIP;
+
+          <span class="code-comment">// Display the bridge data, then update the above variables.</span>
+          let displayBridges = function(hueBridge) {
+                console.log("Hue Bridge Found: " + JSON.stringify(hueBridge));
+                hueData = hueBridge;
+                hueBridgeIP = hueBridge[0].ipaddress;
+              };
+
+          <span class="code-comment">// Retrieve Hue Bridge data, and passing that to displayBridges()</span>
+          hue.nupnpSearch(function(err, result) {
+            if (err) throw err;
+            displayBridges(result);
+          });
+
         </pre>
       </div>
 
-      <h3 class="subheading" id="Code"><a href="#Code">#Code</a></h3>
+      <h3 class="subheading" id="Registering"><a href="#Registering">#Registering a user</a></h3>
+      <p>
+        Now for the Bridge to accept any commands we send, we need a valid user profile.
+        <br/>The easiest way to do this is to follow the tutorial at <a href="https://developers.meethue.com/documentation/getting-started">Philips: Getting Started</a>
+        , but again this is not automated.
+        <br/>
+        <br/>We will send a user creation request to the Bridge, and store the output in a similar manner to the <i>hueBridgeIP</i>.
+        <br/>
+        <br/>Add the following code in green to 'hue-server.js', underneath <i>hue.nupnpSearch()</i>.
+
+      </p>
+      <div class="code">
+        <pre>
+          <span class="code-comment">// adding hueBridgeUsername to variable list.</span>
+          let hueData, hueBridgeIP<span class="code-green">, hueBridgeUsername</span>;
+
+          <span class="code-green">
+          <span class="code-comment">// Display the new username, then update hueBridgeUsername</span>
+          let displayUserResult = function(result) {
+              console.log("Created user: " + JSON.stringify(result));
+              hueBridgeUsername = result;
+          };
+
+          <span class="code-comment">// Simple function to display any errors that may occur</span>
+          let displayError = function(err) {
+              console.log(err);
+
+          <span class="code-comment">// Simple function to display any errors that may occur</span>
+          hue.createUser(hueBridgeIP, function(err, username) {
+              if (err) throw err;
+              displayUserResult(username);
+          });
+        </span>
+        </pre>
+      </div>
+
+      <h3 class="subheading" id="Checking-username"><a href="#Checking-username">#Checking for Username</a></h3>
         <p>
-          lorem ipsum
+          So this is great, we can now communicate with the Hue Bridge, and soon the Hue lights!
+          however, we don't want to be creating a new user account every time, so it would be best if we check if we've registered a user already when launching the server.
+          <br/>
+          <br/>To do this, we will save the user details into a <i>'hueUser.txt'</i> file in the root of this project folder, and check that for a user account on every launch.
+          <br/>We'll use the <i>'fs'</i> package for this.
+          <br/>
+          <br/>Update <i>'hue-server.js'</i> to the code below.
+        </p>
+        <div class="code">
+          <pre>
+            let hue = require('node-hue-api'),
+            HueApi = hue.HueApi,
+            lightState = hue.lightState;
+
+            <span class="code-green">let fs = require('fs');</span>
+
+            let hueData, hueBridgeIP, hueBridgeUsername;
+
+            let displayBridges = function(hueBridge) {
+                  console.log("Hue Bridge Found: " + JSON.stringify(hueBridge));
+                  hueData = hueBridge;
+                  hueBridgeIP = hueBridge[0].ipaddress;
+                };
+
+            let displayUserResult = function(result) {
+                  console.log("Created user: " + JSON.stringify(result));
+                  hueBridgeUsername = result;
+                };
+
+            let displayError = function(err) {
+                  console.log(err);
+
+            hue.nupnpSearch(function(err, result) {
+              if (err) throw err;
+              displayBridges(result);
+            });
+
+            <span class="code-comment">// Read content in 'hueUser.txt' and assign to 'hueBridgeUsername' if there's nothing there, create a new user</span>
+            <span class="code-green">fs.readFile('hueUser.txt', function(err, data){
+              if (data) {
+                hueBridgeUsername = data;
+              } else {
+                hue.createUser(hueBridgeIP, function(err, username) {
+                  if (err) throw err;
+                  displayUserResult(username);
+                };
+              });
+            });
+            </span>
+          </pre>
+        </div>
+
+      <h3 class="subheading" id="Finding-bulbs"><a href="#Finding-bulbs">#Finding the Bulbs</a></h3>
+        <p>
+          So now our server is able to reliably find the hub and connect with a valid user, we can start searching for bulbs to command!
+          <br/> This is maybe the most complicated part
+        </p>
+        <div class="code">
+          <pre>
+            var lightStatus = [];
+            api.lights(function(err, devices ) {
+                lightStatus = [];
+                if (err) throw err;
+                let lightsJSON = JSON.stringify(devices, null, 2);
+                lightsJSON = JSON.parse(lightsJSON);
+                lightsJSON = lightsJSON.lights;
+
+                for (let i = 0; i < lightsJSON.length; i++) {
+
+                  //If the light bulb is on, get info from the hub.
+                  if (lightsJSON[i].state.reachable) {
+                    lightStatus.push(
+                      {
+                        "name":lightsJSON[i].name,
+                        "type":lightsJSON[i].type,
+                        "id":lightsJSON[i].id,
+                        "state":{
+                                  "on":lightsJSON[i].state.on,
+                                  "brightness":lightsJSON[i].state.bri,
+                                  // If bulb is RGB, return the converted CIE colour, else return 'N/A'
+                                  "rgb": (lightsJSON[i].type === 'Extended color light') ? cie_to_rgb(lightsJSON[i].state.xy[0],lightsJSON[i].state.xy[1],lightsJSON[i].state.brightness) : "rgb(240,200,140)" ,
+                                },
+                      }
+                    )
+                  };
+              };
+
+            });
+          </pre>
+        </div>
+
+      <h3 class="subheading" id="Commanding-bulbs"><a href="#Commanding-bulbs">#Commanding the Bulbs</a></h3>
+        <p>
+          So now our server is able to reliably find
         </p>
         <div class="code">
           <pre>
