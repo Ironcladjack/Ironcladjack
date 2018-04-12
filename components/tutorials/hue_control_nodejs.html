@@ -183,23 +183,29 @@
       <h3 class="subheading" id="Finding-bulbs"><a href="#Finding-bulbs">#Finding the Bulbs</a></h3>
         <p>
           So now our server is able to reliably find the hub and connect with a valid user, we can start searching for bulbs to command!
-          <br/> This is maybe the most complicated part
-        </p>
+          <br/> This is the most complicated part and is really just my personal preferance, sorting the data from the hue hub into a more useful format.
+          <br/>
+          <br/> Once we've done this, it's easy to control the lights! Add this code to the bottom of 'server.js'.p>
         <div class="code">
           <pre>
-            var lightStatus = [];
+            <span class="code-comment">// Create global blank array to store data</span>
+            var hueLightData = [];
+
+            <span class="code-comment">// Request data on attached lights</span>
             api.lights(function(err, devices ) {
-                lightStatus = [];
                 if (err) throw err;
+
+                <span class="code-comment">// Format data and prepare</span>
                 let lightsJSON = JSON.stringify(devices, null, 2);
                 lightsJSON = JSON.parse(lightsJSON);
                 lightsJSON = lightsJSON.lights;
 
+                <span class="code-comment">// For each light, scrape important data into an object, and push object onto array</span>
                 for (let i = 0; i < lightsJSON.length; i++) {
 
-                  //If the light bulb is on, get info from the hub.
+                  <span class="code-comment">// Only attempt to get info if the light has power</span>
                   if (lightsJSON[i].state.reachable) {
-                    lightStatus.push(
+                    hueLightData.push(
                       {
                         "name":lightsJSON[i].name,
                         "type":lightsJSON[i].type,
@@ -207,8 +213,6 @@
                         "state":{
                                   "on":lightsJSON[i].state.on,
                                   "brightness":lightsJSON[i].state.bri,
-                                  // If bulb is RGB, return the converted CIE colour, else return 'N/A'
-                                  "rgb": (lightsJSON[i].type === 'Extended color light') ? cie_to_rgb(lightsJSON[i].state.xy[0],lightsJSON[i].state.xy[1],lightsJSON[i].state.brightness) : "rgb(240,200,140)" ,
                                 },
                       }
                     )
@@ -225,7 +229,7 @@
         </p>
         <div class="code">
           <pre>
-            console.log( "Hello World!" );
+            api.setLightState(1, lightState.create().on().rgb(255,200,200).brightness(80));
           </pre>
         </div>
 
