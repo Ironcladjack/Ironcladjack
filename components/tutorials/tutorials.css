@@ -2,6 +2,19 @@
   margin-top: 2em;
 }
 
+.tutorial-container {
+  background: grey;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+  width: 300px;
+  height: 300px;
+}
+
+p {
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+   font-weight: 300;
+}
+
 .tutorial-heading {
   font-weight: 500;
   font-family: helvetica;
@@ -27,7 +40,7 @@
   border: solid black 1px;
   width: 200px;
   height: auto;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .contents-border {
@@ -54,6 +67,12 @@
   color: black;
 }
 
+iframe {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .code {
   background: #2d2d2d;
   border-radius: 5px;
@@ -66,6 +85,11 @@
   margin: 0;
   color: white;
   padding-left: 0;
+}
+
+.code > .code-file-name {
+  float: right;
+  color: #afafaf;
 }
 
 .code-comment {
