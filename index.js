@@ -16,28 +16,43 @@ var extScope;
 
 
 AngularApp.controller('AngularApp', function($scope, $interval, $compile) {
-    //Data store for available Tutorials
-/*    $scope.tutorials = [
+  $scope.tutorials_list = [
     {
       name: "Node HTTP Server",
       url:  "index.html#!/tutorials/node_http_server",
+      image_url: "./static/nodejs_logo.png",
       created: {
         year: "2018",
         month: "04",
         day: "04"
       },
       tags: ["Node.js", "Webserver", "begginner"],
-    },{
-      name: "Placeholder",
-      url: "",
+    },
+    {
+      name: "Control Philips Hue using Node.js",
+      url: "index.html#!/tutorials/hue_control_nodejs",
+      image_url: "./static/nodejs_logo.png",
       created: {
         year: "2018",
         month: "04",
-        day: "06"
+        day: "15"
       },
-      tags: ["Placeholder"],
+      tags: ["Node.js", "Phillips Hue", "Intermitiate"],
     },
-  ];*/
+    {
+      name: "Control NeoPixels / Ws2812b using Node.js and Raspberry Pi",
+      url: "index.html#!/tutorials/neopixel_control_nodejs",
+      image_url: "./static/nodejs_logo.png",
+      created: {
+        year: "2018",
+        month: "04",
+        day: "??"
+      },
+      tags: ["Node.js", "NeoPixels", "NeoPixels", "Intermitiate"],
+    },
+
+  ];
+
       extScope = $scope; //allows access to the $scope object outside of the Angular Contructor
 
 });
@@ -62,6 +77,10 @@ AngularApp.config(function($routeProvider) { //Angular routing provides these HT
   })
   .when("/tutorials/hue_control_nodejs", {
     templateUrl : "./components/tutorials/hue_control_nodejs.html",
+    controller : "AngularApp"
+  })
+  .when("/tutorials/neopixel_control_nodejs", {
+    templateUrl : "./components/tutorials/neopixel_control_nodejs.html",
     controller : "AngularApp"
   })
   .when("/about", {

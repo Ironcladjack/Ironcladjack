@@ -9,13 +9,14 @@
 </head>
 <body class="external">
 <h1>Tutorials</h1>
-<div class="tutorials_container-box">
-      <ul>
+<div class="tutorials_container-box row">
+      <!--<ul>
         <li><a href="index.html#!/tutorials/node_http_server">Node HTTP Server</a></li>
         <li><a href="index.html#!/tutorials/hue_control_nodejs">Hue Control using Node.js</a></li>
         <li></li>
         <li></li>
-      </ul>
+      </ul>-->
+      <div class="tutorial-container" ng-repeat="data in tutorials_list"><a href="{{data.url}}"><div class="tutorial-container-image"><img src="{{data.image_url}}"/></div><div class="tutorial-container-header"><p>{{data.name}}</p></div></a></div>
   </div>
 </body>
 </html>
