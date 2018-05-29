@@ -67,6 +67,10 @@ AngularApp.config(function($routeProvider) { //Angular routing provides these HT
     templateUrl : "./components/projects.html",
     controller : "AngularApp"
   })
+  .when("/3D_Printing", {
+    templateUrl : "./components/3D_Printing.html",
+    controller : "AngularApp"
+  })
   .when("/tutorials", {
     templateUrl : "./components/tutorials.html",
     controller : "AngularApp"
