@@ -19,6 +19,11 @@ ul {
   visibility: none;
 }
 
+.todo {
+  color: red;
+  font-weight: bold;
+}
+
 .top {  position: absolute;  top: 0; }
 .right {  position: absolute;  right: 0; }
 .bottom {  position: absolute;  bottom: 0; }

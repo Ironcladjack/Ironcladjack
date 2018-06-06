@@ -24,7 +24,7 @@
   width: 75%;
   border-radius: 100%;
   left: 12.5%;
-  
+
 }
 .profile-name {
   width: 100%;
@@ -37,15 +37,32 @@
 
 .side-nav-quick-links {
   padding-left: 1.2em;
+
 }
 
+
+
 .side-nav-quick-links a {
+  padding: 5px 100px 5px 10px;
   text-decoration: none;
   color: black;
   font-size: 1.2em;
+  position: relative;
 }
 
 .side-nav-quick-links a:hover {
+  text-decoration: none;
   font-weight: 600;
-  color: #bbb;
+  color: rgba(140,160,170);
+}
+
+.side-nav-quick-links a:hover::after {
+  content: "";
+  background: rgb(25,28,144);
+  position: absolute;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  height: 100%;
+  top: 0;
+  left: -20px;
 }
