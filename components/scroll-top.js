@@ -1,5 +1,5 @@
 $(document).ready(function() {
-
+  $(".scroll-top").css("display","none");
   $(".scroll-top").click(function() {
     $("html").animate({
         scrollTop: 0

@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1">
   <head>
     <title>Jack Gooding: 3D Printing</title>
     <link rel="stylesheet" href="components/3D Design/3D_Printing.css">
     <link rel="stylesheet" href="3D Design/3D_Printing.css">
     <link rel="icon" type="image/png" href="curriculum_vitae\favicon.ico"/>
+    <script src="components/3D Design/3D_Printing.js"></script>
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
     <!--===========================================================================================-->
@@ -13,32 +15,23 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   </head>
   <body class="external load">
-    <div class="container">
-      <div class="navbar">
-        <ul>
-          <li>Projects</li>
-          <li>Experience</li>
-          <li>Curriculum Vitae</li>
-        </ul>
-      </div>
-    </div>
   <div class="container">
     <h2>3D Printing!</h2>
-      <p>I recently bought an <a href="Anet A8" class="todo prettylink">Anet A8</a> and I've been trying to design losts of different prototypes, some to solve minor problems around the house, some as a technical test of my CAD skills and of the 3d printers limiations.</p>
+      <p>I recently bought an Anet A8 and I've been trying to design losts of different prototypes, some to solve minor problems around the house, some as a technical test of my CAD skills and of the 3D printers limiations.</p>
     <h2>My Designs</h2>
       <div class="CAD-container">
       <table>
         <tr>
           <td><p class="CAD-title">Key Holder</p></td>
-          <td><div class="img-container"><img src="components\3D Design\KeyHolder.PNG"></div></td>
+          <td><div class="img-container"><img src="components\3D Design\KeyHolder6.PNG" onclick="openLightbox();currentSlide(1)"></div></td>
           <td><p>The general idea of this is to have a swiss army knife to stop my keys jingling, keep my USB from being further dented or scratched, and to have a small multi-purpose container that I'd have 24/7.
-              <br/>So far I have spaces for three standard keys, <a class="prettylink todo" href="Kingston USB">a Kingston USB</a>, a flathead & phillips hex insert, and two barcodes for store membership cards.
+              <br/>So far I have spaces for three standard keys, <a class="prettylink" href="http://amzn.eu/iLHGUjj ">a Kingston USB</a>, a flathead & phillips hex insert, and two barcodes for store membership cards.
               <br/>I plan for the container to hold at minimum; some aspirin, a needle and thread, and some matches.</p></td>
-          <td>Thingiverse</td>
+          <td>Thingiverse <br/> Onshape</td>
         </tr>
         <tr>
           <td><p  class="CAD-title">Pint Glass Adapter</p></td>
-          <td><div class="img-container"><img src="components\3D Design\PintGlassAdapter1.PNG"></div></td>
+          <td><div class="img-container"><img src="components\3D Design\PintGlassAdapter1.PNG" onclick=";"></div></td>
           <td><p>
             I won a Pint glass in a competition at work recently, however we are advised against using open topped containers so I designed this adapter to convert it into a travel mug.
             <br/> It's printed in two parts, one of which slides up the outside, and the other clamps over the top once threaded together.
@@ -81,12 +74,11 @@
     <h2>My Prints</h2>
 
     <div class="printed-container">
-      <img src="#./">
-      <img src="#./">
-      <img src="#./">
-      <img src="#./">
-      <img src="#./">
-      <img src="#./">
+      <img src="components\3D Design\KeyboardDial1.PNG">
+      <img src="components\3D Design\DoorSpacer1.PNG">
+      <img src="components\3D Design\BlindControlGears1.PNG">
+      <img src="components\3D Design\PintGlassAdapter1.PNG">
+      <img src="components\3D Design\KeyHolder6.PNG">
       <img src="#./">
       <img src="#./">
       <img src="#./">
@@ -98,5 +90,38 @@
     </div>
     <p style="text-align: center;"><i>Last Updated: 29/05/2018</i></p>
   </div>
+
+  <!-- The Modal/Lightbox -->
+  <div id="lightbox" class="lightbox-container">
+    <div class="lightbox-content">
+      <span class="close cursor" onclick="closeLightbox()">&times;</span>
+
+      <div class="lightbox-slides">
+        <div class="numbertext"></div>
+        <img src="components\3D Design/KeyHolder2.PNG" style="width:100%" class="lightbox-image" alt="New Design">
+      </div>
+
+      <div class="lightbox-slides">
+        <div class="numbertext"></div>
+        <img src="components\3D Design/KeyHolder6.PNG" style="width:100%" class="lightbox-image" alt="Exploded View">
+      </div>
+
+      <div class="lightbox-slides">
+        <div class="numbertext"></div>
+        <img src="components\3D Design/KeyHolder.PNG" style="width:100%" class="lightbox-image" alt="Early Prototype">
+      </div>
+
+      <!-- Next/previous controls -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+      <!-- Caption text -->
+      <div class="caption-container">
+        <p id="caption"></p>
+      </div>
+
+    </div>
+  </div>
+
   </body>
 </html>

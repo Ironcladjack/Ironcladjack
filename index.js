@@ -31,7 +31,7 @@ AngularApp.controller('AngularApp', function($scope, $interval, $compile) {
     {
       name: "Control Philips Hue using Node.js",
       url: "index.html#!/tutorials/hue_control_nodejs",
-      image_url: "./static/nodejs_logo.png",
+      image_url: "./static/philips-hue-logo.png",
       created: {
         year: "2018",
         month: "04",
@@ -77,10 +77,6 @@ AngularApp.config(function($routeProvider) { //Angular routing provides these HT
   })
   .when("/about", {
     templateUrl : "./components/about.html",
-    controller : "AngularApp"
-  })
-  .when("/curriculum_vitae", {
-    templateUrl : "./components/curriculum_vitae.html",
     controller : "AngularApp"
   })
   .when("/tutorials/node_http_server", {
