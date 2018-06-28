@@ -2,13 +2,14 @@
 <html lang="en">
   <head>
     <title>Jack Gooding: CV</title>
-    <link rel="stylesheet" href="./components/curriculum_vitae.css">
+    <link rel="stylesheet/less" href="./styles.less">
     <link rel="icon" type="image/png" href="curriculum_vitae\favicon.ico"/>
 
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
     <!--===========================================================================================-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--===========================================================================================-->
+    <script src="../static/js/less.min.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
   <script>
   let goBack = function() {
@@ -20,73 +21,81 @@
   <body class="external load">
   <div class="curriculum_vitae container">
     <div class="row">
-      <a href="#Back" onclick=goBack()> < Home</a>
+      <div class="col"><a href="#Back" onclick="goBack()"> &lt; Home</a></div>
+      <div class="col download">
+        <p class="not-print">This page is printable. <a href="" onclick="print()">Print resume</a> or <a href="Jack-Gooding.com/resume">Download PDF.</a></p>
+        <p class="print-only">To view the most up to date version of this document, visit <a href="">Jack-Gooding.com.</a></p>
+      </div>
     </div>
-    <div class="row">
-      <h1>Jack Gooding</h1>
-    </div>
-    <div class="row">
-    <div class="col">
-    <table>
-      <tr>
-        <td style="font-weight: 600;" valign="top">Address:</td>
-        <td style="padding-left: 50px;">
-          Exeter<br/>
-          EX2</td>
+    <header class="row">
+      <h1>Jack Gooding - Curriculum Vitae</h1>
+    </header>
+    <section class="row">
+      <div class="col">
+        <table>
+          <tr>
+            <td style="font-weight: 600;" valign="top">Address:</td>
+            <td>
+              Exeter<br/>
+              EX2</td>
 
-      </tr>
-    </table>
-    </div>
+          </tr>
+        </table>
+      </div>
     <div class="col">
       <table>
         <tr>
           <td style="font-weight: 600">Phone:</td>
-          <td style="padding-left: 50px;">+44 (0)12347890</td>
+          <td>+44 (0)12347890</td>
         </tr>
         <tr>
           <td style="font-weight: 600">Email:</td>
-          <td style="padding-left: 50px;"><a href="mailto:jack-gooding-@outlook.com"><span>Jack-Gooding-@Outlook.com</span></a></td>
+          <td><a href="mailto:jack-gooding-@outlook.com"><span>Jack-Gooding-@outlook.com</span></a></td>
         </tr>
         <tr>
           <td style="font-weight: 600">Website:</td>
-          <td style="padding-left: 50px;"><a href="https://jack-gooding.github.io" target="_blank"><span>Jack-Gooding.github.io</span></a></td>
+          <td><a href="https://jack-gooding.github.io" target="_blank"><span>Jack-Gooding.github.io</span></a></td>
         </tr>
       </table>
      </div>
-  </div>
-  <div>
+  </section>
+  <section>
+    <h2>Summary</h2>
+    <p>Self Taught Coder,Very interested in making things</p>
+  </section>
+  <section>
     <h2>Keywords:</h2>
     <table>
       <tr>
-        <td>Web Design:</td>
-        <td>HTML, CSS, Javascript, Angular, JQuery</td>
+        <td>Web:</td>
+        <td>HTML, CSS, LESS, Javascript, JQuery, Angular</td>
       </tr>
       <tr>
-        <td>Backend:</td>
-        <td>Node.Js, React, Electron, SQL</td>
+        <td>Server:</td>
+        <td>Node.js, React, Electron, SQLlite</td>
       </tr>
       <tr>
         <td>Rapid Prototyping:</td>
-        <td>CAD (Solidworks, Onshape.com), 3D Printing, Laser Cutting</td>
+        <td>CAD (Solidworks, Onshape), 3D Printing, Laser Cutting</td>
       </tr>
       <tr>
         <td>Limited Experience:</td>
-        <td>Java, Python, SASS</td>
+        <td>Java, Python, SASS, C++</td>
       </tr>
     </table>
 
-  </div>
-  <div>
+  </section>
+  <section>
     <h2 class="project-container">Personal Projects</h2>
       <div class="project-cell">
-        <h4>Huebilight</h4>
+        <h4>Home Automation</h4>
         <p>A NodeJs server running on a Rasberry Pi 3b, this projects goal is to implement as much Home Automation as possible and integrate it into one interface.</p>
       </div>
-  </div>
-  <div>
+  </section>
+  <section>
     <h2>Employment</h2>
       <div class="clearfix">
-        <h4 class="float-left">John Lewis, Software Support</h4>
+        <h4 class="float-left"> Software Support, John Lewis</h4>
         <h4 class="float-right">2016 - Ongoing</h4>
       </div>
           <p> In this role, my main responsibility is to provide advanced specialist support for colleagues in the lower tiers of customer support.
@@ -97,16 +106,16 @@
               direct customer support and staff training.
       </p>
       <div class="clearfix">
-        <h4 class="float-left">Plymouth University, Outreach Presenter</h4>
+        <h4 class="float-left">Outreach Presenter, Plymouth University</h4>
         <h4 class="float-right">May - July 2016</h4>
       </div>
-          <p> As an Outreach Presenter, I was required to give presentations to visiting classes from secondary schools in the Plymouth area.
+          <p> As an Outreach Presenter, I gave presentations to visiting classes from secondary schools in the Plymouth area.
               These presentations were based on the concept of energy and electricity, how different countries generate electricity, and how they cope with the various problems surrounding it.
-              In addition to this, I prepared and oversaw a group activity in which the children designed, built, and tested wind turbines made from office supplies.
+              In addition to this, I prepared and oversaw several group activities, in one of which the children designed, built, and tested wind turbines made from office supplies.
           </p>
-  </div>
-  <div>
-    <h2>Education<h2>
+  </section>
+  <section>
+    <h2>Education</h2>
       <div class="clearfix">
         <h4 class="float-left">Plymouth University</h4>
         <h4 class="float-right">2012-2016</h4>
@@ -129,12 +138,12 @@
         <p>A* - Electronics, B - Maths, B - Physics</p>
         <h6>GCSEs</h6>
         <p>11 GCSEs including Electronics, Maths, Physics, Chemistry, Biology and Graphic Design</p>
-  </div>
-  <div>
+  </section>
+  <section>
     <h2>Hobbies/Interests</h2>
     <p>I have always had a keen interest in making and building things. I am always working on at least one project, in various specialisations, and always looking to improve my knowledge and abilities. The creations I am most proud of are:</p>
-  </div>
-  <p style="text-align: center;"><i>Last Updated: 21/06/2018</i></p>
+  </section>
+  <footer style="text-align: center;"><i>Last Updated: June 2018</i></footer>
 </div>
-  </body>
-  </html>
+</body>
+</html>
