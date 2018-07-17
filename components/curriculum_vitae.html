@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>Jack Gooding: CV</title>
-    <link rel="stylesheet/less" href="./styles.less">
+    <link rel="stylesheet/less" href="./curriculum_vitae.less">
     <link rel="icon" type="image/png" href="curriculum_vitae\favicon.ico"/>
 
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
@@ -36,8 +36,8 @@
   <body class="external load">
   <div class="curriculum_vitae container">
     <div class="row">
-      <div class="col"><a href="#Back" onclick="goBack()"> &lt; Home</a></div>
-      <div class="col download">
+      <div class="col"><a class="not-print" href="#Back" onclick="goBack()"> &lt; Home</a></div>
+      <div class="download">
         <p class="not-print">This page is printable. <a href="" onclick="print()">Print resume</a> or <a href="Jack-Gooding.com/resume">Download PDF.</a></p>
         <p class="print-only">To view the most up to date version of this document, visit <a href="">Jack-Gooding.com.</a></p>
       </div>
@@ -69,18 +69,18 @@
         </tr>
         <tr>
           <td style="font-weight: 600">Website:</td>
-          <td><a href="https://jack-gooding.github.io" target="_blank"><span>Jack-Gooding.github.io</span></a></td>
+          <td><a href="https://jack-gooding.com" target="_blank"><span>Jack-Gooding.com</span></a></td>
         </tr>
       </table>
      </div>
   </section>
   <section>
-    <h2>Summary</h2>
-    <p>Self Taught Coder,Very interested in making things</p>
+    <h2 class="section-title">Summary</h2>
+    <p class="section-content">I'm a self taught coder, very interesting in making things both physical and digital. Over the last year and a half I have taught myself all basic webdesign technologies, and have also gone </p>
   </section>
   <section>
-    <h2>Keywords:</h2>
-    <table>
+    <h2 class="section-title">Keywords</h2>
+    <table class="section-content">
       <tr>
         <td>Web:</td>
         <td>HTML, CSS, LESS, Javascript, JQuery, Angular</td>
@@ -101,19 +101,19 @@
 
   </section>
   <section>
-    <h2 class="project-container">Personal Projects</h2>
-      <div class="project-cell">
-        <h4>Home Automation</h4>
-        <p>A NodeJs server running on a Rasberry Pi 3b, this projects goal is to implement as much Home Automation as possible and integrate it into one interface.</p>
+    <h2 class="section-title project-container">Personal Projects</h2>
+      <div class=" project-cell">
+        <h4 class="section-sub-title">Home Automation</h4>
+        <p class="section-sub-content">A NodeJs server running on a Rasberry Pi 3b, this projects goal is to implement as much Home Automation as possible and integrate it into one interface.</p>
       </div>
   </section>
   <section>
-    <h2>Employment</h2>
+    <h2 class="section-title">Employment</h2>
       <div class="clearfix">
-        <h4 class="float-left"> Software Support, John Lewis</h4>
+        <h4 class="section-sub-title float-left"> Software Support, John Lewis</h4>
         <h4 class="float-right">2016 - Ongoing</h4>
       </div>
-          <p> In this role, my main responsibility is to provide advanced specialist support for colleagues in the lower tiers of customer support.
+          <p class="section-sub-content"> In this role, my main responsibility is to provide advanced specialist support for colleagues in the lower tiers of customer support.
               This support is primarily troubleshooting issues customers have faced with their purchases, whether hardware or software related.
               I am required to constantly use my own in-depth knowledge of the main operating systems and popular devices, as well as learning and
               researching new information and techniques rapidly, while also handling either one of my colleagues or a customer.
@@ -121,22 +121,23 @@
               direct customer support and staff training.
       </p>
       <div class="clearfix">
-        <h4 class="float-left">Outreach Presenter, Plymouth University</h4>
+        <h4 class="section-sub-title float-left">Outreach Presenter, Plymouth University</h4>
         <h4 class="float-right">May - July 2016</h4>
       </div>
-          <p> As an Outreach Presenter, I gave presentations to visiting classes from secondary schools in the Plymouth area.
+          <p class="section-sub-content"> As an Outreach Presenter, I gave presentations to visiting classes from secondary schools in the Plymouth area.
               These presentations were based on the concept of energy and electricity, how different countries generate electricity, and how they cope with the various problems surrounding it.
               In addition to this, I prepared and oversaw several group activities, in one of which the children designed, built, and tested wind turbines made from office supplies.
           </p>
   </section>
   <section>
-    <h2>Education</h2>
+    <h2 class="section-title">Education</h2>
       <div class="clearfix">
-        <h4 class="float-left">Plymouth University</h4>
+        <h4 class="section-sub-title float-left">Plymouth University</h4>
         <h4 class="float-right">2012-2016</h4>
       </div>
-      <h6>BEng Mechanical Engineering, Lower Second Class Honours</h6>
-        <table class="col">
+      <div class="section-sub-content">
+        <h6>BEng Mechanical Engineering, Lower Second Class Honours</h6>
+        <table class="section-content">
           <tr><td>Engineering Drawing, CAD, and Design</td><td>69%</td></tr>
           <tr><td>Introduction to Thermo-Fluids</td><td>64%</td></tr>
           <tr><td>Engineering Mathematics</td><td>61%</td></tr>
@@ -144,21 +145,25 @@
           <tr><td>Business Dynamics</td><td>59%</td></tr>
           <tr><td>Mechanics</td><td>59%</td></tr>
         </table>
+        <br/>
         <p>As part of my Third Year at Plymouth University, I completed a dissertation on efficient energy generation in rural areas, which focused on a small village in Cameroon, West Africa, with a very weak and unreliable power grid. I researched the area, decided which method of energy generation was most suitable, and then tested several designs  to determine the best blade type, while minimising the necessary materials and cost of the solution.</p>
+      </div>
         <div class="clearfix">
-          <h4 class="float-left">Tavistock College</h4>
+          <h4 class="section-sub-title float-left">Tavistock College</h4>
           <h4 class="float-right">2006-2012</h4>
         </div>
-        <h6>A-Levels</h6>
-        <p>A* - Electronics, B - Maths, B - Physics</p>
-        <h6>GCSEs</h6>
-        <p>11 GCSEs including Electronics, Maths, Physics, Chemistry, Biology and Graphic Design</p>
+        <div class="section-sub-content">
+          <h6>A-Levels</h6>
+          <p class="section-sub-sub-content">A* - Electronics, B - Maths, B - Physics</p>
+          <h6>GCSEs</h6>
+          <p class="section-sub-sub-content">11 GCSEs including Electronics, Maths, Physics, Chemistry, Biology and Graphic Design</p>
+        </div>
   </section>
   <section>
-    <h2>Hobbies/Interests</h2>
-    <p>I have always had a keen interest in making and building things. I am always working on at least one project, in various specialisations, and always looking to improve my knowledge and abilities. The creations I am most proud of are:</p>
+    <h2 class="section-title">Hobbies/Interests</h2>
+    <p class="section-content">I have always had a keen interest in making and building things. I am always working on at least one project, in various specialisations, and always looking to improve my knowledge and abilities. The creations I am most proud of are:</p>
   </section>
-  <footer style="text-align: center;"><i>Last Updated: June 2018</i></footer>
+  <footer style="text-align: center;"><i>Last Updated: July 2018</i></footer>
 </div>
 </body>
 </html>
