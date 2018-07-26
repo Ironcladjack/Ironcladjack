@@ -1,0 +1,89 @@
+/*Variables*/
+@table-radius: 10px;
+@green: green;
+
+
+/*Mixins*/
+.center() {
+  position: relative;
+  left: 50%;
+  transform+_: translateX(-50%);
+}
+
+.project-image {
+  max-width: 120px;
+  padding: 50px 0;
+}
+
+.project {
+  border-radius: 5px;
+}
+
+table {
+    width:100%;
+    border-collapse: separate;
+    height: auto;
+    border-spacing: 0;
+}
+
+.project-description {
+  padding: 20px;
+}
+
+/*Rounding corners of Tables*/
+tr:first-of-type td:first-of-type { border-top-left-radius: 10px; }
+tr:first-of-type td:last-of-type { border-top-right-radius: 10px; }
+tr:last-of-type td:first-of-type { border-bottom-left-radius: 10px; }
+tr:last-of-type td:last-of-type { border-bottom-right-radius: 10px; }
+
+
+.projects-container {
+  border-radius: 10px;
+  position: relative;
+  width: 95%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.project {
+  border-radius: 10px;
+  position: relative;
+}
+.project-row {
+  position: relative;
+  width: 100%;
+}
+.project-row:nth-child(1) > * {
+  width: 20px;
+  height: 20px;
+}
+
+.project-icon {
+  position: relative;
+  width: 50%;
+  margin: auto;
+}
+
+.project:nth-child(even) td {
+  background-color: #dcdcdc;
+}
+
+.project:nth-child(odd) td {
+  background-color: #cdcdcd;
+}
+
+.project-image {
+  min-width: 50px;
+  padding: 0 10px;
+  .center;
+}
+
+.project-title {
+  top: 50%;
+}
+
+.ref-icon {
+  max-width: 25px;
+  display: block;
+  margin: 5px;
+}

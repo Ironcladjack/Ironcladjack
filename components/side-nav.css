@@ -36,8 +36,8 @@
 }
 
 .side-nav-quick-links {
-  padding-left: 1.2em;
-
+  padding-left: .8em;
+  overflow-wrap: normal;
 }
 
 
@@ -64,5 +64,5 @@
   border-radius: 0 4px 4px 0;
   height: 100%;
   top: 0;
-  left: -20px;
+  left: -.7em;
 }
