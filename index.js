@@ -57,7 +57,7 @@ AngularApp.controller('AngularApp', function($scope, $interval, $compile) {
 
 });
 
-AngularApp.config(function($routeProvider, $locationProvider) { //Angular routing provides these HTML docs to "<ng-view></ng-view>" element
+AngularApp.config(function($routeProvider) { //Angular routing provides these HTML docs to "<ng-view></ng-view>" element
   $routeProvider
   .when("/", {
     templateUrl : "components/projects.html",
@@ -98,5 +98,4 @@ AngularApp.config(function($routeProvider, $locationProvider) { //Angular routin
   .otherwise({
     template : "<h1>404 Error</h1><p>Sorry! There's nothing here! <a href='/'>Go back to Home</a></p>"
   });
-  $locationProvider.hashPrefix('');
 });
