@@ -10,6 +10,20 @@
   transform+_: translateX(-50%);
 }
 
+.td-before() {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 75%;
+  background: black;
+}
+
+
+/*Styling*/
+
 .project-image {
   max-width: 120px;
   padding: 50px 0;
@@ -17,6 +31,24 @@
 
 .project {
   border-radius: 5px;
+}
+
+.project-image {
+  min-width: 50px;
+  padding: 0 10px;
+  .center;
+}
+
+.project-title {
+  top: 50%;
+}
+
+.ref-icon {
+  max-width: 30px;
+  display: block;
+  margin: 5px;
+  transition-duration: 0.1s;
+  padding: 5px 0;
 }
 
 table {
@@ -48,11 +80,45 @@ tr:last-of-type td:last-of-type { border-bottom-right-radius: 10px; }
 .project {
   border-radius: 10px;
   position: relative;
+
+  td {
+    position: relative;
+
+    a img {
+
+    &:hover {
+      transform+: translateY(-2px);
+      transition-duration: 0.1s;
+          }
+    }
+
+    &:nth-child(1) { //Project Icon
+      width: 10%;
+    }
+
+    &:nth-child(2) { //Projct Title
+      padding: 2px;
+      width: 15%;
+      text-align: center;
+    }
+
+    &:nth-child(4) { //Project Links
+      padding: 15px;
+
+    }
+    &:nth-child(1n+2) { // Betwixt table lines
+      &::before {
+        .td-before;
+      }
+    }
+  }
 }
+
 .project-row {
   position: relative;
   width: 100%;
 }
+
 .project-row:nth-child(1) > * {
   width: 20px;
   height: 20px;
@@ -70,20 +136,4 @@ tr:last-of-type td:last-of-type { border-bottom-right-radius: 10px; }
 
 .project:nth-child(odd) td {
   background-color: #cdcdcd;
-}
-
-.project-image {
-  min-width: 50px;
-  padding: 0 10px;
-  .center;
-}
-
-.project-title {
-  top: 50%;
-}
-
-.ref-icon {
-  max-width: 25px;
-  display: block;
-  margin: 5px;
 }
