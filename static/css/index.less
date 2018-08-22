@@ -1,0 +1,105 @@
+@header-bg-color: #333;
+@header-font-color: #FFF;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+}
+
+ul {
+  list-style: none;
+}
+
+.external {
+  display: none;
+  visibility: none;
+}
+
+.todo {
+  color: red;
+  font-weight: bold;
+}
+
+.top {  position: absolute;  top: 0; }
+.right {  position: absolute;  right: 0; }
+.bottom {  position: absolute;  bottom: 0; }
+.left {  position: absolute;  left: 0; }
+
+.justify-left { text-align: left;}
+.justify-right { text-align: right;}
+
+.container-fluid {
+  height: 100%;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.header-bar {
+  position: relative;
+  width: 100%;
+  background: @header-bg-color;
+  color: @header-font-color;
+  padding: 0 5%;
+  margin: 0;
+
+  div {
+    display: inline-block;
+  }
+
+  .nav-bar {
+    width: 45%;
+    ul {
+      padding: 0px 10%;
+        li.nav-link {
+        padding: 0 5% 2px 5%;
+        margin: 0 1%;
+        display: inline-block;
+        transition: .2s ease-in-out;
+        cursor: pointer;
+        &:hover{
+          background: darken(@header-bg-color, 10%);
+        }
+        a {
+          text-decoration: none;
+          color: inherit;
+        }
+
+      }
+    }
+  }
+
+  .logo {
+    width: 9%;
+    img {
+      width: 100%;
+      padding: 0 15px;
+  }
+
+  }
+  h1 {
+  }
+}
+
+
+
+.main-content {
+  min-height: 94%;
+  background: #dcdcdc;
+  position: relative;
+}
+
+.content-centre {
+  background: white;
+  padding-top: 50px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 0 2%;
+}
