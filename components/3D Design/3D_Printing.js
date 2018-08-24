@@ -1,3 +1,8 @@
+$(document).ready(function() {
+    $("").css("content",$(this).attr("alt"));
+});
+
+
 // Open the Lightbox
 function openLightbox() {
 

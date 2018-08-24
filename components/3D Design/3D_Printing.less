@@ -2,6 +2,16 @@ h2 {
   padding-top: 25px;
 }
 
+img::before {
+  content: "";
+  position: relative;
+  top: 0;
+  left:0;
+  background: rgba(0,0,0,0.2);
+  width: 50px;
+  height: 50px;
+}
+
 x.CAD-container img {
   width: 100%;
   margin: 5px;
@@ -14,13 +24,31 @@ a.prettylink {
 }
 
 .prettylink:hover {
-  color: #554455=av=
+  color: #554455
+}
+
+.width-100 {
+  width: 100%;
+  height: auto;
+  clear: both;
+  border: solid 1px black;
+  padding: auto;
 }
 
 .todo {
   color: red;
   font-weight: bold;
   text-decoration: none;
+}
+
+.centre-div {
+  width: 100%;
+  text-align: center;
+}
+.centre-image {
+  width: 30%;
+  margin: 0 auto;
+  display: inline-block;
 }
 
 table {
@@ -45,6 +73,11 @@ tr .img-container {
     border-radius: 5px;
     position: relative;
     z-index: 2
+    cursor: zoom-in;
+}
+
+.show-more {
+cursor: zoom-in;
 }
 
 tr img {
@@ -53,7 +86,6 @@ tr img {
   border-radius: 5px;
   z-index: 2;
   padding: 1px;
-  cursor: pointer;
 }
 
 tr td:nth-child(2):hover > div::before {
@@ -141,11 +173,13 @@ tr td:last-child {
 .printed-container {
   display: flex;
   flex-flow: row wrap;
+  cursor: zoom-in;
 }
 
 .printed-container > img {
   max-height: 150px;
   min-width: 16%;
+  cursor: zoom-in;
 }
 
 @media (max-width: 600px) {

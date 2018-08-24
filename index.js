@@ -92,7 +92,7 @@ AngularApp.config(function($routeProvider) { //Angular routing provides these HT
     controller : "AngularApp"
   })
   .when("/about", {
-    templateUrl : "./about/",
+    templateUrl : "./components/about.html/",
     controller : "AngularApp"
   })
   .otherwise({
