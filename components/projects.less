@@ -1,6 +1,7 @@
 /*Variables*/
 @table-radius: 10px;
 @green: green;
+@link-color: black;
 
 
 /*Mixins*/
@@ -27,10 +28,6 @@
 .project-image {
   max-width: 120px;
   padding: 50px 0;
-}
-
-.project {
-  border-radius: 5px;
 }
 
 .project-image {
@@ -78,19 +75,29 @@ tr:last-of-type td:last-of-type { border-bottom-right-radius: 10px; }
 }
 
 .project {
+  border-radius: 5px;
   border-radius: 10px;
   position: relative;
 
-  td {
-    position: relative;
-
-    a img {
-
+  .ref-icon {
     &:hover {
       transform+: translateY(-2px);
       transition-duration: 0.1s;
-          }
     }
+  }
+
+
+
+  .project-title {
+    a {
+      text-decoration: none;
+      font-weight: 500;
+      color: black;
+    }
+  }
+
+  td {
+    position: relative;
 
     &:nth-child(1) { //Project Icon
       width: 10%;
@@ -100,6 +107,10 @@ tr:last-of-type td:last-of-type { border-bottom-right-radius: 10px; }
       padding: 2px;
       width: 15%;
       text-align: center;
+    }
+
+    &:nth-child(3) { //Project Description
+      color: lighten(black,30%);
     }
 
     &:nth-child(4) { //Project Links
