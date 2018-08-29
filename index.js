@@ -10,6 +10,22 @@ $(document).ready(function() {
 
 });
 
+var scrollToTop = function() {
+    $("html").animate({scrollTop: 0}, 800);
+  };
+
+$(document).scroll(function() {
+  $(".scroll-top").css("display","block");
+  var y = $(this).scrollTop();
+  if (y > 20) {
+    $('.scroll-top').fadeIn();
+  } else {
+    $('.scroll-top').fadeOut();
+  }
+});
+
+
+
 var AngularApp = angular.module('Angular', ["ngRoute"]);
 var extScope;
 
@@ -26,7 +42,7 @@ AngularApp.controller('AngularApp', function($scope, $interval, $compile) {
         month: "04",
         day: "04"
       },
-      tags: ["Node.js", "Webserver", "begginner"],
+      tags: ["Node.js", "Webserver", "Beginner"],
     },
     {
       name: "Control Philips Hue using Node.js",
@@ -37,7 +53,7 @@ AngularApp.controller('AngularApp', function($scope, $interval, $compile) {
         month: "04",
         day: "15"
       },
-      tags: ["Node.js", "Phillips Hue", "Intermitiate"],
+      tags: ["Node.js", "Phillips Hue", "Intermediate"],
     },
     {
       name: "Control NeoPixels / Ws2812b using Node.js and Raspberry Pi",
@@ -48,7 +64,18 @@ AngularApp.controller('AngularApp', function($scope, $interval, $compile) {
         month: "04",
         day: "??"
       },
-      tags: ["Node.js", "NeoPixels", "NeoPixels", "Intermitiate"],
+      tags: ["Node.js", "NeoPixels", "NeoPixels", "Intermediate"],
+    },
+    {
+      name: "Raspberry Pi Intruder Detection",
+      url: "index.html#!/tutorials/raspberry_intruder_detection",
+      image_url: "./static/RasPi.png",
+      created: {
+        year: "2018",
+        month: "08",
+        day: "29"
+      },
+      tags: ["Raspberry Pi","Node.js","Electronics","Intermediate"]
     },
 
   ];
@@ -89,6 +116,10 @@ AngularApp.config(function($routeProvider) { //Angular routing provides these HT
   })
   .when("/tutorials/neopixel_control_nodejs", {
     templateUrl : "./components/tutorials/neopixel_control_nodejs.html",
+    controller : "AngularApp"
+  })
+  .when("/tutorials/raspberry_intruder_detection", {
+    templateUrl : "./components/tutorials/raspberry_intruder_detection.html",
     controller : "AngularApp"
   })
   .when("/about", {

@@ -1,5 +1,5 @@
 .scroll-top {
-  //visibility: hidden;
+  display: none;
   position: fixed;
   margin:  0 auto;
   bottom: 0;

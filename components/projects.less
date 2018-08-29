@@ -22,8 +22,20 @@
   background: black;
 }
 
+.unselectable() {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
 
 /*Styling*/
+
+h4 {
+  margin-top: 5px;
+  padding: 0;
+}
 
 .project-image {
   max-width: 120px;
@@ -80,19 +92,30 @@ tr:last-of-type td:last-of-type { border-bottom-right-radius: 10px; }
   position: relative;
 
   .ref-icon {
+    .unselectable();
     &:hover {
-      transform+: translateY(-2px);
-      transition-duration: 0.1s;
+      transform+_: scale(1.1);
+      transition-duration: 0.05s;
     }
   }
 
-
+  a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #005577;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 
   .project-title {
     a {
       text-decoration: none;
       font-weight: 500;
       color: black;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 

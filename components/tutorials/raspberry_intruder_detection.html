@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Node.js Server</title>
+    <link rel="stylesheet" href="./components/tutorials/tutorials.css">
+    <link rel="stylesheet" href="./tutorials.css">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-121612593-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-121612593-1');
+</script>
+
+  </head>
+  <body class="external">
+
+    <div class="tutorial">
+      <div class="tutorial-header-container">
+        <h1 class="tutorial-heading">Node.js HTTP Server</h1>
+        <div class="tutorial-date-container">
+          <p class="tutorial-date">Date Posted: <span>29/08/2018</span> Last Modified: <span>29/08/2018</span></p>
+        </div>
+      </div>
+      <div class="tutorial-content">
+        <p>In this tutorial i'll be showing you how to set up a simple webserver to detect motion and trigger a Raspberry Pi to take a photo using a camera.
+          This is a fairly simple task but basic electronics will be needed as well as having Node.js already set up on your RPi.
+        </p>
+        <h4>Additonal Materials Needed</h4>
+        <ul>
+          <li>Rasperry Pi Camera</li>
+          <li>PIR Motion Detector</li>
+        </ul>
+
+        <div data-include="contents"></div>
+        <div class="contents-container">
+          <div class="contents-border">
+            <ol class="contents-list">
+              <li><a href="#Preparation">Preparation</a></li>
+              <li><a href="#Code">Code</a></li>
+              <li><a href="#Testing">Testing</a></li>
+              <li><a href="#Improvements">Improvements</a></li>
+              <li><a href="#Extras">Extras</a></li>
+            </ol>
+        </div>
+      </div>
+      <h3 class="subheading" id="Preparation"><a href="#Preparation">#Preparation</a></h3>
+      <p>
+        First, connect the cameras ribbon cable into the camera socket on the Pi. You'll need to lift the white latch, insert the ribbon cable and then press the latch back down.
+        <br>
+        Now we need to wire the PIR sensor into the GPIO pins of the Pi. Using some jumper cables, connect up <span class="todo">the first pin to +5V, the middle pin to GPIO pin 26, and the final pin to ground.</span>
+        <br>
+        <br>
+        We'll also need to install an NPM module for the camera.
+        https://www.npmjs.com/package/raspicam
+      </p>
+      <div class="code">
+        <pre>
+          <span class="code-comment">//Add the npm package for raspicam</span>
+          npm install raspicam
+        </pre>
+      </div>
+
+      <h3 class="subheading" id="Code"><a href="#Code">#Code</a></h3>
+        <p>
+          First, make a folder named <i>'motion_sensor'</i> on your Raspberry Pi, then navigate into it and create a file named <i>motion_sensor.js</i>, then add the following code into it.
+        </p>
+        <div class="code">
+          <pre>
+
+            <span class="code-comment">//Dependencies</span>
+
+            var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
+            var RaspiCam = require("raspicam"); //include Raspberry Pi Camera module
+
+            <span class="code-comment">//Variables</span>
+
+            var pirSensor = new Gpio(26,'in', 'both') //Define PIR GPIO
+            var motionDetectStatus = false; //Motion Detection using PIR sensor, off at startup
+          </pre>
+        </div>
+        <p>
+          Now we need to add some functional code. Add this below the previous code.
+        </p>
+        <div class="code">
+          <pre>
+
+            pirSensor.watch(function (err, value) {
+              if (err) {
+                console.error('There was an error', err);
+              };
+
+              console.log("Motion Detected!");
+
+            };
+          </pre>
+        </div>
+      <p>
+      This will continously watch for a change in the output of the PIR sensor, while it detects movement it will report this to the console
+      <br>
+      This is great, we can see the device is working and we can track it! Now we need to add the camera!
+      <br>
+      Add the following code beneath the previous section.
+      </p>
+      <div class="code">
+        <pre>
+          <span class="code-comment">//Create a 'camera' construction object and pass it some values</span>
+          var camera = new RaspiCam({
+            mode: "photo",
+            output: "test.jpg", //location of photo to be saved
+            encoding: "jpg", //file extension type, not required
+            quality: 100, //photo quality, 1-100, higher is better but slower
+          });
+
+          <span class="code-comment">//to take a snapshot, start a timelapse or video recording</span>
+          camera.start( );
+
+          <span class="code-comment">//listen for the "read" event triggered when each new photo/video is saved</span>
+          camera.on("read", function(err, timestamp, filename){
+          	console.log("Photo Taken!");
+          });
+        </pre>
+      </div>
+      <p>
+        When running the server now, it will take a single photo and save it as 'test.jpg'.
+      <br>
+        This is nice progress, but we need to join the two functions to take a snap of any intruders.
+        <br>
+        for ease, the following code below is the entire code required and should replace all existing code in <i>motion_sensor.js</i>.
+      </p>
+      <div class="code">
+        <pre>
+          <span class="code-comment"></span>
+          var Gpio = require('onoff').Gpio;
+          var RaspiCam = require("raspicam");
+
+          var pirSensor = new Gpio(26,'in', 'both')
+          var motionDetectStatus = false;
+
+        </pre>
+      </div>
+      <h3 class="subheading" id="Testing"><a href="#Testing">#Testing</a></h3>
+      <p>
+        Now we can test the installation simply by directing node to run the new script with the following command.
+      </p>
+      <div class="code">
+        <pre>
+          node hello_world.js
+        </pre>
+      </div>
+      <p>
+        <br/>
+        In the shell, you should now be able to see "Hello World!". That's great, but it's not useful or even that interesting. Let's try something better! Press CTRL + C to exit the program.
+
+        <h3 class="subheading" id="Improvements"><a href="#Improvements">#Improvements</a></h3>
+
+
+        One of the most popular things Node is used for is to host a webserver, so that's what we'll do next. There are more advanced ways to do this using other native packages, but this is the easiest way to get a simple server running, and suited me for a long time while learning Node.
+
+        First, create a new file called <i>'server.js'</i>, and then fill it with the following:
+      </p>
+
+      <div class="code">
+        <pre>
+          <span class="code-comment">//Load/require the native 'http' server package</span>
+          var http = require('http');
+
+          <span class="code-comment">//Create an object to configure the server:</span>
+          http.createServer( function (request, response) {
+
+            res.writeHead(200, {'Content-Type': 'text/html'}); <span class="code-comment">//Send out an 'OK' status message to the browser, and the type of content to expect </span>
+            response.write('Hello World!');      <span class="code-comment">//write a response to the client</span>
+            response.end();                      <span class="code-comment">//end the response</span>
+
+          }).listen(3000); <span class="code-comment">//the server is listening on ipaddress:port; localhost:3000, 127.0.0.1:3000</span>
+        </pre>
+      </div>
+      <p>
+        <br/>Now run the file by typing 'Node server.js', load up a browser and go to 127.0.0.1:3000, and you should see your message! Alternatively, go to the local ip address of your device, with the port 3000, and you should be able to view this from any other device on your network!
+        <br/>
+        <br/>Yet again, this still isn't very useful, as we don't want to be creating an entire website within <kbd>response.write('')</kbd>, lets load a .html file instead.
+        <br/>
+        <br/>Create an <i>'index.html'</i> file, and fill it with the following code:
+      </p>
+      <div class="code">
+        <pre>
+          &lt;h1&gt;Hello World!&lt;/h1&gt;
+          &lt;p&gt;I just loaded a html file!&lt;/p&gt;
+        </pre>
+      </div>
+      <p>
+      <br/>
+      <br/>To load this file, we'll need to use another of nodes native packages, 'fs' which stands for FileSystem. This package can be used to read/write on the server filesystem.
+      <br/>
+      <br/>Edit <i>'server.js'</i> to add the code in green.
+      </p>
+      <div class="code">
+        <pre>
+
+          var http = require('http');
+          <span class="code-green">var fs = require('fs');</span> <span class="code-comment">//Load/require the native 'fs' server package</span>
+
+
+          <span class="code-comment">//Create an object to configure the server:</span>
+          http.createServer( function (request, response) {
+            <span class="code-green">fs.readFileSync('index.html', function(err, data) {</span> <span class="code-comment">//before anything else, load <i>'index.html'</i>, then use a callback to complete the server</span>
+
+
+              res.writeHead(200, {'Content-Type': 'text/html'});
+              response.write(<span class="code-green">data</span>);
+              response.end();
+
+            <span class="code-green">});</span>
+
+          }).listen(3000);
+        </pre>
+      </div>
+      <p>
+        <br/>
+        <br/> When you close the server (CTRL + C) and run it again (node server.js), your browser should now display the html you created!
+        <br/>
+        <br/>You can do a lot with this package, although you cannot load in resources to the html file easily, any scripting or styling needs to be done inside that <i>'index.html'</i> file.
+        <br/>Once you are more proficient with Node, it is usually a good idea to convert to using a more advanced server package, such as 'Express'.
+        <br/>
+        <br/>I will be doing further tutorials on Node, using Express to create servers, and controlling IoT devices, and other things i have learned during my projects.
+      </p>
+    </div>
+  </div>
+</body>
+</html>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
