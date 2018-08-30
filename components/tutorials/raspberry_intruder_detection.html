@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Node.js Server</title>
+    <title>Intruder Detection</title>
     <link rel="stylesheet" href="./components/tutorials/tutorials.css">
     <link rel="stylesheet" href="./tutorials.css">
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -19,7 +19,7 @@
 
     <div class="tutorial">
       <div class="tutorial-header-container">
-        <h1 class="tutorial-heading">Node.js HTTP Server</h1>
+        <h1 class="tutorial-heading">Intruder Detection using Raspberry Pi:</h1>
         <div class="tutorial-date-container">
           <p class="tutorial-date">Date Posted: <span>29/08/2018</span> Last Modified: <span>29/08/2018</span></p>
         </div>
@@ -69,7 +69,6 @@
         </p>
         <div class="code">
           <pre>
-
             <span class="code-comment">//Dependencies</span>
 
             var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
@@ -78,7 +77,6 @@
             <span class="code-comment">//Variables</span>
 
             var pirSensor = new Gpio(26,'in', 'both') //Define PIR GPIO
-            var motionDetectStatus = false; //Motion Detection using PIR sensor, off at startup
           </pre>
         </div>
         <p>
@@ -137,8 +135,38 @@
           var RaspiCam = require("raspicam");
 
           var pirSensor = new Gpio(26,'in', 'both')
+          <span class="code-green">
           var motionDetectStatus = false;
+          var photoNameModifier = 0;
+          </span>
+          var camera = new RaspiCam({
+            mode: "photo",
+            output: "test" + photoNameModifier + ".jpg", //location of photo to be saved
+            encoding: "jpg", //file extension type, not required
+            quality: 100, //photo quality, 1-100, higher is better but slower
+          });
 
+
+
+          pirSensor.watch(function (err, value) {
+            if (err) {
+              console.error('There was an error', err);
+            };
+
+            <span class="code-green">
+            if (!motionDetectStatus) { <span class="code-comment">//Checks if motion detection is already in progress</span>
+              motionDetectStatus = true; <span class="code-comment">//Stops further triggers from sensor</span>
+              photoNameModifier++; <span class="code-comment">//Changes the filename of photo per photo taken</span>
+            </span>
+              camera.start( );
+              console.log("Motion Detected!");
+
+              camera.on("read", function(err, timestamp, filename){
+                console.log("Photo Taken, Motion Detection is ready again!");
+                <span class="code-green">motionDetectStatus = false;</span> <span class="code-comment">//Unblocks sensor triggers</span>
+              });
+            };
+          };
         </pre>
       </div>
       <h3 class="subheading" id="Testing"><a href="#Testing">#Testing</a></h3>
@@ -147,85 +175,23 @@
       </p>
       <div class="code">
         <pre>
-          node hello_world.js
+          node motion-sensor.js
         </pre>
       </div>
       <p>
-        <br/>
-        In the shell, you should now be able to see "Hello World!". That's great, but it's not useful or even that interesting. Let's try something better! Press CTRL + C to exit the program.
-
-        <h3 class="subheading" id="Improvements"><a href="#Improvements">#Improvements</a></h3>
-
-
-        One of the most popular things Node is used for is to host a webserver, so that's what we'll do next. There are more advanced ways to do this using other native packages, but this is the easiest way to get a simple server running, and suited me for a long time while learning Node.
-
-        First, create a new file called <i>'server.js'</i>, and then fill it with the following:
+        Now if you stand in front of the PIR sensor, the device will take photos as frequently as possible and save them all to the root directory of this project.
       </p>
 
-      <div class="code">
-        <pre>
-          <span class="code-comment">//Load/require the native 'http' server package</span>
-          var http = require('http');
+      <h3 class="subheading" id="Improvements"><a href="#Improvements">#Improvements</a></h3>
 
-          <span class="code-comment">//Create an object to configure the server:</span>
-          http.createServer( function (request, response) {
-
-            res.writeHead(200, {'Content-Type': 'text/html'}); <span class="code-comment">//Send out an 'OK' status message to the browser, and the type of content to expect </span>
-            response.write('Hello World!');      <span class="code-comment">//write a response to the client</span>
-            response.end();                      <span class="code-comment">//end the response</span>
-
-          }).listen(3000); <span class="code-comment">//the server is listening on ipaddress:port; localhost:3000, 127.0.0.1:3000</span>
-        </pre>
-      </div>
       <p>
-        <br/>Now run the file by typing 'Node server.js', load up a browser and go to 127.0.0.1:3000, and you should see your message! Alternatively, go to the local ip address of your device, with the port 3000, and you should be able to view this from any other device on your network!
-        <br/>
-        <br/>Yet again, this still isn't very useful, as we don't want to be creating an entire website within <kbd>response.write('')</kbd>, lets load a .html file instead.
-        <br/>
-        <br/>Create an <i>'index.html'</i> file, and fill it with the following code:
+        There are a lot of improvements that could be made, for example if running a webserver at the same time, a button could be added and used to turn this on /off.
+        I currently have this device set up with the NodeMailer package, which automatically emails me the photo of the intruder.
+        <br>
+        <br>
+        I won't go into these improvements here, as I will have other tutorials available that cover how to do this in a broader scope.
       </p>
-      <div class="code">
-        <pre>
-          &lt;h1&gt;Hello World!&lt;/h1&gt;
-          &lt;p&gt;I just loaded a html file!&lt;/p&gt;
-        </pre>
-      </div>
-      <p>
-      <br/>
-      <br/>To load this file, we'll need to use another of nodes native packages, 'fs' which stands for FileSystem. This package can be used to read/write on the server filesystem.
-      <br/>
-      <br/>Edit <i>'server.js'</i> to add the code in green.
-      </p>
-      <div class="code">
-        <pre>
 
-          var http = require('http');
-          <span class="code-green">var fs = require('fs');</span> <span class="code-comment">//Load/require the native 'fs' server package</span>
-
-
-          <span class="code-comment">//Create an object to configure the server:</span>
-          http.createServer( function (request, response) {
-            <span class="code-green">fs.readFileSync('index.html', function(err, data) {</span> <span class="code-comment">//before anything else, load <i>'index.html'</i>, then use a callback to complete the server</span>
-
-
-              res.writeHead(200, {'Content-Type': 'text/html'});
-              response.write(<span class="code-green">data</span>);
-              response.end();
-
-            <span class="code-green">});</span>
-
-          }).listen(3000);
-        </pre>
-      </div>
-      <p>
-        <br/>
-        <br/> When you close the server (CTRL + C) and run it again (node server.js), your browser should now display the html you created!
-        <br/>
-        <br/>You can do a lot with this package, although you cannot load in resources to the html file easily, any scripting or styling needs to be done inside that <i>'index.html'</i> file.
-        <br/>Once you are more proficient with Node, it is usually a good idea to convert to using a more advanced server package, such as 'Express'.
-        <br/>
-        <br/>I will be doing further tutorials on Node, using Express to create servers, and controlling IoT devices, and other things i have learned during my projects.
-      </p>
     </div>
   </div>
 </body>

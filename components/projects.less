@@ -1,7 +1,7 @@
 /*Variables*/
 @table-radius: 10px;
 @green: green;
-@link-color: black;
+@link-color: #005577;
 
 
 /*Mixins*/
@@ -27,6 +27,9 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+
+  user-drag: none;
+  -webkit-user-drag: none;
 }
 
 
@@ -38,6 +41,7 @@ h4 {
 }
 
 .project-image {
+  .unselectable();
   max-width: 120px;
   padding: 50px 0;
 }
@@ -102,8 +106,9 @@ tr:last-of-type td:last-of-type { border-bottom-right-radius: 10px; }
   a {
     text-decoration: none;
     font-weight: 500;
-    color: #005577;
+    color: @link-color;
     &:hover {
+      color: darken(@link-color, 10%);
       text-decoration: underline;
     }
   }
