@@ -27,10 +27,18 @@
 
 
   <script>
-  let goBack = function() {
-    history.back();
-    return false;
-  };
+    function goBack(fallbackUrl) {
+        fallbackUrl = fallbackUrl || '/';
+        var prevPage = window.location.href;
+
+        window.history.go(-1);
+
+        setTimeout(function(){
+            if (window.location.href == prevPage) {
+                window.location.href = fallbackUrl;
+            }
+        }, 500);
+    };
   </script>
   </head>
   <body class="external load">
@@ -38,7 +46,7 @@
     <div class="row">
       <div class="col"><a class="not-print" href="#Back" onclick="goBack()"> &lt; Home</a></div>
       <div class="download">
-        <p class="not-print">This page is printable. <a href="" onclick="print()">Print resume</a> or <a href="Jack-Gooding.com/resume">Download PDF.</a></p>
+        <p class="not-print">This page is printable. <a href="" onclick="print()">Print resume</a> or <a href="http://www.jack-gooding.com/resume.pdf">Download PDF.</a></p>
         <p class="print-only">To view the most up to date version of this document, visit <a href="">Jack-Gooding.com.</a></p>
       </div>
     </div>
@@ -58,10 +66,10 @@
         </table>
       </div>
     <div class="col">
-      <table>
+      <table id="CV-links">
         <tr>
           <td style="font-weight: 600">Phone:</td>
-          <td>+44 (0)12347890</td>
+          <td><a href="tel:012347890">+44 (0)12347890</a></td>
         </tr>
         <tr>
           <td style="font-weight: 600">Email:</td>
@@ -77,9 +85,9 @@
   <section>
     <h2 class="section-title">Summary</h2>
     <p class="section-content">
-      I'm a self taught coder, very interesting in making things both physical and digital.
+      I'm a self taught coder, very interested in making things both physical and digital.
       Over the last year and a half I have taught myself all basic webdesign technologies, and have also used server oriented languages/technologies.
-      I'm very self-suffiecient and a quick learner, and enjoy jumping into new challenges.
+      I'm very self-sufficient and a quick learner, and enjoy jumping into new challenges.
       </p>
   </section>
   <section>
@@ -91,7 +99,7 @@
       </tr>
       <tr>
         <td>Server:</td>
-        <td>Node.js, React, Electron, SQLlite</td>
+        <td>Node.js, React, Electron, SQLite</td>
       </tr>
       <tr>
         <td>Rapid Prototyping:</td>
@@ -108,7 +116,7 @@
     <h2 class="section-title project-container">Personal Projects</h2>
       <div>
         <h4 class="section-sub-title">Home Automation</h4>
-        <p class="section-sub-content">A NodeJs server running on a Rasberry Pi 3b, this projects goal is to control all the IoT devices I have from one interface, and to make several custom IoT devices.
+        <p class="section-sub-content">A NodeJs server running on a Rasberry Pi 3b: this projects goal is to control all the IoT devices I have from one interface, and to make several custom IoT devices.
         </p>
       </div>
       <div>
@@ -120,7 +128,7 @@
       </div>
       <div>
         <h4 class="section-sub-title">PC Horse Transport</h4>
-        <p class="section-sub-content">My Mother recently purchased a business and the workflow she inherited was very manually intensive, with all bookings and calculations being done on paper and by hand.
+        <p class="section-sub-content">I was approached by a relative to help with a recently purchased business in which workflow inherited was very manually intensive, with all bookings and calculations being done on paper and by hand.
           I created a system to streamline this using a combination of Google services and scripting, to allow her and her customers to use an online booking form to submit their job requests, responding with a cost estimate, a new calendar event and a confirmation email.
         </p>
       </div>
@@ -144,7 +152,7 @@
       </div>
           <p class="section-sub-content"> As an Outreach Presenter, I gave presentations to visiting classes from secondary schools in the Plymouth area.
               These presentations were based on the concept of energy and electricity, how different countries generate electricity, and how they cope with the various problems surrounding it.
-              In addition to this, I prepared and oversaw several group activities, in one of which the children designed, built, and tested wind turbines made from office supplies.
+              In addition to this, I prepared and oversaw several group activities; in one of which, the children designed, built, and tested wind turbines made from office supplies.
           </p>
   </section>
   <section>
@@ -181,14 +189,14 @@
     <h2 class="section-title">Hobbies/Interests</h2>
     <div>
       <h4 class="section-sub-title">Making</h4>
-      <p class="section-sub-content">I have always had a keen interest in making and building things. I am always working on at least one project in various specialisations, and always looking to improve my knowledge and abilities. The creations I am most proud of are:</p>
+      <p class="section-sub-content">I have always had a keen interest in making and building things. I am always working on at least one project in various specialisations, and always looking to improve my knowledge and abilities. The creations I am most proud of are: a Digital Clock made from scratch using logic gates, a 3D printed key holder, and a handmade wooden cabinet. </p>
     </div>
     <div>
-      <h4 class="seciton-sub-title">Film & TV</h4>
+      <h4 class="section-sub-title">Film & TV</h4>
       <p class="section-sub-content">I enjoy keeping up with new releases, and am almost always watching something in the background.</p>
     </div>
   </section>
-  <footer style="text-align: center;"><i>Last Updated: July 2018</i></footer>
+  <footer style="text-align: center;"><i>Last Updated: September 2018</i></footer>
 </div>
 </body>
 </html>
