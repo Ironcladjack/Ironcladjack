@@ -42,14 +42,11 @@ h4 {
 
 .project-image {
   .unselectable();
+  min-width: 50px;
   max-width: 120px;
   padding: 50px 0;
-}
-
-.project-image {
-  min-width: 50px;
-  padding: 0 10px;
   .center;
+
 }
 
 .project-title {
@@ -124,11 +121,40 @@ tr:last-of-type td:last-of-type { border-bottom-right-radius: 10px; }
     }
   }
 
+.project-image-shadow {
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+}
+
   td {
     position: relative;
+    height: 100%;
 
     &:nth-child(1) { //Project Icon
       width: 10%;
+      position: relative;
+      height: 100%;
+      a {
+        &:hover {
+        &::before {
+          content: "";
+          position: absolute;
+          width: 100px;
+          height: 50px;
+          top: 50%;
+          left: 50%;
+          background-color: rgba(255,255,255,0);
+          transform: translate(-50%, -200px;);
+          border-radius: 50px;
+          //horizonal off, vertical off, blur, spread
+          -webkit-box-shadow: 0px 220px 30px 5px rgba(0,0,0,0.3);
+          -moz-box-shadow: 0px 220px 30px 5px rgba(0,0,0,0.3);
+          box-shadow: 0px 220px 30px 5px rgba(0,0,0,0.3);
+        }
+        }
+      }
     }
 
     &:nth-child(2) { //Projct Title
