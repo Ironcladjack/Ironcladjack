@@ -5,14 +5,15 @@
     <title>Jack Gooding: 3D Printing</title>
     <link rel="stylesheet/less" type="text/css" href="./components/3D Design/3D_Printing.less">
     <link rel="stylesheet/less" type="text/css" href="./3D Design/3D_Printing.less">
-    <link rel="icon" type="image/png" href="./curriculum_vitae\favicon.ico"/>
-    <script rel="stylesheet/less" type="text/css" src="./components/3D Design/3D_Printing.js"></script>
+    <link rel="icon" type="image/png" href="..\favicon.ico"/>
 
     <!--===========================================================================================-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!--===========================================================================================-->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script src="3D Design/3D_Printing.js"></script>
+
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121612593-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -24,7 +25,7 @@
 
   </head>
   <body class="external load">
-  <div class="container">
+  <div class="container-fluid">
     <h2>3D Printing!</h2>
       <p>I recently bought an Anet A8 and I've been trying to design losts of different prototypes, some to solve minor problems around the house, some as a technical test of my CAD skills and of the 3D printers limiations.</p>
     <h2>The Printer</h3>
@@ -46,19 +47,28 @@
 
 
     <h2>My Designs</h2>
+    <p>All of my designs will be hosted on my <a class="prettylink" href="https://thingiverse.com/JackGooding">Thingiverse</a> account, however here is a brief list of my favourite designs.
       <div class="CAD-container">
       <table>
         <tr>
-          <td><p class="CAD-title">Key Holder</p></td>
-          <td><div class="img-container"><img class="show-more" src="components\3D Design\KeyHolder6.PNG" onclick="openLightbox();currentSlide(1)"></div></td>
-          <td><p>The general idea of this is to have a swiss army knife to stop my keys jingling, keep my USB from being further dented or scratched, and to have a small multi-purpose container that I'd have 24/7.
-              <br/>So far I have spaces for three standard keys, <a class="prettylink" href="http://amzn.eu/iLHGUjj ">a Kingston USB</a>, a flathead & phillips hex insert, and two barcodes for store membership cards.
-              <br/>I plan for the container to hold at minimum; some aspirin, a needle and thread, and some matches.</p></td>
-          <td>Thingiverse <br/> Onshape</td>
+          <td>
+            <p class="CAD-title">Key Holder</p>
+          </td>
+          <td>
+            <div class="img-container lightbox-target img-zoom"><img class="show-more" src="components\3D Design\KeyHolder6.PNG"><img class="show-more" src="components\3D Design\PintGlassAdapter1.PNG" style="display:none"></div>
+          </td>
+          <td>
+            <p>The general idea of this is to have a swiss army knife to stop my keys jingling, keep my USB from being further dented or scratched, and to have a small multi-purpose container that I'd have 24/7.
+              <br/>So far I have spaces for three standard keys, <a class="prettylink" href="http://amzn.eu/iLHGUjj" target="_blank">a Kingston USB</a>, a flathead & phillips hex insert, and two barcodes for store membership cards.
+              <br/>I plan for the container to hold at minimum; some aspirin, a needle and thread, and some matches.</p>
+          </td>
+          <td>
+            <a href="https://www.thingiverse.com/JackGooding" target="_blank"><img class="ref-icon" src="./static/thingiverse.png" alt="Thingiverse"></a>
+          </td>
         </tr>
         <tr>
           <td><p  class="CAD-title">Pint Glass Adapter</p></td>
-          <td><div class="img-container"><img src="components\3D Design\PintGlassAdapter1.PNG" onclick=";"></div></td>
+          <td><div class="img-container lightbox-target img-zoom" ><img src="components\3D Design\PintGlassAdapter1.PNG"></div></td>
           <td><p>
             I won a Pint glass in a competition at work recently, however we are advised against using open topped containers so I designed this adapter to convert it into a travel mug.
             <br/> It's printed in two parts, one of which slides up the outside, and the other clamps over the top once threaded together.
@@ -69,7 +79,7 @@
         </tr>
         <tr>
           <td><p  class="CAD-title">Blind Control Gears</p></td>
-          <td><div class="img-container"><img src="components\3D Design\BlindControlGears1.PNG"></div></td>
+          <td><div class="img-container lightbox-target img-zoom"><img src="components\3D Design\BlindControlGears1.PNG"></div></td>
           <td><p>
             In pursuit of ever increasing the amount of things i can control from my Home server, I've been working on controlling a stepper motor using arduino to move my windows blinds up and down.
             <br/>This design holds a Nema 17 Motor in place while two gears increase the torque by 3:1. The cord for the blinds attaches to a face plate attached to the larger gear.
@@ -79,7 +89,7 @@
         </tr>
         <tr>
           <td><p  class="CAD-title">Door Hook Spacer</p></td>
-          <td><div class="img-container"><img src="components\3D Design\DoorSpacer1.PNG"></div></td>
+          <td><div class="img-container lightbox-target img-zoom"><img src="components\3D Design\DoorSpacer1.PNG"></div></td>
           <td><p>
             I have a set of over-door hooks which are too large for the doors in my new house, which means they catch on the door frame when closing the door.
             <br/> This part slots into a gap in the hook to make up for the door being to thin.
@@ -89,7 +99,7 @@
         </tr>
         <tr>
           <td><p  class="CAD-title">Keyboard Volume Dial</p></td>
-          <td><div class="img-container"><img src="components\3D Design\KeyboardDial1.PNG"></div></td>
+          <td><div class="img-container lightbox-target img-zoom"><img src="components\3D Design\KeyboardDial1.PNG"></div></td>
           <td><p> Many years ago I inherited a fairly decent Keyboard, with a missing volume dial. The dial stem still worked, it was just quite fiddly.
             <br/>This is just a simple circular block to fit onto the dial stem with a good grip around the outside edge.</p></td>
           <td></td>
@@ -100,61 +110,26 @@
     </div>
     <h2>My Prints</h2>
 
-    <div class="printed-container">
-      <img src="components\3D Design\KeyboardDial1.PNG">
-      <img src="components\3D Design\DoorSpacer1.PNG">
-      <img src="components\3D Design\BlindControlGears1.PNG">
-      <img src="components\3D Design\PintGlassAdapter1.PNG">
-      <img src="components\3D Design\KeyHolder6.PNG">
-      <img src="#./">
+    <div class="printed-container lightbox-target">
+      <?php //Load all files from 3D_Design folder and display reasonably
+      $diraddr = './../static/3D_Prints';
+      if ($handle = opendir($diraddr)) {
+        //echo "Directory handle: $diraddr\n";
+        while(($file = readdir($handle)) !== false) {
+          if($file !== '.' && $file !== '..'){
+            echo '<div class="img-zoom"><img src="./static/3D_Prints/'.$file.'" alt="'.$file.'"/></div>';
+          }
+        }
+      closedir($handle);
+      }
+      ?>
     </div>
-    <p style="text-align: center;"><i>Last Updated: 29/05/2018</i></p>
-  </div>
-
-  <!-- The Modal/Lightbox -->
-  <div id="lightbox" class="lightbox-container">
-    <div class="lightbox-content">
-      <span class="close cursor" onclick="closeLightbox()">&times;</span>
-
-      <div class="lightbox-slides">
-        <div class="numbertext"></div>
-        <img src="components\3D Design/KeyHolder2.PNG" style="width:100%" class="lightbox-image" alt="New Design">
-      </div>
-
-      <div class="lightbox-slides">
-        <div class="numbertext"></div>
-        <img src="components\3D Design/KeyHolder6.PNG" style="width:100%" class="lightbox-image" alt="Exploded View">
-      </div>
-
-      <div class="lightbox-slides">
-        <div class="numbertext"></div>
-        <img src="components\3D Design/KeyHolder.PNG" style="width:100%" class="lightbox-image" alt="Early Prototype">
-      </div>
-
-      <!-- Next/previous controls -->
-      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-      <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-      <!-- Caption text -->
-      <div class="caption-container">
-        <p id="caption"></p>
-      </div>
-
-    </div>
-  </div>
+    <p style="text-align: center;"><i>Last Updated: 15/01/2019</i></p>
 
   <h3 id="Upgrades">Upgrades</h3>
   <p>I've made several improvements to the stock A8, some printed and some purchased, most of these are to improve the quality of prints, the rest are to make using it easier or less noisesome.
 
-    <ul>
-      <li>Glass Bed</li>
-      <li>X/Y Belt Tensioners</li>
-      <li>Extruder Fan Mount</li>
-      <li>Kettle/IEC PSU Socket</li>
-      <li>Rigid Wood Base</li>
-    </ul>
-
-    <table>
+    <table class="table table-striped">
       <tr>
         <td>360' Blower Fan</td>
         <td></td>
@@ -162,7 +137,7 @@
       </tr>
       <tr>
         <td>Glass Bed</td>
-        <td>IMAGE</td>
+        <td></td>
         <td>Improves the first-layer quality and makes setup much easier.<br/>
           Glass by itself gives much lower bed adhesion than painters tape, however a thin layer of PVA glue will create a strong bond with a very smooth surface,
           or for ABS a thin layer of 'ABS Juice' works great.
@@ -201,6 +176,9 @@
         </td>
       </tr>
     </table>
+
+
+  </div>
 
   </body>
 </html>

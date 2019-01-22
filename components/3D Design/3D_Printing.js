@@ -1,43 +1,69 @@
+//This file works simply, add the class "lightbox-target" to a div directly containing some <img> elements, and this document will 'after' a lightbox modal to the div.
+//Requires an accompanying .css file for styling.
+
 $(document).ready(function() {
-    $("").css("content",$(this).attr("alt"));
+
 });
+
+
+let lightboxIndex = 0; //Which lightbox currently selected
+let slideIndex = 0; //Which slide currently selected
+let lightboxSlides = 0; //number of slides in currently selected lightbox
 
 
 // Open the Lightbox
-function openLightbox() {
+function openLightbox(index, slide) {
+  lightboxIndex = index;
 
-  $("#lightbox").css("top","0");
-  $("#lightbox").css("left","0");
-  document.getElementById('lightbox').style.display = "block";
+  //check 'slide' variable given, if yes, display that slide, else display the first slide.
+  slideIndex = slide > 0 ? slide : 0;
+
+  //Get number of slides in selected lightbox, update global variable
+  lightboxSlides = $(".lightbox-container:eq("+index+")").find(".lightbox-slides").length-1;
+
+
+
+  //Display lightbox based on index assigned at creation
+  $(".lightbox-container").css("display","none");
+  $(".lightbox-container:eq("+index+")").css("display","block");
+  showSlides(slideIndex);
 }
 
-// Close the Lightbox
+// Close all lightboxes by turning off display.
 function closeLightbox() {
-  document.getElementById('lightbox').style.display = "none";
+    $(".lightbox-container").css("display","none");
 }
-$(document).keyup(function(e) {
-     if (e.keyCode == 27) { // escape key maps to keycode `27`
-       closeLightbox();
+document.onkeydown = checkKey;
+
+function checkKey(e) {
+
+    e = e || window.event;
+
+    if (e.keyCode == '38') {// up arrow
     }
-});
+    else if (e.keyCode == '40') {// down arrow
+    }
+    else if (e.keyCode == '37') {//left arrow
+      plusSlides(-1)
+    }
+    else if (e.keyCode == '39') {// right arrow
+      plusSlides(1)
+    }
+    else if (e.keyCode == '27') {// escape key
+      closeLightbox();
+    }
 
-//Close lightbox when clicking the outside blur
-$(".lightbox-container").click(function() {
-  closeLightbox();
-})
-//Prevent above from happening when clicking inside elements
-$(".lightbox-container div").click(function() {
-  return false;
-})
+}
 
-var slideIndex = 1;
 
 showSlides(slideIndex);
 
 // Next/previous controls
 function plusSlides(n) {
+  if ( !(slideIndex + n > lightboxSlides) && !(slideIndex + n < 0) ) { //If going forward/back is not outside the bounds of images available, +/- slide
   showSlides(slideIndex += n);
-
+  console.log(slideIndex);
+  }
 }
 
 // Thumbnail image controls
@@ -47,22 +73,11 @@ function currentSlide(n) {
 
 
 
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("lightbox-slides");
-  var dots = document.getElementsByClassName("lightbox-image");
-  var numbertext = document.getElementsByClassName("numbertext");
-  var captionText = document.getElementById("caption");
-  if (n > slides.length) {slideIndex = 1}
-  $(".numbertext").text(slideIndex+" / "+slides.length);
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className += " active";
-  captionText.innerHTML = dots[slideIndex-1].alt;
+function showSlides(index) {
+  //Update 'Caption' lightbox header - selects the correct caption box to modify, selects the correct image to pull 'alt' from, updates 'caption'
+  $(".lightbox-container:eq("+lightboxIndex+")").find(".caption").text( $(".lightbox-container:eq("+lightboxIndex+")").find(".lightbox-slides:eq("+index+") img").attr("alt"));
+
+  //hides all slides, unhides the correct slide from the correct lightbox.
+  $(".lightbox-slides").css("display","none");
+  $(".lightbox-container:eq("+lightboxIndex+")").find(".lightbox-slides:eq("+index+")").css("display","block");
 }
