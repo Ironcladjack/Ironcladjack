@@ -79,10 +79,11 @@
         </tr>
         <tr>
           <td><p  class="CAD-title">Blind Control Gears</p></td>
-          <td><div class="img-container lightbox-target img-zoom"><img src="components\3D Design\BlindControlGears1.PNG"></div></td>
+          <td><div class="img-container lightbox-target img-zoom"><img src="./static\3D_Prints\Bike Handle - Key (1).jpg" alt="Bike Handle - Key (1).jpg"/></div></td>
           <td><p>
-            In pursuit of ever increasing the amount of things i can control from my Home server, I've been working on controlling a stepper motor using arduino to move my windows blinds up and down.
-            <br/>This design holds a Nema 17 Motor in place while two gears increase the torque by 3:1. The cord for the blinds attaches to a face plate attached to the larger gear.
+            A friend recently asked me to print a replacement end cap for his bike handle bars, to which i thought i would add on something useful.
+            <br/>I designed a slot to hold their bike lock key, which they could <i>relatively</i> safely store a replacement key in case they lost theirs.
+            <br/>It fits both my bike key and theirs, and would be trivially easy to modify for a different dimensioned key.
           </p></td>
           <td></td>
 
@@ -111,6 +112,19 @@
     <h2>My Prints</h2>
 
     <div class="printed-container lightbox-target">
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Key (1).jpg" alt="Bike Handle - Key (1).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Key (2).jpg" alt="Bike Handle - Key (2).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Key (3).jpg" alt="Bike Handle - Key (3).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Key (4).jpg" alt="Bike Handle - Key (4).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Key (5).jpg" alt="Bike Handle - Key (5).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Key (6).jpg" alt="Bike Handle - Key (6).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Money Stash (1).jpg" alt="Money Stash (1).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Money Stash (2).jpg" alt="Money Stash (2).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Money Stash (3).jpg" alt="Money Stash (3).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Money Stash (4).jpg" alt="Money Stash (4).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Money Stash (5).jpg" alt="Money Stash (5).jpg"/></div>
+      <div class="img-zoom"><img src="./static\3D_Prints\Bike Handle - Money Stash (6).jpg" alt="Money Stash (6).jpg"/></div>
+<!--
       <?php //Load all files from 3D_Design folder and display reasonably
       $diraddr = './../static/3D_Prints';
       if ($handle = opendir($diraddr)) {
@@ -122,7 +136,7 @@
         }
       closedir($handle);
       }
-      ?>
+      ?>-->
     </div>
     <p style="text-align: center;"><i>Last Updated: 15/01/2019</i></p>
 
