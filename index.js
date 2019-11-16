@@ -74,6 +74,7 @@ AngularApp.config(function($routeProvider) { //Angular routing provides these HT
     templateUrl : "./components/tutorials/raspberry_intruder_detection.html",
     controller : "AngularApp"
   })
+
   .otherwise({
     template : "<h1>404 Error</h1><p>Sorry! There's nothing here! <a href='/'>Go back to Home</a></p>"
   });
